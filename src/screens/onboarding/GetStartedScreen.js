@@ -14,6 +14,7 @@ const GetStartedScreen = () => {
   const [fontsLoaded] = useFonts({
     "satoshi-bold": require("../../../assets/fonts/satoshi/Satoshi-Bold.otf"),
     "satoshi-regular": require("../../../assets/fonts/satoshi/Satoshi-Regular.otf"),
+    "satoshi-medium": require('../../../assets/fonts/satoshi/Satoshi-Medium.otf')
   });
 
   const navigation = useNavigation()
@@ -65,8 +66,8 @@ const GetStartedScreen = () => {
               ipsam aut debitis deleniti est dolorem cumque aut unde voluptas ad
               eaque provident!
             </Text>
-            <View>
-              <Button onPress={NextScreen}>Get Started</Button>
+            <View style={styles.view}>
+              <Button onPress={NextScreen} style={styles.button}>Get Started</Button>
             </View>
           </View>
         </View>
@@ -119,7 +120,7 @@ const styles = StyleSheet.create({
     //backgroundColor: 'white',
     //opacity: 0.5,
     position: "absolute",
-    height: 110,
+    height: 115,
     width: 350,
     bottom: 260,
   },
@@ -128,5 +129,16 @@ const styles = StyleSheet.create({
     fontFamily: "satoshi-regular",
     fontSize: 25,
     textAlign: "center",
+  },
+  view: {
+    //backgroundColor: "red",
+    flex: 1,
+    position: 'absolute',
+    top: 170,
+    alignSelf: 'center'
+  },
+  button: {
+    width: 329,
+    height: 92
   },
 });
