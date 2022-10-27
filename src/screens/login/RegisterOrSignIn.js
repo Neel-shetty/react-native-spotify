@@ -11,38 +11,64 @@ import { StatusBar } from "expo-status-bar";
 import Logo from "../../components/ui/Logo";
 import Logobig from "../../components/ui/Logobig";
 import Button from "../../components/ui/Button";
+import BackArrow from "../../components/ui/backArrow";
 
-const RegisterOrSignIn = () => {
+const RegisterOrSignIn = ({ navigation }) => {
+  function RegisterButton() {
+    navigation.navigate("RegisterScreen");
+  }
+
+  function SignInButton() {
+    navigation.navigate("SignInScreen");
+  }
+
+  function BackButton(){
+    navigation.navigate('GetStarted')
+  }
+
   return (
-    <View style={styles.rootContainer}>
-      <View style={styles.logoContainer}>
-        <Logobig />
-      </View>
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}>Enjoy Listening to Music</Text>
-        <Text style={styles.subtitle}>
-          Spotify is a proprietary Swedish audio streaming and media services
-          provider
-        </Text>
-      </View>
-      <View>
-        <View>
-          <Image
-            source={require("../../../assets/images/billieLogin.png")}
-            style={styles.image}
-          />
-          <Image source={require("../../../assets/images/Unionlines.png")} />
-        </View>
-        <View style={styles.buttonContainer}>
-          <Button style={styles.button} textStyle={styles.buttonTextStyle}>
-            Register
-          </Button>
-          <TouchableOpacity>
-            <Text style={styles.buttonTextStyle}>Sign in</Text>
+    <>
+      <StatusBar style="dark" />
+      <View style={styles.rootContainer}>
+        <View style={styles.backButtonContainer}>
+          <TouchableOpacity onPress={BackButton}>
+            <Image source={require('../../../assets/images/Ellipse.png')} style={styles.backButton}/>
+            <BackArrow />
           </TouchableOpacity>
         </View>
+        <View style={styles.logoContainer}>
+          <Logobig />
+        </View>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>Enjoy Listening to Music</Text>
+          <Text style={styles.subtitle}>
+            Spotify is a proprietary Swedish audio streaming and media services
+            provider
+          </Text>
+        </View>
+        <View>
+          <View>
+            <Image
+              source={require("../../../assets/images/billieLogin.png")}
+              style={styles.image}
+            />
+            <Image source={require("../../../assets/images/Unionlines.png")} />
+          </View>
+          <View style={styles.buttonContainer}>
+            <Button
+              style={styles.button}
+              textStyle={styles.buttonTextStyle}
+              onPress={RegisterButton}
+            >
+              Register
+            </Button>
+            <TouchableOpacity onPress={SignInButton}>
+              <Text style={styles.signInButtonTextStyle}>Sign in</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
       </View>
-    </View>
+    </>
   );
 };
 
@@ -56,7 +82,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     position: "relative",
-    top: 100,
+    top: 200,
   },
   titleContainer: {
     flex: 1,
@@ -74,19 +100,19 @@ const styles = StyleSheet.create({
     fontFamily: "satoshi-bold",
     fontSize: 35,
     textAlign: "center",
-    marginBottom: 30,
+    marginBottom: 25,
     //position: "relative",
     //bottom: height / 6,
   },
   subtitle: {
     fontFamily: "satoshi-medium",
-    fontSize: 24,
+    fontSize: 23,
     color: "#797979",
     //backgroundColor: "red",
   },
   buttonContainer: {
     //flex:1 ,
-    backgroundColor: "red",
+    //backgroundColor: "red",
     //alignSelf: "center",
     flexDirection: "row",
     position: "absolute",
@@ -120,7 +146,27 @@ const styles = StyleSheet.create({
     height: 73,
   },
   buttonTextStyle: {
-    fontFamily: "satoshi-regular",
+    fontFamily: "satoshi-medium",
     fontSize: 25,
+  },
+  signInButtonTextStyle: {
+    fontFamily: "satoshi-medium",
+    fontSize: 25,
+    textAlign: "center",
+    textAlignVertical: "center",
+    position: "relative",
+    right: 30,
+    top: 22,
+    color: "#313131",
+  },
+  backButtonContainer: {
+    //alignItems: 'center'
+    paddingHorizontal: 20,
+    paddingTop: 10,
+    marginTop: 0
+  },
+  backButton: {
+    top: 28,
+    right: 3
   },
 });
