@@ -60,7 +60,7 @@ const SignInScreen = ({ navigation }) => {
         </View>
       </View>
       <View style={styles.dividerContainer}>
-        <Text style={styles.dividerText}>Or</Text>
+        <Text style={styles.dividerText}>           -------------------------------------------------</Text><Text style={styles.dividerTextM}> OR </Text><Text style={styles.dividerText}>-------------------------------------------------</Text>
       </View>
       <View>
         <Text>google logo</Text>
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     fontFamily: "satoshi-medium",
     padding: 5,
     color: "#383838",
-    left: 90
+    left: 90,
   },
   view: {
     //backgroundColor: "red",
@@ -161,11 +161,16 @@ const styles = StyleSheet.create({
     height: 80,
   },
   dividerContainer: {
-    backgroundColor: 'red',
-    top:370,
+    //backgroundColor: "red",
+    top: 370,
+    flexDirection: 'row',
+    alignContent: 'center'
   },
   dividerText: {
-    textAlign:'center'
+    color:'#383838'
   },
-  divider:{}
+  dividerTextM: {
+    fontFamily: 'satoshi-medium',
+    color: '#383838'
+  },
 });
