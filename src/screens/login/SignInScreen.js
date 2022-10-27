@@ -17,6 +17,9 @@ const SignInScreen = ({ navigation }) => {
   function BackButton() {
     navigation.navigate("RegisterOrSignIn");
   }
+  function RegisterButton() {
+    navigation.navigate('RegisterScreen')
+  }
 
   return (
     <View style={styles.rootContainer}>
@@ -73,7 +76,7 @@ const SignInScreen = ({ navigation }) => {
         </View>
         <View style={styles.questionContainer}>
           <Text style={styles.question}>Not A Member ? </Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={RegisterButton}>
             <Text style={styles.register}>Register Now</Text>
           </TouchableOpacity>
         </View>
@@ -227,3 +230,5 @@ const styles = StyleSheet.create({
   }
 
 });
+
+
