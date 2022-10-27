@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 30,
     fontFamily: "satoshi-bold",
-    color: "#DADADA",
+    color: "white",
     textAlign: "center",
     justifyContent: "center",
     flex: 1,

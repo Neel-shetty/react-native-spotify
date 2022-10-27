@@ -62,12 +62,21 @@ const SignInScreen = ({ navigation }) => {
       <View style={styles.dividerContainer}>
         <Text style={styles.dividerText}>           -------------------------------------------------</Text><Text style={styles.dividerTextM}> OR </Text><Text style={styles.dividerText}>-------------------------------------------------</Text>
       </View>
-      <View>
-        <Text>google logo</Text>
-        <Text>apple logo</Text>
-      </View>
-      <View>
-        <Text>Registerpage sender textbutton</Text>
+      <View style={styles.bottomMenu}>
+        <View style={styles.imageContainer}>
+          <TouchableOpacity>
+            <Image source={require('../../../assets/images/googlelogo.png')} style={styles.imagebox} />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Image source={require('../../../assets/images/applelogo.png')} style={styles.imagebox2} />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.questionContainer}>
+          <Text style={styles.question}>Not A Member ? </Text>
+          <TouchableOpacity>
+            <Text style={styles.register}>Register Now</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -173,4 +182,48 @@ const styles = StyleSheet.create({
     fontFamily: 'satoshi-medium',
     color: '#383838'
   },
+  bottomMenu:{
+    //backgroundColor: 'red',
+    width: width - 50,
+    height:250 ,
+    alignSelf: 'center',
+    top:400
+  },
+  imagebox: {
+    height: 40,
+    width: 40,
+    alignContent: 'center',
+  },
+  imagebox2: {
+    height: 35,
+    width: 35,
+    alignContent: 'center',
+  },
+  imageContainer: {
+    flexDirection: "row",
+    alignSelf: 'center',
+    justifyContent: 'space-evenly',
+    //backgroundColor: 'red',
+    minWidth: 250,
+    left: 5
+  },
+  questionContainer:{
+    flex:1,
+    //backgroundColor:'red',
+    alignItems: 'center',
+    justifyContent: 'center',
+    top:0,
+    flexDirection: 'row'
+  },
+  question:{
+    fontSize: 16,
+    fontFamily: "satoshi-medium",
+    color: "#383838",
+  },
+  register: {
+    fontSize: 16,
+    fontFamily: "satoshi-bold",
+    color: "#288CE9",
+  }
+
 });

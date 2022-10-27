@@ -148,6 +148,7 @@ const styles = StyleSheet.create({
   buttonTextStyle: {
     fontFamily: "satoshi-medium",
     fontSize: 25,
+    color: 'white'
   },
   signInButtonTextStyle: {
     fontFamily: "satoshi-medium",
