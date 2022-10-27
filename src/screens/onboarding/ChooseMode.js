@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, Dimensions } from "react-native";
+import { Image, StyleSheet, Text, View, Dimensions, TouchableOpacity } from "react-native";
 import React from "react";
 import Logo from "../../components/ui/Logo";
 import Logos from "../../../assets/svg/Logo.svg";
@@ -9,65 +9,43 @@ import { useCallback, useEffect, useState } from "react";
 import Button from "../../components/ui/Button";
 import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
+import {Ionicons} from '@expo/vector-icons'
 
-const GetStartedScreen = () => {
-  const [fontsLoaded] = useFonts({
-    "satoshi-bold": require("../../../assets/fonts/satoshi/Satoshi-Bold.otf"),
-    "satoshi-regular": require("../../../assets/fonts/satoshi/Satoshi-Regular.otf"),
-    "satoshi-medium": require('../../../assets/fonts/satoshi/Satoshi-Medium.otf')
-  });
+const ChooseMode = () => {
 
   const navigation = useNavigation()
 
   function NextScreen() {
-    navigation.navigate('ChooseMode')
-  }
-
-
-  useEffect(() => {
-    async function prepare() {
-      await SplashScreen.preventAutoHideAsync();
-    }
-    prepare();
-  }, []);
-
-  const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded) {
-      await SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded]);
-
-  if (!fontsLoaded) {
-    return null;
+    navigation.navigate('RegisterOrSignIn')
   }
 
   return (
     <>
     <StatusBar style="light" />
-    <View onLayout={onLayoutRootView} style={styles.rootContainer}>
+    <View style={styles.rootContainer}>
       <View style={styles.imageContainer}>
         <Image
           style={styles.image}
-          source={require("../../../assets/images/getStartedBG.png")}
+          source={require("../../../assets/images/choosemode.png")}
         />
       </View>
       <View style={styles.logoContainer}>
         <Logo width='196' height='59' scale='2'/>
         <View style={styles.titleContainer}>
           <View>
-            <Text style={styles.title}>Enjoy Listening To Music?</Text>
+            <Text style={styles.title}>Choose Mode</Text>
           </View>
           <View style={styles.subtitleContainer}>
-            <Text style={styles.subtitle}>
-              Lorem ipsum dolor sit amet. A delectus animi id accusamus illo et
-              veniam omnis. Est quae dolorem et pariatur debitis est voluptas
-              sint sed Quis magni nam veniam tempora et consequuntur debitis a
-              expedita consequatur. Non odio galisum sed inventore quasi ea modi
-              ipsam aut debitis deleniti est dolorem cumque aut unde voluptas ad
-              eaque provident!
-            </Text>
+          <View style={styles.iconContainer}>
+            <TouchableOpacity>
+              <Ionicons name="moon" size={50} color='white'/>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={NextScreen}>
+              <Ionicons name="sunny" size={50} color='white'/>
+            </TouchableOpacity>
+          </View>
             <View style={styles.view}>
-              <Button onPress={NextScreen} style={styles.button}>Get Started</Button>
+              <Button onPress={NextScreen} style={styles.button}>Continue</Button>
             </View>
           </View>
         </View>
@@ -75,9 +53,9 @@ const GetStartedScreen = () => {
     </View>
     </>
   );
-};
+}
 
-export default GetStartedScreen;
+export default ChooseMode
 
 const height = Dimensions.get("window").height;
 const width = Dimensions.get("window").width;
@@ -141,4 +119,13 @@ const styles = StyleSheet.create({
     width: 329,
     height: 92
   },
+  iconContainer: {
+    flexDirection:'row',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+    top: 50,
+    //backgroundColor: "red",
+    //flex:1
+    
+  }
 });

@@ -6,6 +6,7 @@ import GetStartedScreen from "../screens/onboarding/GetStartedScreen";
 import RegisterOrSignIn from "../screens/login/RegisterOrSignIn";
 import RegisterScreen from "../screens/login/RegisterScreen";
 import SignInScreen from "../screens/login/SignInScreen";
+import ChooseMode from "../screens/onboarding/ChooseMode";
 
 const Tab = createBottomTabNavigator();
 
@@ -16,6 +17,17 @@ const Navigator = () => {
         <Tab.Screen
           name="GetStarted"
           component={GetStartedScreen}
+          options={() => ({
+            tabBarStyle: {
+              display: "none",
+            },
+            tabBarButton: () => null,
+            headerShown: false,
+          })}
+        />
+        <Tab.Screen
+          name="ChooseMode"
+          component={ChooseMode}
           options={() => ({
             tabBarStyle: {
               display: "none",
