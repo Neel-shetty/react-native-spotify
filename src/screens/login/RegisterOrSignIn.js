@@ -23,7 +23,7 @@ const RegisterOrSignIn = ({ navigation }) => {
   }
 
   function BackButton(){
-    navigation.navigate('GetStarted')
+    navigation.navigate('ChooseMode')
   }
 
   return (

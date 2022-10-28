@@ -1,4 +1,11 @@
-import { Image, StyleSheet, Text, View, Dimensions } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  Text,
+  View,
+  Dimensions,
+  ImageBackground,
+} from "react-native";
 import React from "react";
 import Logo from "../../components/ui/Logo";
 import Logos from "../../../assets/svg/Logo.svg";
@@ -14,15 +21,14 @@ const GetStartedScreen = () => {
   const [fontsLoaded] = useFonts({
     "satoshi-bold": require("../../../assets/fonts/satoshi/Satoshi-Bold.otf"),
     "satoshi-regular": require("../../../assets/fonts/satoshi/Satoshi-Regular.otf"),
-    "satoshi-medium": require('../../../assets/fonts/satoshi/Satoshi-Medium.otf')
+    "satoshi-medium": require("../../../assets/fonts/satoshi/Satoshi-Medium.otf"),
   });
 
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   function NextScreen() {
-    navigation.navigate('ChooseMode')
+    navigation.navigate("ChooseMode");
   }
-
 
   useEffect(() => {
     async function prepare() {
@@ -43,36 +49,38 @@ const GetStartedScreen = () => {
 
   return (
     <>
-    <StatusBar style="light" />
-    <View onLayout={onLayoutRootView} style={styles.rootContainer}>
-      <View style={styles.imageContainer}>
-        <Image
-          style={styles.image}
+      <StatusBar style="light" />
+      <View onLayout={onLayoutRootView} style={styles.rootContainer}>
+        <ImageBackground
           source={require("../../../assets/images/getStartedBG.png")}
-        />
-      </View>
-      <View style={styles.logoContainer}>
-        <Logo width='196' height='59' scale='2'/>
-        <View style={styles.titleContainer}>
-          <View>
-            <Text style={styles.title}>Enjoy Listening To Music?</Text>
+          resizeMode="cover"
+          style={styles.image}
+        >
+          <View style={styles.logoContainer}>
+            <Logo width="196" height="59" scale="1" />
           </View>
-          <View style={styles.subtitleContainer}>
-            <Text style={styles.subtitle}>
-              Lorem ipsum dolor sit amet. A delectus animi id accusamus illo et
-              veniam omnis. Est quae dolorem et pariatur debitis est voluptas
-              sint sed Quis magni nam veniam tempora et consequuntur debitis a
-              expedita consequatur. Non odio galisum sed inventore quasi ea modi
-              ipsam aut debitis deleniti est dolorem cumque aut unde voluptas ad
-              eaque provident!
-            </Text>
-            <View style={styles.view}>
-              <Button onPress={NextScreen} style={styles.button}>Get Started</Button>
+          <View style={styles.semiroot}>
+          <View style={styles.dummy}>
+
+          </View>
+            <View style={styles.titleContainer}>
+              <Text style={styles.title}>Enjoy Listening To Music?</Text>
             </View>
+            <View style={styles.subtitleContainer}>
+              <Text style={styles.subtitle}>
+                Lorem ipsum dolor sit amet. A delectus animi id accusamus illo
+                et veniam omnis. Est quae dolorem et pariatur debitis est.
+            
+              </Text>
+            </View>
+            <View style={styles.view}>
+                <Button onPress={NextScreen} style={styles.button}>
+                  Get Started
+                </Button>
+              </View>
           </View>
-        </View>
+        </ImageBackground>
       </View>
-    </View>
     </>
   );
 };
@@ -81,48 +89,71 @@ export default GetStartedScreen;
 
 const height = Dimensions.get("window").height;
 const width = Dimensions.get("window").width;
+//console.log(height,width)
 
 const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
   },
   image: {
-    height: height + 30,
-    width: "100%",
+    flex: 1,
+    //height: height + 60,
+    //width: "100%",
   },
   imageContainer: {
     flex: 1,
+    //backgroundColor:'red'
   },
   logoContainer: {
-    flex: 12,
-    alignItems: "baseline",
-    justifyContent: "flex-start",
+    flex: 1,
+    alignSelf: "center",
+    justifyContent: "center",
     //backgroundColor: 'red',
-    paddingHorizontal: width / 3.5,
+    //paddingHorizontal: width / 3.5,
+    //position: "absolute",
+    //top: 60,
+  },
+  semiroot: {
+    //backgroundColor: "white",
+    flex: 6,
   },
   titleContainer: {
     flex: 1,
-    //backgroundColor: 'white',
-    alignItems: "center",
-    justifyContent: "center",
-    paddingTop: 100,
-    marginHorizontal: 5,
-    flexDirection: "column",
-    minWidth: width,
-    alignSelf: "center",
+    //backgroundColor: "red",
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    paddingBottom: 5
+
+    //paddingHorizontal: 30,
+    //marginHorizontal: 5,
+    //flexDirection: "column",
+    //minWidth: width,
+    //alignSelf: "center",
   },
   title: {
     color: "white",
     fontFamily: "satoshi-bold",
     fontSize: 35,
+    //position: "absolute",
+    //bottom: height / 20,
+    //backgroundColor: "green",
+    //flex: 1,
+    //textAlign: 'center'
+    //justifyContent: 'flex-start',
   },
   subtitleContainer: {
-    //backgroundColor: 'white',
+    //backgroundColor: "white",
     //opacity: 0.5,
-    position: "absolute",
-    height: 115,
-    width: 350,
-    bottom: 260,
+    //position: "absolute",
+    //height: 115,
+    //width: 350,
+    //bottom: 260,
+    //bottom: height / 5,
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 60,
+    paddingVertical: 15,
   },
   subtitle: {
     color: "#797979",
@@ -131,14 +162,24 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   view: {
-    //backgroundColor: "red",
+    //backgroundColor: "blue",
     flex: 1,
-    position: 'absolute',
-    top: 170,
-    alignSelf: 'center'
+    //position: "absolute",
+    //top: 170,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingBottom: 50,
+    paddingTop: 10
   },
   button: {
     width: 329,
-    height: 92
+    height: 92,
+    alignSelf: 'center',
+    justifyContent: 'center',
+    //marginBottom: 5
   },
+  dummy: {
+    flex: 3
+  }
+  
 });

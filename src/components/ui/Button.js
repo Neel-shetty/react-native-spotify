@@ -28,11 +28,9 @@ const styles = StyleSheet.create({
     textAlignVertical: "center",
   },
   titleContainer: {
-    //backgroundColor: "white",
-    //width: 329,
-    //height: 92,
-    //top: 70,
-    //alignSelf: "center",
+    width: 329,
+    height: 92,
+    alignSelf: "center",
     borderRadius: 30,
     overflow: "hidden",
   }, 
@@ -40,6 +38,8 @@ const styles = StyleSheet.create({
     flex:1,
     overflow:'hidden',
     borderRadius: 30,
+    alignItems: 'center',
+    justifyContent: 'center'
     //position: 'absolute',
     //top:5
   },

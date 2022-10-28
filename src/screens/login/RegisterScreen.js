@@ -13,12 +13,12 @@ import Logosmall from "../../components/ui/Logosmall";
 import BackArrow from "../../components/ui/backArrow";
 import Input from "../../components/ui/Input";
 
-const RegisterScreen = ({navigation}) => {
+const RegisterScreen = ({ navigation }) => {
   function BackButton() {
     navigation.navigate("RegisterOrSignIn");
   }
   function LoginButton() {
-    navigation.navigate('SignInScreen')
+    navigation.navigate("SignInScreen");
   }
 
   return (
@@ -50,7 +50,7 @@ const RegisterScreen = ({navigation}) => {
       </View>
       <View style={styles.inputContainer}>
         <View style={styles.input1}>
-          <Input>Full Name</Input>
+          <Input>Username</Input>
         </View>
         <View style={styles.input1}>
           <Input>Enter Email</Input>
@@ -63,15 +63,28 @@ const RegisterScreen = ({navigation}) => {
         </View>
       </View>
       <View style={styles.dividerContainer}>
-        <Text style={styles.dividerText}>           -------------------------------------------------</Text><Text style={styles.dividerTextM}> OR </Text><Text style={styles.dividerText}>-------------------------------------------------</Text>
+        <Text style={styles.dividerText}>
+          {"           "}
+          -------------------------------------------------
+        </Text>
+        <Text style={styles.dividerTextM}> OR </Text>
+        <Text style={styles.dividerText}>
+          -------------------------------------------------
+        </Text>
       </View>
       <View style={styles.bottomMenu}>
         <View style={styles.imageContainer}>
           <TouchableOpacity>
-            <Image source={require('../../../assets/images/googlelogo.png')} style={styles.imagebox} />
+            <Image
+              source={require("../../../assets/images/googlelogo.png")}
+              style={styles.imagebox}
+            />
           </TouchableOpacity>
           <TouchableOpacity>
-            <Image source={require('../../../assets/images/applelogo.png')} style={styles.imagebox2} />
+            <Image
+              source={require("../../../assets/images/applelogo.png")}
+              style={styles.imagebox2}
+            />
           </TouchableOpacity>
         </View>
         <View style={styles.questionContainer}>
@@ -83,9 +96,9 @@ const RegisterScreen = ({navigation}) => {
       </View>
     </View>
   );
-}
+};
 
-export default RegisterScreen
+export default RegisterScreen;
 
 const height = Dimensions.get("window").height;
 const width = Dimensions.get("window").width;
@@ -175,50 +188,50 @@ const styles = StyleSheet.create({
   dividerContainer: {
     //backgroundColor: "red",
     top: 370,
-    flexDirection: 'row',
-    alignContent: 'center'
+    flexDirection: "row",
+    alignContent: "center",
   },
   dividerText: {
-    color:'#383838'
+    color: "#383838",
   },
   dividerTextM: {
-    fontFamily: 'satoshi-medium',
-    color: '#383838'
+    fontFamily: "satoshi-medium",
+    color: "#383838",
   },
-  bottomMenu:{
+  bottomMenu: {
     //backgroundColor: 'red',
     width: width - 50,
-    height:250 ,
-    alignSelf: 'center',
-    top:400
+    height: 250,
+    alignSelf: "center",
+    top: 400,
   },
   imagebox: {
     height: 40,
     width: 40,
-    alignContent: 'center',
+    alignContent: "center",
   },
   imagebox2: {
     height: 35,
     width: 35,
-    alignContent: 'center',
+    alignContent: "center",
   },
   imageContainer: {
     flexDirection: "row",
-    alignSelf: 'center',
-    justifyContent: 'space-evenly',
+    alignSelf: "center",
+    justifyContent: "space-evenly",
     //backgroundColor: 'red',
     minWidth: 250,
-    left: 5
+    left: 5,
   },
-  questionContainer:{
-    flex:1,
+  questionContainer: {
+    flex: 1,
     //backgroundColor:'red',
-    alignItems: 'center',
-    justifyContent: 'center',
-    top:0,
-    flexDirection: 'row'
+    alignItems: "center",
+    justifyContent: "center",
+    top: 0,
+    flexDirection: "row",
   },
-  question:{
+  question: {
     fontSize: 16,
     fontFamily: "satoshi-medium",
     color: "#383838",
@@ -227,6 +240,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: "satoshi-bold",
     color: "#288CE9",
-  }
-
+  },
 });

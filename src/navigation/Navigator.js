@@ -1,20 +1,33 @@
 import { View, Text } from "react-native";
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import GetStartedScreen from "../screens/onboarding/GetStartedScreen";
 import RegisterOrSignIn from "../screens/login/RegisterOrSignIn";
 import RegisterScreen from "../screens/login/RegisterScreen";
 import SignInScreen from "../screens/login/SignInScreen";
 import ChooseMode from "../screens/onboarding/ChooseMode";
+import Tenp from "../screens/Tenp";
 
-const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
 const Navigator = () => {
   return (
     <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen
+      <Stack.Navigator>
+      {/* <Tab.Screen
+          name="temp"
+          component={Tenp}
+          options={() => ({
+            tabBarStyle: {
+              display: "none",
+            },
+            tabBarButton: () => null,
+            headerShown: false,
+          })}
+        /> */}
+        <Stack.Screen
           name="GetStarted"
           component={GetStartedScreen}
           options={() => ({
@@ -25,7 +38,7 @@ const Navigator = () => {
             headerShown: false,
           })}
         />
-        <Tab.Screen
+        <Stack.Screen
           name="ChooseMode"
           component={ChooseMode}
           options={() => ({
@@ -36,7 +49,7 @@ const Navigator = () => {
             headerShown: false,
           })}
         />
-        <Tab.Screen
+        <Stack.Screen
           name="RegisterOrSignIn"
           component={RegisterOrSignIn}
           options={() => ({
@@ -47,7 +60,7 @@ const Navigator = () => {
             headerShown: false,
           })}
         />
-        <Tab.Screen
+        <Stack.Screen
           name="RegisterScreen"
           component={RegisterScreen}
           options={() => ({
@@ -58,7 +71,7 @@ const Navigator = () => {
             headerShown: false,
           })}
         />
-        <Tab.Screen
+        <Stack.Screen
           name="SignInScreen"
           component={SignInScreen}
           options={() => ({
@@ -69,7 +82,7 @@ const Navigator = () => {
             headerShown: false,
           })}
         />
-      </Tab.Navigator>
+      </Stack.Navigator>
     </NavigationContainer>
   );
 };

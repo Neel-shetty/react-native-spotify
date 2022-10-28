@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Image,
   Dimensions,
+  ScrollView,
 } from "react-native";
 import React from "react";
 import Button from "../../components/ui/Button";
@@ -18,69 +19,82 @@ const SignInScreen = ({ navigation }) => {
     navigation.navigate("RegisterOrSignIn");
   }
   function RegisterButton() {
-    navigation.navigate('RegisterScreen')
+    navigation.navigate("RegisterScreen");
   }
 
   return (
     <View style={styles.rootContainer}>
-      <View style={styles.header}>
-        <View style={styles.backButtonContainer}>
-          <TouchableOpacity onPress={BackButton}>
-            <Image
-              source={require("../../../assets/images/Ellipse.png")}
-              style={styles.backButton}
-            />
-            <BackArrow />
+        <View style={styles.header}>
+          <View style={styles.backButtonContainer}>
+            <TouchableOpacity onPress={BackButton}>
+              <Image
+                source={require("../../../assets/images/Ellipse.png")}
+                style={styles.backButton}
+              />
+              <BackArrow />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.logoContainer}>
+            <Logosmall />
+          </View>
+        </View>
+        <View>
+          <View style={styles.titleContainer}>
+            <Text style={styles.title}>Sign in</Text>
+            <View style={styles.subtitleContainer}>
+              <Text style={styles.subtitle}>If You Need Any Support</Text>
+              <TouchableOpacity>
+                <Text style={styles.subtitle2}> Click Here</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+        <View style={styles.inputContainer}>
+          <View style={styles.input1}>
+            <Input>Enter Username or Email</Input>
+          </View>
+          <View style={styles.input2}>
+            <Input>Password</Input>
+          </View>
+          <TouchableOpacity>
+            <Text style={styles.recover}>Forgot password</Text>
           </TouchableOpacity>
+          <View style={styles.view}>
+            <Button style={styles.button}>Sign In</Button>
+          </View>
         </View>
-        <View style={styles.logoContainer}>
-          <Logosmall />
+        <View style={styles.dividerContainer}>
+          <Text style={styles.dividerText}>
+            {"           "}
+            -------------------------------------------------
+          </Text>
+          <Text style={styles.dividerTextM}> OR </Text>
+          <Text style={styles.dividerText}>
+            -------------------------------------------------
+          </Text>
         </View>
-      </View>
-      <View>
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>Sign in</Text>
-          <View style={styles.subtitleContainer}>
-            <Text style={styles.subtitle}>If You Need Any Support</Text>
+        <View style={styles.bottomMenu}>
+          <View style={styles.imageContainer}>
             <TouchableOpacity>
-              <Text style={styles.subtitle2}> Click Here</Text>
+              <Image
+                source={require("../../../assets/images/googlelogo.png")}
+                style={styles.imagebox}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <Image
+                source={require("../../../assets/images/applelogo.png")}
+                style={styles.imagebox2}
+              />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.questionContainer}>
+            <Text style={styles.question}>Not A Member ? </Text>
+            <TouchableOpacity onPress={RegisterButton}>
+              <Text style={styles.register}>Register Now</Text>
             </TouchableOpacity>
           </View>
         </View>
-      </View>
-      <View style={styles.inputContainer}>
-        <View style={styles.input1}>
-          <Input>Enter Username or Email</Input>
-        </View>
-        <View style={styles.input2}>
-          <Input>Password</Input>
-        </View>
-        <TouchableOpacity>
-          <Text style={styles.recover}>Forgot password</Text>
-        </TouchableOpacity>
-        <View style={styles.view}>
-          <Button style={styles.button}>Sign In</Button>
-        </View>
-      </View>
-      <View style={styles.dividerContainer}>
-        <Text style={styles.dividerText}>           -------------------------------------------------</Text><Text style={styles.dividerTextM}> OR </Text><Text style={styles.dividerText}>-------------------------------------------------</Text>
-      </View>
-      <View style={styles.bottomMenu}>
-        <View style={styles.imageContainer}>
-          <TouchableOpacity>
-            <Image source={require('../../../assets/images/googlelogo.png')} style={styles.imagebox} />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Image source={require('../../../assets/images/applelogo.png')} style={styles.imagebox2} />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.questionContainer}>
-          <Text style={styles.question}>Not A Member ? </Text>
-          <TouchableOpacity onPress={RegisterButton}>
-            <Text style={styles.register}>Register Now</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
     </View>
   );
 };
@@ -175,50 +189,50 @@ const styles = StyleSheet.create({
   dividerContainer: {
     //backgroundColor: "red",
     top: 370,
-    flexDirection: 'row',
-    alignContent: 'center'
+    flexDirection: "row",
+    alignContent: "center",
   },
   dividerText: {
-    color:'#383838'
+    color: "#383838",
   },
   dividerTextM: {
-    fontFamily: 'satoshi-medium',
-    color: '#383838'
+    fontFamily: "satoshi-medium",
+    color: "#383838",
   },
-  bottomMenu:{
+  bottomMenu: {
     //backgroundColor: 'red',
     width: width - 50,
-    height:250 ,
-    alignSelf: 'center',
-    top:400
+    height: 250,
+    alignSelf: "center",
+    top: 400,
   },
   imagebox: {
     height: 40,
     width: 40,
-    alignContent: 'center',
+    alignContent: "center",
   },
   imagebox2: {
     height: 35,
     width: 35,
-    alignContent: 'center',
+    alignContent: "center",
   },
   imageContainer: {
     flexDirection: "row",
-    alignSelf: 'center',
-    justifyContent: 'space-evenly',
+    alignSelf: "center",
+    justifyContent: "space-evenly",
     //backgroundColor: 'red',
     minWidth: 250,
-    left: 5
+    left: 5,
   },
-  questionContainer:{
-    flex:1,
+  questionContainer: {
+    flex: 1,
     //backgroundColor:'red',
-    alignItems: 'center',
-    justifyContent: 'center',
-    top:0,
-    flexDirection: 'row'
+    alignItems: "center",
+    justifyContent: "center",
+    top: 0,
+    flexDirection: "row",
   },
-  question:{
+  question: {
     fontSize: 16,
     fontFamily: "satoshi-medium",
     color: "#383838",
@@ -227,8 +241,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: "satoshi-bold",
     color: "#288CE9",
-  }
-
+  },
 });
-
-
