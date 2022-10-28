@@ -144,6 +144,6 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
   buttonContainer: {
-    flex: 2,
+    flex: 3,
   },
 });

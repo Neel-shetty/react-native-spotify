@@ -32,22 +32,15 @@ const ChooseMode = () => {
     if(iconLight==='sunny'){
       setIconLight('sunny-outline')
     }
-    if(iconDark==='moon'){
-      setIconDark('moon-outline')
-    }else{
     setIconDark('moon')
-    }
   }
 
   function ToggleLightMode(){
     if(iconDark==='moon'){
       setIconDark('moon-outline')
     }
-    if(iconLight==='sunny'){
-      setIconLight('sunny-outline')
-    }else{
     setIconLight('sunny')
-    }
+    
   }
 
   return (

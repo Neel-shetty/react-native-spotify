@@ -177,6 +177,7 @@ const styles = StyleSheet.create({
     padding: 5,
     color: "#383838",
     left: 90,
+    //textAlign: 'left'
   },
   view: {
     //backgroundColor: "red",
