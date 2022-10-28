@@ -16,7 +16,7 @@ const Stack = createNativeStackNavigator();
 const Navigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="ResetPassword">
+      <Stack.Navigator initialRouteName="GetStarted">
         {/* <Tab.Screen
           name="temp"
           component={Tenp}

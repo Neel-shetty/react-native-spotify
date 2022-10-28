@@ -5,6 +5,8 @@ import InputOutline from "./InputOutline";
 const Input = ({ children }) => {
   const [value, setValue] = useState("");
   return (
+    <>
+    <View>
     <View style={styles.rootContainer}>
       <View style={styles.outline}>
         <InputOutline />
@@ -15,6 +17,8 @@ const Input = ({ children }) => {
         //fontStyle={"satoshi-bold"}
       />
     </View>
+    </View>
+    </>
   );
 };
 

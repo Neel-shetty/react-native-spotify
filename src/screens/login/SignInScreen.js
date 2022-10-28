@@ -54,7 +54,7 @@ const SignInScreen = ({ navigation }) => {
         </View>
         <View style={styles.inputContainer}>
           <View style={styles.input1}>
-            <Input>Enter Username or Email</Input>
+            <Input>Username or Email</Input>
           </View>
           <View style={styles.input2}>
             <Input>Password</Input>
