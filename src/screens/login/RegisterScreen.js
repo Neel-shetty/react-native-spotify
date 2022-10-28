@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Image,
   Dimensions,
+  ScrollView
 } from "react-native";
 import React from "react";
 import Button from "../../components/ui/Button";

@@ -5,6 +5,7 @@ import {
   Dimensions,
   TouchableOpacity,
   Image,
+  ImageBackground,
 } from "react-native";
 import React from "react";
 import { StatusBar } from "expo-status-bar";
@@ -22,8 +23,8 @@ const RegisterOrSignIn = ({ navigation }) => {
     navigation.navigate("SignInScreen");
   }
 
-  function BackButton(){
-    navigation.navigate('ChooseMode')
+  function BackButton() {
+    navigation.navigate("ChooseMode");
   }
 
   return (
@@ -32,7 +33,10 @@ const RegisterOrSignIn = ({ navigation }) => {
       <View style={styles.rootContainer}>
         <View style={styles.backButtonContainer}>
           <TouchableOpacity onPress={BackButton}>
-            <Image source={require('../../../assets/images/Ellipse.png')} style={styles.backButton}/>
+            <Image
+              source={require("../../../assets/images/Ellipse.png")}
+              style={styles.backButton}
+            />
             <BackArrow />
           </TouchableOpacity>
         </View>
@@ -46,14 +50,11 @@ const RegisterOrSignIn = ({ navigation }) => {
             provider
           </Text>
         </View>
-        <View>
-          <View>
-            <Image
-              source={require("../../../assets/images/billieLogin.png")}
-              style={styles.image}
-            />
-            <Image source={require("../../../assets/images/Unionlines.png")} />
-          </View>
+        <View style={styles.imageContainer}>
+          <Image
+            source={require("../../../assets/images/billieLogin.png")}
+            style={styles.image}
+          />
           <View style={styles.buttonContainer}>
             <Button
               style={styles.button}
@@ -66,6 +67,9 @@ const RegisterOrSignIn = ({ navigation }) => {
               <Text style={styles.signInButtonTextStyle}>Sign in</Text>
             </TouchableOpacity>
           </View>
+          <View style={styles.view}>
+
+          </View>
         </View>
       </View>
     </>
@@ -76,24 +80,56 @@ export default RegisterOrSignIn;
 
 const height = Dimensions.get("window").height;
 const width = Dimensions.get("window").width;
+const left = -23;
 
 const styles = StyleSheet.create({
-  logoContainer: {
+  backButtonContainer: {
+    //alignItems: 'center',
+    //paddingHorizontal: 20,
+    //paddingTop: 10,
+    //marginTop: 0
     flex: 1,
+    paddingLeft: 20,
+    justifyContent: "center",
+    //backgroundColor: 'red'
+  },
+  logoContainer: {
+    flex: 3,
     alignItems: "center",
-    position: "relative",
-    top: 200,
+    justifyContent: "flex-end",
+    //backgroundColor: "blue",
+    paddingBottom: 20,
+    //position: "relative",
+    //top: 200,
   },
   titleContainer: {
-    flex: 1,
-    //backgroundColor: 'red',
+    flex: 3,
+    //backgroundColor: "pink",
     alignItems: "center",
     justifyContent: "center",
-    width: width,
-    paddingHorizontal: 50,
-    height: 200,
-    position: "absolute",
-    top: height / 2.5,
+    //width: width,
+    //paddingHorizontal: 50,
+    //height: 200,
+    //position: "absolute",
+    //top: height / 2.5,
+  },
+  imageContainer: {
+    flex: 7,
+    //backgroundColor: "coral",
+    alignItems: "center",
+  },
+  buttonContainer: {
+    flex: 1,
+    //backgroundColor: "purple",
+    //alignSelf: "center",
+    flexDirection: "row",
+    alignItems: 'center',
+    //justifyContent: 'space-between'
+    //position: "absolute",
+    //bottom: 360,
+    //paddingHorizontal: 50,
+    //justifyContent: "center",
+    //alignContent: "center",
   },
   title: {
     color: "#383838",
@@ -101,25 +137,14 @@ const styles = StyleSheet.create({
     fontSize: 35,
     textAlign: "center",
     marginBottom: 25,
-    //position: "relative",
-    //bottom: height / 6,
+    textAlignVertical: "center",
   },
   subtitle: {
     fontFamily: "satoshi-medium",
     fontSize: 23,
     color: "#797979",
-    //backgroundColor: "red",
-  },
-  buttonContainer: {
-    //flex:1 ,
-    //backgroundColor: "red",
-    //alignSelf: "center",
-    flexDirection: "row",
-    position: "absolute",
-    bottom: 360,
     paddingHorizontal: 50,
-    //justifyContent: 'space-around',
-    //alignContent: 'center'
+    //backgroundColor: "red",
   },
   textButton: {
     fontFamily: "satoshi-bold",
@@ -127,16 +152,15 @@ const styles = StyleSheet.create({
     color: "#313131",
   },
   view: {
-    backgroundColor: "red",
+    backgroundColor: "blue",
+    flex: 3,
   },
   image: {
-    //position: "absolute",
-    width: 380.07,
-    height: 520.73,
-    top: 300,
-    left: 0,
-    //top: 723.3,
-    //backgroundColor: "red",
+    position: "absolute",
+    width: 440,
+    height: 554,
+    bottom: 0,
+    left: -5
   },
   rootContainer: {
     flex: 1,
@@ -144,30 +168,25 @@ const styles = StyleSheet.create({
   button: {
     width: 147,
     height: 73,
+    right: 70
   },
   buttonTextStyle: {
     fontFamily: "satoshi-medium",
     fontSize: 25,
-    color: 'white'
+    color: "white",
   },
   signInButtonTextStyle: {
     fontFamily: "satoshi-medium",
     fontSize: 25,
     textAlign: "center",
     textAlignVertical: "center",
-    position: "relative",
-    right: 30,
-    top: 22,
+    //position: "relative",
+    right: 65,
+    //top: 22,
     color: "#313131",
-  },
-  backButtonContainer: {
-    //alignItems: 'center'
-    paddingHorizontal: 20,
-    paddingTop: 10,
-    marginTop: 0
   },
   backButton: {
     top: 28,
-    right: 3
+    right: 3,
   },
 });

@@ -9,14 +9,15 @@ import RegisterScreen from "../screens/login/RegisterScreen";
 import SignInScreen from "../screens/login/SignInScreen";
 import ChooseMode from "../screens/onboarding/ChooseMode";
 import Tenp from "../screens/Tenp";
+import ResetPassword from "../screens/login/ResetPassword";
 
 const Stack = createNativeStackNavigator();
 
 const Navigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-      {/* <Tab.Screen
+      <Stack.Navigator initialRouteName="ResetPassword">
+        {/* <Tab.Screen
           name="temp"
           component={Tenp}
           options={() => ({
@@ -74,6 +75,17 @@ const Navigator = () => {
         <Stack.Screen
           name="SignInScreen"
           component={SignInScreen}
+          options={() => ({
+            tabBarStyle: {
+              display: "none",
+            },
+            tabBarButton: () => null,
+            headerShown: false,
+          })}
+        />
+        <Stack.Screen
+          name="ResetPassword"
+          component={ResetPassword}
           options={() => ({
             tabBarStyle: {
               display: "none",

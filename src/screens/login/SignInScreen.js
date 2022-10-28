@@ -21,6 +21,9 @@ const SignInScreen = ({ navigation }) => {
   function RegisterButton() {
     navigation.navigate("RegisterScreen");
   }
+  function ForgotButton() {
+    navigation.navigate('ResetPassword')
+  }
 
   return (
     <View style={styles.rootContainer}>
@@ -56,7 +59,7 @@ const SignInScreen = ({ navigation }) => {
           <View style={styles.input2}>
             <Input>Password</Input>
           </View>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={ForgotButton}>
             <Text style={styles.recover}>Forgot password</Text>
           </TouchableOpacity>
           <View style={styles.view}>
