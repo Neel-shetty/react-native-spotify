@@ -34,7 +34,7 @@ export const ReviewSchema = yup.object({
     .test("isnum", "", (val) => {
       return /\d/.test(val);
     }),
-    newpassword: yup
+  newpassword: yup
     .string()
     .min(8, "Too Short!")
     .max(50, "Too Long!")
@@ -43,7 +43,7 @@ export const ReviewSchema = yup.object({
     .test("isnum", "Must include atleast 1 number", (val) => {
       return /\d/.test(val);
     }),
-    otp: yup.string().required('Required!')
+  otp: yup.string().required("Required!"),
 });
 
 const RegisterScreen = ({ navigation }) => {
@@ -88,7 +88,14 @@ const RegisterScreen = ({ navigation }) => {
             onSubmit={(values) => console.log(values)}
             validationSchema={ReviewSchema}
           >
-            {({ handleChange, handleSubmit, handleBlur, values, errors, touched }) => (
+            {({
+              handleChange,
+              handleSubmit,
+              handleBlur,
+              values,
+              errors,
+              touched,
+            }) => (
               <>
                 <View style={styles.input1}>
                   <Input
@@ -97,7 +104,14 @@ const RegisterScreen = ({ navigation }) => {
                     onBlur={handleBlur("username")}
                     value={values.username}
                   />
-                  <Text style={[styles.subtitle, {textAlign:'center', color: 'red'}]}>{touched.username && errors.username}</Text>
+                  <Text
+                    style={[
+                      styles.subtitle,
+                      { textAlign: "center", color: "red" },
+                    ]}
+                  >
+                    {touched.username && errors.username}
+                  </Text>
                 </View>
                 <View style={styles.input1}>
                   <Input
