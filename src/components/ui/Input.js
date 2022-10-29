@@ -9,6 +9,7 @@ const Input = ({
   secureTextEntry,
   placeholder,
   keyboardType,
+  spellCheck
 }) => {
   //const [value, setValue] = useState("");
   return (
@@ -26,6 +27,8 @@ const Input = ({
             value={value}
             secureTextEntry={secureTextEntry}
             keyboardType={keyboardType}
+            spellCheck={false}
+            autoCorrect={false}
             //fontStyle={"satoshi-bold"}
           />
         </View>

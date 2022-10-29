@@ -9,6 +9,8 @@ import {
   ScrollView,
   StatusBar,
   KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  Keyboard
 } from "react-native";
 import React from "react";
 import Button from "../../components/ui/Button";
@@ -26,6 +28,7 @@ const ResetPassword = ({ navigation }) => {
   }
 
   return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
     <SafeAreaView style={styles.rootContainer}>
       <View style={styles.rootContainer}>
         <KeyboardAvoidingView
@@ -76,6 +79,7 @@ const ResetPassword = ({ navigation }) => {
         </KeyboardAvoidingView>
       </View>
     </SafeAreaView>
+    </TouchableWithoutFeedback>
   );
 };
 

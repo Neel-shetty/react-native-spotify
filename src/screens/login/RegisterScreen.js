@@ -7,6 +7,8 @@ import {
   Image,
   Dimensions,
   ScrollView,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import React from "react";
 import Button from "../../components/ui/Button";
@@ -14,6 +16,25 @@ import Logosmall from "../../components/ui/Logosmall";
 import BackArrow from "../../components/ui/backArrow";
 import Input from "../../components/ui/Input";
 import { Formik } from "formik";
+import * as yup from "yup";
+
+export const ReviewSchema = yup.object({
+  username: yup
+    .string()
+    .required("Required!")
+    .min(4, "Too short, like your pp :)")
+    .max(20, "too long, didn't ask your mum's body count"),
+  email: yup.string().email("Invalid email").required("Required!"),
+  password: yup
+    .string()
+    .min(8, "Too Short!")
+    .max(50, "Too Long!")
+    .uppercase(1, "Must include atleast 1 uppercase letter")
+    .required("Required!")
+    .test("isnum", "", (val) => {
+      return /\d/.test(val);
+    }),
+});
 
 const RegisterScreen = ({ navigation }) => {
   function BackButton() {
@@ -22,90 +43,115 @@ const RegisterScreen = ({ navigation }) => {
   function LoginButton() {
     navigation.navigate("SignInScreen");
   }
+  function isnum(str) {
+    return /\d/.test(str);
+  }
 
   return (
-    <View style={styles.rootContainer}>
-      <View style={styles.header}>
-        <View style={styles.backButtonContainer}>
-          <TouchableOpacity onPress={BackButton}>
-            <Image
-              source={require("../../../assets/images/Ellipse.png")}
-              style={styles.backButton}
-            />
-            <BackArrow />
-          </TouchableOpacity>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.rootContainer}>
+        <View style={styles.header}>
+          <View style={styles.backButtonContainer}>
+            <TouchableOpacity onPress={BackButton}>
+              <Image
+                source={require("../../../assets/images/Ellipse.png")}
+                style={styles.backButton}
+              />
+              <BackArrow />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.logoContainer}>
+            <Logosmall />
+          </View>
         </View>
-        <View style={styles.logoContainer}>
-          <Logosmall />
+        <View>
+          <View style={styles.titleContainer}>
+            <Text style={styles.title}>Register</Text>
+            <View style={styles.subtitleContainer}>
+              <Text style={styles.subtitle}>If You Need Any Support</Text>
+              <TouchableOpacity>
+                <Text style={styles.subtitle2}> Click Here</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
         </View>
-      </View>
-      <View>
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>Register</Text>
-          <View style={styles.subtitleContainer}>
-            <Text style={styles.subtitle}>If You Need Any Support</Text>
+        <View style={styles.inputContainer}>
+          <Formik
+            initialValues={{ username: "", email: "", password: "" }}
+            onSubmit={(values) => console.log(values)}
+            validationSchema={ReviewSchema}
+          >
+            {({ handleChange, handleSubmit, handleBlur, values, errors, touched }) => (
+              <>
+                <View style={styles.input1}>
+                  <Input
+                    placeholder="Username"
+                    onChangeText={handleChange("username")}
+                    onBlur={handleBlur("username")}
+                    value={values.username}
+                  />
+                  <Text style={[styles.subtitle, {textAlign:'center', color: 'red'}]}>{touched.username && errors.username}</Text>
+                </View>
+                <View style={styles.input1}>
+                  <Input
+                    placeholder="Email"
+                    onChangeText={handleChange("email")}
+                    onBlur={handleBlur("email")}
+                    value={values.email}
+                  />
+                </View>
+                <View style={styles.input2}>
+                  <Input
+                    placeholder="Password"
+                    secureTextEntry={true}
+                    onChangeText={handleChange("password")}
+                    onBlur={handleBlur("password")}
+                    value={values.password}
+                  />
+                </View>
+                <View style={styles.view}>
+                  <Button style={styles.button} onPress={handleSubmit}>
+                    Create Account
+                  </Button>
+                </View>
+              </>
+            )}
+          </Formik>
+        </View>
+        <View style={styles.dividerContainer}>
+          <Text style={styles.dividerText}>
+            {"           "}
+            -------------------------------------------------
+          </Text>
+          <Text style={styles.dividerTextM}> OR </Text>
+          <Text style={styles.dividerText}>
+            -------------------------------------------------
+          </Text>
+        </View>
+        <View style={styles.bottomMenu}>
+          <View style={styles.imageContainer}>
             <TouchableOpacity>
-              <Text style={styles.subtitle2}> Click Here</Text>
+              <Image
+                source={require("../../../assets/images/googlelogo.png")}
+                style={styles.imagebox}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <Image
+                source={require("../../../assets/images/applelogo.png")}
+                style={styles.imagebox2}
+              />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.questionContainer}>
+            <Text style={styles.question}>Do You Have An Account? </Text>
+            <TouchableOpacity onPress={LoginButton}>
+              <Text style={styles.register}>Sign In</Text>
             </TouchableOpacity>
           </View>
         </View>
       </View>
-      <View style={styles.inputContainer}>
-        <Formik
-          initialValues={{ username: "", email: "", password: "" }}
-          onSubmit={(values) => console.log(values)}
-        >
-          {({ handleChange, handleSubmit, handleBlur, values }) => (
-            <>
-              <View style={styles.input1}>
-                <Input placeholder="Username" onChangeText={handleChange('username')} onBlur={handleBlur('username')} value={values.username} />
-              </View>
-              <View style={styles.input1}>
-                <Input placeholder="Email" onChangeText={handleChange('email')} onBlur={handleBlur('email')} value={values.email}/>
-              </View>
-              <View style={styles.input2}>
-                <Input placeholder="Password" secureTextEntry={true} onChangeText={handleChange('password')} onBlur={handleBlur('password')} value={values.password}/>
-              </View>
-              <View style={styles.view}>
-                <Button style={styles.button} onPress={handleSubmit}>Create Account</Button>
-              </View>
-            </>
-          )}
-        </Formik>
-      </View>
-      <View style={styles.dividerContainer}>
-        <Text style={styles.dividerText}>
-          {"           "}
-          -------------------------------------------------
-        </Text>
-        <Text style={styles.dividerTextM}> OR </Text>
-        <Text style={styles.dividerText}>
-          -------------------------------------------------
-        </Text>
-      </View>
-      <View style={styles.bottomMenu}>
-        <View style={styles.imageContainer}>
-          <TouchableOpacity>
-            <Image
-              source={require("../../../assets/images/googlelogo.png")}
-              style={styles.imagebox}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Image
-              source={require("../../../assets/images/applelogo.png")}
-              style={styles.imagebox2}
-            />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.questionContainer}>
-          <Text style={styles.question}>Do You Have An Account? </Text>
-          <TouchableOpacity onPress={LoginButton}>
-            <Text style={styles.register}>Sign In</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 

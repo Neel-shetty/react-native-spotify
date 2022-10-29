@@ -27,7 +27,7 @@ const GetStartedScreen = () => {
   const navigation = useNavigation();
 
   function NextScreen() {
-    navigation.navigate("SignInScreen");
+    navigation.navigate("RegisterScreen");
   }
 
   useEffect(() => {
