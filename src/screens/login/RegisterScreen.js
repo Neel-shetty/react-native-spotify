@@ -34,6 +34,16 @@ export const ReviewSchema = yup.object({
     .test("isnum", "", (val) => {
       return /\d/.test(val);
     }),
+    newpassword: yup
+    .string()
+    .min(8, "Too Short!")
+    .max(50, "Too Long!")
+    .uppercase(1, "Must include atleast 1 uppercase letter")
+    .required("Required!")
+    .test("isnum", "Must include atleast 1 number", (val) => {
+      return /\d/.test(val);
+    }),
+    otp: yup.string().required('Required!')
 });
 
 const RegisterScreen = ({ navigation }) => {
@@ -42,9 +52,6 @@ const RegisterScreen = ({ navigation }) => {
   }
   function LoginButton() {
     navigation.navigate("SignInScreen");
-  }
-  function isnum(str) {
-    return /\d/.test(str);
   }
 
   return (

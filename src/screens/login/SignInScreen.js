@@ -77,7 +77,7 @@ const SignInScreen = ({ navigation }) => {
                     onBlur={handleBlur("username")}
                     value={values.username}
                   />
-                  <Text style={[styles.subtitle, {textAlign:'center', color: 'red'}]}>{touched.username && errors.username}</Text>
+                  <Text style={[styles.subtitle, {textAlign:'center', color: 'red'}]}>{touched.password && errors.password}</Text>
                 </View>
                 <View style={styles.input2}>
                   <Input
