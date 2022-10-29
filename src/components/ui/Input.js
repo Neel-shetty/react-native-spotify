@@ -2,8 +2,8 @@ import { StyleSheet, Text, TextInput, View } from "react-native";
 import React, { useState } from "react";
 import InputOutline from "./InputOutline";
 
-const Input = ({ children }) => {
-  const [value, setValue] = useState("");
+const Input = ({ onChangeText, onBlur,value,secureTextEntry, placeholder }) => {
+  //const [value, setValue] = useState("");
   return (
     <>
     <View>
@@ -12,8 +12,12 @@ const Input = ({ children }) => {
         <InputOutline />
       </View>
       <TextInput
-        placeholder={children}
+        placeholder={placeholder}
         style={styles.input}
+        onChangeText={onChangeText}
+        onBlur={onBlur}
+        value={value}
+        secureTextEntry={secureTextEntry}
         //fontStyle={"satoshi-bold"}
       />
     </View>
