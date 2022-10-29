@@ -2,26 +2,34 @@ import { StyleSheet, Text, TextInput, View } from "react-native";
 import React, { useState } from "react";
 import InputOutline from "./InputOutline";
 
-const Input = ({ onChangeText, onBlur,value,secureTextEntry, placeholder }) => {
+const Input = ({
+  onChangeText,
+  onBlur,
+  value,
+  secureTextEntry,
+  placeholder,
+  keyboardType,
+}) => {
   //const [value, setValue] = useState("");
   return (
     <>
-    <View>
-    <View style={styles.rootContainer}>
-      <View style={styles.outline}>
-        <InputOutline />
+      <View>
+        <View style={styles.rootContainer}>
+          <View style={styles.outline}>
+            <InputOutline />
+          </View>
+          <TextInput
+            placeholder={placeholder}
+            style={styles.input}
+            onChangeText={onChangeText}
+            onBlur={onBlur}
+            value={value}
+            secureTextEntry={secureTextEntry}
+            keyboardType={keyboardType}
+            //fontStyle={"satoshi-bold"}
+          />
+        </View>
       </View>
-      <TextInput
-        placeholder={placeholder}
-        style={styles.input}
-        onChangeText={onChangeText}
-        onBlur={onBlur}
-        value={value}
-        secureTextEntry={secureTextEntry}
-        //fontStyle={"satoshi-bold"}
-      />
-    </View>
-    </View>
     </>
   );
 };
@@ -31,8 +39,8 @@ export default Input;
 const styles = StyleSheet.create({
   input: {
     alignSelf: "center",
-    justifyContent: 'center',
-    textAlignVertical: 'center',
+    justifyContent: "center",
+    textAlignVertical: "center",
     //borderWidth: 3,
     width: 280,
     height: 80,
@@ -52,11 +60,11 @@ const styles = StyleSheet.create({
   },
   rootContainer: {
     //backgroundColor: "red",
-    flex:1,
-    padding:50,
+    flex: 1,
+    padding: 50,
     width: 333,
     height: 80,
-    alignSelf:'center',
-    justifyContent: 'center'
+    alignSelf: "center",
+    justifyContent: "center",
   },
 });

@@ -15,6 +15,7 @@ import Button from "../../components/ui/Button";
 import Input from "../../components/ui/Input";
 import BackArrow from "../../components/ui/backArrow";
 import Logosmall from "../../components/ui/Logosmall";
+import {Formik} from 'formik'
 
 const ResetPassword = ({ navigation }) => {
   function submitButton() {
@@ -51,15 +52,25 @@ const ResetPassword = ({ navigation }) => {
             <View style={styles.titleContainer}>
               <Text style={styles.title}>Reset Password</Text>
             </View>
-            <View style={styles.inputContainer}>
-              <Input>Enter Your Email</Input>
-              <Input>OTP</Input>
-            </View>
-            <View style={styles.buttonContainer}>
-              <Button onPress={submitButton} style={styles.button}>
-                Reset Password
-              </Button>
-            </View>
+            <Formik
+              initialValues={{ username: "", otp: "", newpassword: '' }}
+              onSubmit={(values) => console.log(values)}
+            >
+              {({ handleChange, handleSubmit, handleBlur, values }) => (
+                <>
+                  <View style={styles.inputContainer}>
+                    <Input placeholder='Username' onChangeText={handleChange('username')} onBlur={handleBlur('username')} value={values.username}/>
+                    <Input placeholder='OTP' keyboardType='numeric' onChangeText={handleChange('otp')} onBlur={handleBlur('otp')} value={values.otp}/>
+                    <Input secureTextEntry={true} placeholder='New Password' onChangeText={handleChange('newpassword')} onBlur={handleBlur('newpassword')} value={values.newpassword}/>
+                  </View>
+                  <View style={styles.buttonContainer}>
+                    <Button onPress={handleSubmit} style={styles.button}>
+                      Reset Password
+                    </Button>
+                  </View>
+                </>
+              )}
+            </Formik>
           </View>
           <View style={styles.dummy}></View>
         </KeyboardAvoidingView>

@@ -6,13 +6,14 @@ import {
   TouchableOpacity,
   Image,
   Dimensions,
-  ScrollView
+  ScrollView,
 } from "react-native";
 import React from "react";
 import Button from "../../components/ui/Button";
 import Logosmall from "../../components/ui/Logosmall";
 import BackArrow from "../../components/ui/backArrow";
 import Input from "../../components/ui/Input";
+import { Formik } from "formik";
 
 const RegisterScreen = ({ navigation }) => {
   function BackButton() {
@@ -50,18 +51,27 @@ const RegisterScreen = ({ navigation }) => {
         </View>
       </View>
       <View style={styles.inputContainer}>
-        <View style={styles.input1}>
-          <Input>Username</Input>
-        </View>
-        <View style={styles.input1}>
-          <Input>Enter Email</Input>
-        </View>
-        <View style={styles.input2}>
-          <Input>Password</Input>
-        </View>
-        <View style={styles.view}>
-          <Button style={styles.button}>Create Account</Button>
-        </View>
+        <Formik
+          initialValues={{ username: "", email: "", password: "" }}
+          onSubmit={(values) => console.log(values)}
+        >
+          {({ handleChange, handleSubmit, handleBlur, values }) => (
+            <>
+              <View style={styles.input1}>
+                <Input placeholder="Username" onChangeText={handleChange('username')} onBlur={handleBlur('username')} value={values.username} />
+              </View>
+              <View style={styles.input1}>
+                <Input placeholder="Email" onChangeText={handleChange('email')} onBlur={handleBlur('email')} value={values.email}/>
+              </View>
+              <View style={styles.input2}>
+                <Input placeholder="Password" secureTextEntry={true} onChangeText={handleChange('password')} onBlur={handleBlur('password')} value={values.password}/>
+              </View>
+              <View style={styles.view}>
+                <Button style={styles.button} onPress={handleSubmit}>Create Account</Button>
+              </View>
+            </>
+          )}
+        </Formik>
       </View>
       <View style={styles.dividerContainer}>
         <Text style={styles.dividerText}>
