@@ -9,6 +9,9 @@ import {
   ScrollView,
   TouchableWithoutFeedback,
   Keyboard,
+  SafeAreaView,
+  KeyboardAvoidingView,
+  Linking,
 } from "react-native";
 import React from "react";
 import Button from "../../components/ui/Button";
@@ -29,7 +32,7 @@ const SignInScreen = ({ navigation }) => {
     navigation.navigate("ResetPassword");
   }
 
-  return (
+  /* return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
     <View style={styles.rootContainer}>
       
@@ -77,7 +80,6 @@ const SignInScreen = ({ navigation }) => {
                     onBlur={handleBlur("username")}
                     value={values.username}
                   />
-                  <Text style={[styles.subtitle, {textAlign:'center', color: 'red'}]}>{touched.password && errors.password}</Text>
                 </View>
                 <View style={styles.input2}>
                   <Input
@@ -135,6 +137,139 @@ const SignInScreen = ({ navigation }) => {
       
     </View>
     </TouchableWithoutFeedback>
+  ); */
+
+  return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <SafeAreaView style={styles.rootContainer}>
+        <View style={styles.rootContainer}>
+          <KeyboardAvoidingView
+            style={styles.rootContainer}
+            behavior={Platform.OS == "ios" ? "padding" : "height"}
+            keyboardVerticalOffset={Platform.OS == "ios" ? 0 : 20}
+            enabled={Platform.OS === "ios" ? true : false}
+          >
+            <View style={styles.main}>
+              <View style={styles.header}>
+                <View style={styles.backButtonContiner}>
+                  <TouchableOpacity onPress={BackButton}>
+                    <Image
+                      source={require("../../../assets/images/Ellipse.png")}
+                      style={styles.backButton}
+                    />
+                    <BackArrow style={styles.backArrow} />
+                  </TouchableOpacity>
+                </View>
+                <View style={styles.logoContainer}>
+                  <Logosmall />
+                </View>
+              </View>
+              <View style={styles.titleContainer}>
+                <Text style={styles.title}>Sign In</Text>
+                <View style={styles.subtitleContainer}>
+                  <Text style={styles.subtitle}>If You Need Any Support</Text>
+                  <TouchableOpacity>
+                    <Text style={styles.subtitle2}> Click Here</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+              <Formik
+                initialValues={{ username: "", newpassword: "" }}
+                onSubmit={(values) => console.log(values)}
+                validationSchema={ReviewSchema}
+              >
+                {({
+                  handleChange,
+                  handleSubmit,
+                  handleBlur,
+                  values,
+                  errors,
+                  touched,
+                }) => (
+                  <>
+                    <View style={styles.inputContainer}>
+                      <Input
+                        placeholder="Username"
+                        onChangeText={handleChange("username")}
+                        onBlur={handleBlur("username")}
+                        value={values.username}
+                      />
+                      <Input
+                        secureTextEntry={true}
+                        placeholder="Password"
+                        onChangeText={handleChange("password")}
+                        onBlur={handleBlur("password")}
+                        value={values.newpassword}
+                      />
+                      {/* <Text
+                        style={[
+                          styles.subtitle,
+                          { textAlign: "center", color: "red" },
+                        ]}
+                      >
+                        {touched.username && errors.username}
+                      </Text> */}
+                      <TouchableOpacity onPress={ForgotButton}>
+                        <Text style={styles.recover}>Forgot password</Text>
+                      </TouchableOpacity>
+                    </View>
+                    <View style={styles.buttonContainer}>
+                      <Button onPress={handleSubmit} style={styles.button}>
+                        Sign In
+                      </Button>
+                    </View>
+                  </>
+                )}
+              </Formik>
+            </View>
+            <View style={styles.dummy}>
+              <View style={styles.dividerContainer}>
+{/*                 <Text style={styles.dividerText}>
+                  {"           "}
+                  -------------------------------------------------
+                </Text>
+								*/}
+								<View style={styles.div1}>
+
+								</View>
+								<Text style={styles.subtitle}> OR </Text>
+								<View style={styles.div2}>
+
+								</View>
+
+								{/*
+                <Text style={styles.dividerTextM}> OR </Text>
+                <Text style={styles.dividerText}>
+                  -------------------------------------------------
+                </Text> */}
+              </View>
+              <View style={styles.bottomMenu}>
+                <View style={styles.imageContainer}>
+                  <TouchableOpacity>
+                    <Image
+                      source={require("../../../assets/images/googlelogo.png")}
+                      style={styles.imagebox}
+                    />
+                  </TouchableOpacity>
+                  <TouchableOpacity>
+                    <Image
+                      source={require("../../../assets/images/applelogo.png")}
+                      style={styles.imagebox2}
+                    />
+                  </TouchableOpacity>
+                </View>
+                <View style={styles.questionContainer}>
+                  <Text style={styles.question}>Not A Member ? </Text>
+                  <TouchableOpacity onPress={RegisterButton}>
+                    <Text style={styles.register}>Register Now</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </View>
+          </KeyboardAvoidingView>
+        </View>
+      </SafeAreaView>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -144,6 +279,194 @@ const height = Dimensions.get("window").height;
 const width = Dimensions.get("window").width;
 
 const styles = StyleSheet.create({
+  rootContainer: {
+    flex: 1,
+    //paddingTop: StatusBar.currentHeight/1
+  },
+  main: {
+    flex: 2,
+    //backgroundColor: "red",
+  },
+  dummy: {
+    flex: 1,
+		//backgroundColor: 'pink'
+  },
+  header: {
+    flex: 2,
+    //backgroundColor: "gold",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  backButtonContiner: {
+    //flex: 1,
+    paddingLeft: 20,
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
+    alignSelf: "center",
+    //flexDirection: 'row'
+  },
+  backArrow: {
+    flex: 1,
+    alignSelf: "center",
+    justifyContent: "center",
+    bottom: 15,
+  },
+  backButton: {
+    top: 13,
+    //right: 3,
+  },
+  logoContainer: {
+    //flex: 2,
+    alignItems: "center",
+    justifyContent: "center",
+    //flexDirection: 'row',
+    alignSelf: "center",
+    //backgroundColor: "red",
+    paddingRight: width / 2 - 50,
+    //paddingTop: 55
+  },
+  titleContainer: {
+    flex: 3,
+    //backgroundColor: "violet",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  title: {
+    color: "#383838",
+    fontFamily: "satoshi-bold",
+    fontSize: 35,
+    textAlign: "center",
+    marginBottom: 25,
+    textAlignVertical: "center",
+    //paddingBottom: 25
+  },
+  subtitle: {
+    fontFamily: "satoshi-medium",
+    fontSize: 15,
+    color: "#797979",
+    textAlign: "center",
+    //backgroundColor: "red",
+  },
+  subtitle2: {
+    fontFamily: "satoshi-medium",
+    fontSize: 15,
+    color: "#42C83C",
+    //backgroundColor: "red",
+  },
+  subtitleContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    //marginVertical: 20
+  },
+  inputContainer: {
+    flex: 4,
+    //backgroundColor: "pink",
+    alignContent: "center",
+    justifyContent: "center",
+  },
+  recover: {
+    fontSize: 16,
+    fontFamily: "satoshi-medium",
+    padding: 5,
+    color: "#383838",
+    //left: 90,
+    textAlign: 'center',
+		//paddingHorizontal: 90
+  },
+  button: {
+    //marginBottom: 40,
+  },
+  buttonContainer: {
+    flex: 3,
+    //backgroundColor: "violet",
+		alignItems:'center'
+  },
+	dividerContainer: {
+    //backgroundColor: "red",
+    // top: 370,
+    flexDirection: "row",
+    alignItems: "center",
+		marginHorizontal: 50
+  },
+	div1: {
+		flex: 1,
+		borderTopWidth: 1,
+		borderColor: '#797979',
+		//borderStyle: 'dashed',
+		alignItems: 'center',
+		justifyContent: 'center',
+		marginRight: 5
+		//backgroundColor: 'blue'
+	},
+	div2: {
+		flex: 1,
+		borderTopWidth: 1,
+		borderColor: '#797979',
+		//borderStyle: 'dashed',
+		marginLeft: 5
+		//backgroundColor: 'red'
+	},
+  dividerText: {
+    color: "#383838",
+  },
+  dividerTextM: {
+    fontFamily: "satoshi-medium",
+    color: "#383838",
+  },
+	bottomMenu: {
+    //backgroundColor: 'violet',
+    //width: width - 50,
+    //height: 250,
+    alignItems: "center",
+    //top: 400,
+		flex: 1,
+		justifyContent: 'center',
+		// borderTopRightRadius: 75,
+		// borderTopLeftRadius: 75,
+  },
+  imagebox: {
+    height: 40,
+    width: 40,
+    alignContent: "center",
+		marginHorizontal: 50
+  },
+  imagebox2: {
+    height: 35,
+    width: 35,
+    alignContent: "center",
+		marginHorizontal: 50
+  },
+  imageContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-evenly",
+		flex: 1,
+    //backgroundColor: 'red',
+    //minWidth: 250,
+    //left: 5,
+  },
+  questionContainer: {
+    flex: 1,
+    //backgroundColor:'coral',
+    alignItems: "center",
+    justifyContent: "center",
+    //top: 0,
+    flexDirection: "row",
+  },
+  question: {
+    fontSize: 16,
+    fontFamily: "satoshi-medium",
+    color: "#383838",
+  },
+  register: {
+    fontSize: 16,
+    fontFamily: "satoshi-bold",
+    color: "#288CE9",
+  },
+});
+
+/* const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
   },
@@ -282,4 +605,4 @@ const styles = StyleSheet.create({
     fontFamily: "satoshi-bold",
     color: "#288CE9",
   },
-});
+}); */
