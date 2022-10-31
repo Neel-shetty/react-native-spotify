@@ -53,14 +53,21 @@ const ConfirmScreen = ({ navigation }) => {
   function RegisterButton() {
     navigation.navigate("RegisterScreen");
   }
-  function ForgotButton() {
-    navigation.navigate("ResetPassword");
+  async function ResendButton() {
+    try {
+      const response = await Auth.resendSignUp(username)
+      Alert.alert('OTP will be resent', 'check your email')
+      console.log(response)
+    } catch (e) {
+      Alert.alert('oops', e.message)
+    }
   }
   async function VerifyButton({ username, otp }) {
     //console.log(values);
     try {
       const response = await Auth.confirmSignUp(username, otp);
       console.log(response);
+      navigation.navigate("signup");
     } catch (e) {
       Alert.alert("oops", e.message);
     }
@@ -72,11 +79,11 @@ const ConfirmScreen = ({ navigation }) => {
       const { event } = payload;
       if (event === "autoSignIn") {
         const user = payload.data;
-        console.log(user)
+        console.log(user);
         // assign user
       } else if (event === "autoSignIn_failure") {
         // redirect to sign in page
-        navigation.navigate('SignInScreen')
+        navigation.navigate("SignInScreen");
       }
     });
   }
@@ -275,7 +282,7 @@ const ConfirmScreen = ({ navigation }) => {
                       </Button>
                     </View>
                     <View style={styles.resend}>
-                      <TouchableOpacity onPress={ForgotButton}>
+                      <TouchableOpacity onPress={ResendButton}>
                         <Text style={styles.recover}>Resend OTP</Text>
                       </TouchableOpacity>
                     </View>
