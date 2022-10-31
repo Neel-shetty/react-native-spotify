@@ -41,7 +41,7 @@ const ReviewSchema = yup.object({
     }),
 });
 
-const SignInScreen = ({ navigation }) => {
+const ConfirmScreen = ({ navigation }) => {
   function BackButton() {
     navigation.navigate("RegisterOrSignIn");
   }
@@ -55,12 +55,12 @@ const SignInScreen = ({ navigation }) => {
     console.log(values);
     const { username, password } = values;
     try {
-      const user = await Auth.signIn(username,password)
-      console.log(user)
+      const user = await Auth.signIn(username, password);
+      console.log(user);
     } catch (e) {
-      Alert.alert('oops', e.message)
+      Alert.alert("oops", e.message);
     }
-    console.log(user)
+    console.log(user);
   }
 
   /* return (
@@ -196,7 +196,7 @@ const SignInScreen = ({ navigation }) => {
                 </View>
               </View>
               <View style={styles.titleContainer}>
-                <Text style={styles.title}>Sign In</Text>
+                <Text style={styles.title}>Verify Your Account</Text>
                 <View style={styles.subtitleContainer}>
                   <Text style={styles.subtitle}>If You Need Any Support</Text>
                   <TouchableOpacity>
@@ -225,14 +225,14 @@ const SignInScreen = ({ navigation }) => {
                         onBlur={handleBlur("username")}
                         value={values.username}
                       />
-                      <Text
+                      {/* <Text
                         style={[
                           styles.subtitle,
                           { textAlign: "center", color: "red" },
                         ]}
                       >
                         {touched.username && errors.password}
-                      </Text>
+                      </Text> */}
                       <Input
                         secureTextEntry={true}
                         placeholder="Password"
@@ -241,21 +241,13 @@ const SignInScreen = ({ navigation }) => {
                         value={values.password}
                       />
 
-                      <Text
-                        style={[
-                          styles.subtitle,
-                          { textAlign: "center", color: "red" },
-                        ]}
-                      >
-                        {touched.password && errors.password}
-                      </Text>
                       {/* <Text
                         style={[
                           styles.subtitle,
                           { textAlign: "center", color: "red" },
                         ]}
                       >
-                        {touched.username && errors.username}
+                        {touched.password && errors.password}
                       </Text> */}
                       <TouchableOpacity onPress={ForgotButton}>
                         <Text style={styles.recover}>Forgot password</Text>
@@ -306,7 +298,7 @@ const SignInScreen = ({ navigation }) => {
   );
 };
 
-export default SignInScreen;
+export default ConfirmScreen;
 
 const height = Dimensions.get("window").height;
 const width = Dimensions.get("window").width;
@@ -361,7 +353,7 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     flex: 3,
-    //backgroundColor: "violet",
+    backgroundColor: "violet",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -394,7 +386,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     flex: 4,
-    //backgroundColor: "pink",
+    backgroundColor: "pink",
     alignContent: "center",
     justifyContent: "center",
   },

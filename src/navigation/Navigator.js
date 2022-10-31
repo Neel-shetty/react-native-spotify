@@ -10,6 +10,7 @@ import SignInScreen from "../screens/login/SignInScreen";
 import ChooseMode from "../screens/onboarding/ChooseMode";
 import Tenp from "../screens/Tenp";
 import ResetPassword from "../screens/login/ResetPassword";
+import ConfirmScreen from "../screens/login/ConfirmScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -64,6 +65,17 @@ const Navigator = () => {
         <Stack.Screen
           name="RegisterScreen"
           component={RegisterScreen}
+          options={() => ({
+            tabBarStyle: {
+              display: "none",
+            },
+            tabBarButton: () => null,
+            headerShown: false,
+          })}
+        />
+        <Stack.Screen
+          name="ConfirmScreen"
+          component={ConfirmScreen}
           options={() => ({
             tabBarStyle: {
               display: "none",
