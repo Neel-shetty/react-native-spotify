@@ -60,7 +60,7 @@ const SignInScreen = ({ navigation }) => {
     } catch (e) {
       Alert.alert('oops', e.message)
     }
-    console.log(user)
+    //console.log(user)
   }
 
   /* return (
@@ -394,7 +394,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     flex: 4,
-    backgroundColor: "pink",
+    //backgroundColor: "pink",
     alignContent: "center",
     justifyContent: "center",
     minHeight: 130
@@ -413,7 +413,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 3,
-    backgroundColor: "violet",
+    //backgroundColor: "violet",
     alignItems: "center",
     //padding: 20
   },

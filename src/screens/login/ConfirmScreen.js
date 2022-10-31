@@ -21,7 +21,9 @@ import BackArrow from "../../components/ui/backArrow";
 import Input from "../../components/ui/Input";
 import { Formik } from "formik";
 import * as yup from "yup";
-import { Auth } from "aws-amplify";
+import { Auth, Hub } from "aws-amplify";
+import { useRoute } from "@react-navigation/native";
+
 //import { ReviewSchema } from "./RegisterScreen";
 
 const ReviewSchema = yup.object({
@@ -42,6 +44,9 @@ const ReviewSchema = yup.object({
 });
 
 const ConfirmScreen = ({ navigation }) => {
+  const route = useRoute();
+  //const default =
+
   function BackButton() {
     navigation.navigate("RegisterScreen");
   }
@@ -51,16 +56,29 @@ const ConfirmScreen = ({ navigation }) => {
   function ForgotButton() {
     navigation.navigate("ResetPassword");
   }
-  async function SignInButton(values) {
-    console.log(values);
-    /* const { username, password } = values;
+  async function VerifyButton({ username, otp }) {
+    //console.log(values);
     try {
-      const user = await Auth.signIn(username, password);
-      console.log(user);
+      const response = await Auth.confirmSignUp(username, otp);
+      console.log(response);
     } catch (e) {
       Alert.alert("oops", e.message);
     }
-    console.log(user); */
+    console.log(response);
+  }
+
+  function listenToAutoSignInEvent() {
+    Hub.listen("auth", ({ payload }) => {
+      const { event } = payload;
+      if (event === "autoSignIn") {
+        const user = payload.data;
+        console.log(user)
+        // assign user
+      } else if (event === "autoSignIn_failure") {
+        // redirect to sign in page
+        navigation.navigate('SignInScreen')
+      }
+    });
   }
 
   /* return (
@@ -205,8 +223,8 @@ const ConfirmScreen = ({ navigation }) => {
                 </View>
               </View>
               <Formik
-                initialValues={{ username: "", otp: "" }}
-                onSubmit={SignInButton}
+                initialValues={{ username: route?.params?.username, otp: "" }}
+                onSubmit={VerifyButton}
                 //validationSchema={ReviewSchema}
               >
                 {({
@@ -239,7 +257,7 @@ const ConfirmScreen = ({ navigation }) => {
                         onChangeText={handleChange("otp")}
                         onBlur={handleBlur("otp")}
                         value={values.otp}
-                        keyboardType={'numeric'}
+                        keyboardType={"numeric"}
                       />
 
                       {/* <Text
@@ -250,7 +268,6 @@ const ConfirmScreen = ({ navigation }) => {
                       >
                         {touched.password && errors.password}
                       </Text> */}
-                      
                     </View>
                     <View style={styles.buttonContainer}>
                       <Button onPress={handleSubmit} style={styles.button}>
@@ -261,7 +278,7 @@ const ConfirmScreen = ({ navigation }) => {
                       <TouchableOpacity onPress={ForgotButton}>
                         <Text style={styles.recover}>Resend OTP</Text>
                       </TouchableOpacity>
-                      </View>
+                    </View>
                   </>
                 )}
               </Formik>
@@ -393,7 +410,7 @@ const styles = StyleSheet.create({
     //backgroundColor: "pink",
     alignContent: "center",
     justifyContent: "center",
-    minHeight: 80
+    minHeight: 80,
   },
   recover: {
     fontSize: 16,
@@ -411,7 +428,7 @@ const styles = StyleSheet.create({
     flex: 3,
     //backgroundColor: "violet",
     alignItems: "center",
-    padding: 10
+    padding: 10,
   },
   dividerContainer: {
     //backgroundColor: "red",
@@ -497,7 +514,7 @@ const styles = StyleSheet.create({
   },
   resend: {
     //padding: 10
-  }
+  },
 });
 
 /* const styles = StyleSheet.create({

@@ -31,5 +31,12 @@
         ]
       }
     }
+  },
+  "storage": {
+    "s3spotifyclonestoraged070c184": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": []
+    }
   }
 }

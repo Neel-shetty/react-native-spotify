@@ -11,5 +11,11 @@ export type AmplifyDependentResourcesAttributes = {
             "AppClientIDWeb": "string",
             "AppClientID": "string"
         }
+    },
+    "storage": {
+        "s3spotifyclonestoraged070c184": {
+            "BucketName": "string",
+            "Region": "string"
+        }
     }
 }

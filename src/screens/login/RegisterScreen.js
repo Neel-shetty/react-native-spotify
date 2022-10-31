@@ -56,7 +56,7 @@ const RegisterScreen = ({ navigation }) => {
     navigation.navigate("SignInScreen");
   }
   async function SignUpButton(values) {
-    const {username, email, password} = values
+    const { username, email, password } = values;
 
     try {
       const user = await Auth.signUp({
@@ -65,17 +65,27 @@ const RegisterScreen = ({ navigation }) => {
         attributes: {
           email,
           //user: username
-        }
+        },
+        autoSignIn: {
+          // optional - enables auto sign in after user is confirmed
+          enabled: true,
+        },
       });
       console.log(user);
+      navigation.navigate("ConfirmScreen", { username });
     } catch (e) {
       Alert.alert("oops", e.message);
-      console.log(e)
+      console.log(e);
+      if (e.message === "User already exists") {
+        navigation.navigate("ConfirmScreen", { username });
+        Auth.resendSignUp(username);
+        Alert.alert("Account exits", "verify your email");
+      }
     }
   }
 
   function ConfirmScreen() {
-    navigation.navigate('ConfirmScreen')
+    navigation.navigate("ConfirmScreen");
   }
 
   return (
@@ -155,7 +165,7 @@ const RegisterScreen = ({ navigation }) => {
                   />
                 </View>
                 <View style={styles.view}>
-                  <Button style={styles.button} onPress={ConfirmScreen}>
+                  <Button style={styles.button} onPress={handleSubmit}>
                     Create Account
                   </Button>
                 </View>

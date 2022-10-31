@@ -16,8 +16,13 @@ import { useCallback, useEffect, useState } from "react";
 import Button from "../../components/ui/Button";
 import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
+import { Storage } from "@aws-amplify/storage";
 
 const GetStartedScreen = () => {
+  async function awsstore() {
+    const store = await Storage.put("test.txt", "Hello");
+  }
+
   const [fontsLoaded] = useFonts({
     "satoshi-bold": require("../../../assets/fonts/satoshi/Satoshi-Bold.otf"),
     "satoshi-regular": require("../../../assets/fonts/satoshi/Satoshi-Regular.otf"),
@@ -60,9 +65,7 @@ const GetStartedScreen = () => {
             <Logo width="196" height="59" scale="1" />
           </View>
           <View style={styles.semiroot}>
-          <View style={styles.dummy}>
-
-          </View>
+            <View style={styles.dummy}></View>
             <View style={styles.titleContainer}>
               <Text style={styles.title}>Enjoy Listening To Music?</Text>
             </View>
@@ -70,14 +73,13 @@ const GetStartedScreen = () => {
               <Text style={styles.subtitle}>
                 Lorem ipsum dolor sit amet. A delectus animi id accusamus illo
                 et veniam omnis. Est quae dolorem et pariatur debitis est.
-            
               </Text>
             </View>
             <View style={styles.view}>
-                <Button onPress={NextScreen} style={styles.button}>
-                  Get Started
-                </Button>
-              </View>
+              <Button onPress={NextScreen} style={styles.button}>
+                Get Started
+              </Button>
+            </View>
           </View>
         </ImageBackground>
       </View>
@@ -120,9 +122,9 @@ const styles = StyleSheet.create({
   titleContainer: {
     flex: 1,
     //backgroundColor: "red",
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    paddingBottom: 5
+    alignItems: "center",
+    justifyContent: "flex-end",
+    paddingBottom: 5,
 
     //paddingHorizontal: 30,
     //marginHorizontal: 5,
@@ -169,17 +171,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingBottom: 50,
-    paddingTop: 10
+    paddingTop: 10,
   },
   button: {
     width: 329,
     height: 92,
-    alignSelf: 'center',
-    justifyContent: 'center',
+    alignSelf: "center",
+    justifyContent: "center",
     //marginBottom: 5
   },
   dummy: {
-    flex: 3
-  }
-  
+    flex: 3,
+  },
 });
