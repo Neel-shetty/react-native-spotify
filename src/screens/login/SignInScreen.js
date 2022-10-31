@@ -368,22 +368,22 @@ const styles = StyleSheet.create({
   title: {
     color: "#383838",
     fontFamily: "satoshi-bold",
-    fontSize: 35,
+    fontSize: width < 400 ? 27 : 35,
     textAlign: "center",
-    marginBottom: 25,
+    marginBottom: 20,
     textAlignVertical: "center",
     //paddingBottom: 25
   },
   subtitle: {
     fontFamily: "satoshi-medium",
-    fontSize: 15,
+    fontSize: width < 400 ? 13 : 15,
     color: "#797979",
     textAlign: "center",
     //backgroundColor: "red",
   },
   subtitle2: {
     fontFamily: "satoshi-medium",
-    fontSize: 15,
+    fontSize: width < 400 ? 13 : 15,
     color: "#42C83C",
     //backgroundColor: "red",
   },
@@ -394,12 +394,13 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     flex: 4,
-    //backgroundColor: "pink",
+    backgroundColor: "pink",
     alignContent: "center",
     justifyContent: "center",
+    minHeight: 130
   },
   recover: {
-    fontSize: 16,
+    fontSize: width < 400 ? 14 : 16,
     fontFamily: "satoshi-medium",
     padding: 5,
     color: "#383838",
@@ -412,8 +413,9 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 3,
-    //backgroundColor: "violet",
+    backgroundColor: "violet",
     alignItems: "center",
+    //padding: 20
   },
   dividerContainer: {
     //backgroundColor: "red",

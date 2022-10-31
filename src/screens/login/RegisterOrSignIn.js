@@ -31,6 +31,10 @@ const RegisterOrSignIn = ({ navigation }) => {
     <>
       <StatusBar style="dark" />
       <View style={styles.rootContainer}>
+        <Image
+          source={require("../../../assets/images/billieLogin.png")}
+          style={styles.image}
+        />
         <View style={styles.backButtonContainer}>
           <TouchableOpacity onPress={BackButton}>
             <Image
@@ -40,6 +44,7 @@ const RegisterOrSignIn = ({ navigation }) => {
             <BackArrow />
           </TouchableOpacity>
         </View>
+        
         <View style={styles.logoContainer}>
           <Logobig />
         </View>
@@ -51,10 +56,6 @@ const RegisterOrSignIn = ({ navigation }) => {
           </Text>
         </View>
         <View style={styles.imageContainer}>
-          <Image
-            source={require("../../../assets/images/billieLogin.png")}
-            style={styles.image}
-          />
           <View style={styles.buttonContainer}>
             <Button
               style={styles.button}
@@ -67,9 +68,7 @@ const RegisterOrSignIn = ({ navigation }) => {
               <Text style={styles.signInButtonTextStyle}>Sign in</Text>
             </TouchableOpacity>
           </View>
-          <View style={styles.view}>
-
-          </View>
+          <View style={styles.view}></View>
         </View>
       </View>
     </>
@@ -81,6 +80,7 @@ export default RegisterOrSignIn;
 const height = Dimensions.get("window").height;
 const width = Dimensions.get("window").width;
 const left = -23;
+console.log(height,width)
 
 const styles = StyleSheet.create({
   backButtonContainer: {
@@ -107,6 +107,7 @@ const styles = StyleSheet.create({
     //backgroundColor: "pink",
     alignItems: "center",
     justifyContent: "center",
+    //minHeight: 12
     //width: width,
     //paddingHorizontal: 50,
     //height: 200,
@@ -123,7 +124,7 @@ const styles = StyleSheet.create({
     //backgroundColor: "purple",
     //alignSelf: "center",
     flexDirection: "row",
-    alignItems: 'center',
+    alignItems: "center",
     //justifyContent: 'space-between'
     //position: "absolute",
     //bottom: 360,
@@ -134,14 +135,14 @@ const styles = StyleSheet.create({
   title: {
     color: "#383838",
     fontFamily: "satoshi-bold",
-    fontSize: 35,
+    fontSize: width < 400 ? 27 : 35,
     textAlign: "center",
     marginBottom: 25,
     textAlignVertical: "center",
   },
   subtitle: {
     fontFamily: "satoshi-medium",
-    fontSize: 23,
+    fontSize: width < 400 ? 16 : 23,
     color: "#797979",
     paddingHorizontal: 50,
     //backgroundColor: "red",
@@ -158,9 +159,9 @@ const styles = StyleSheet.create({
   image: {
     position: "absolute",
     width: 440,
-    height: 554,
+    height: height > 900 ? 554 : 440,
     bottom: 0,
-    left: -5
+    left: -5,
   },
   rootContainer: {
     flex: 1,
@@ -168,7 +169,7 @@ const styles = StyleSheet.create({
   button: {
     width: 147,
     height: 73,
-    right: 70
+    right: 70,
   },
   buttonTextStyle: {
     fontFamily: "satoshi-medium",

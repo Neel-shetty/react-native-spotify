@@ -74,6 +74,10 @@ const RegisterScreen = ({ navigation }) => {
     }
   }
 
+  function ConfirmScreen() {
+    navigation.navigate('ConfirmScreen')
+  }
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.rootContainer}>
@@ -151,7 +155,7 @@ const RegisterScreen = ({ navigation }) => {
                   />
                 </View>
                 <View style={styles.view}>
-                  <Button style={styles.button} onPress={handleSubmit}>
+                  <Button style={styles.button} onPress={ConfirmScreen}>
                     Create Account
                   </Button>
                 </View>

@@ -43,7 +43,7 @@ const ReviewSchema = yup.object({
 
 const ConfirmScreen = ({ navigation }) => {
   function BackButton() {
-    navigation.navigate("RegisterOrSignIn");
+    navigation.navigate("RegisterScreen");
   }
   function RegisterButton() {
     navigation.navigate("RegisterScreen");
@@ -53,14 +53,14 @@ const ConfirmScreen = ({ navigation }) => {
   }
   async function SignInButton(values) {
     console.log(values);
-    const { username, password } = values;
+    /* const { username, password } = values;
     try {
       const user = await Auth.signIn(username, password);
       console.log(user);
     } catch (e) {
       Alert.alert("oops", e.message);
     }
-    console.log(user);
+    console.log(user); */
   }
 
   /* return (
@@ -205,7 +205,7 @@ const ConfirmScreen = ({ navigation }) => {
                 </View>
               </View>
               <Formik
-                initialValues={{ username: "", password: "" }}
+                initialValues={{ username: "", otp: "" }}
                 onSubmit={SignInButton}
                 //validationSchema={ReviewSchema}
               >
@@ -234,11 +234,12 @@ const ConfirmScreen = ({ navigation }) => {
                         {touched.username && errors.password}
                       </Text> */}
                       <Input
-                        secureTextEntry={true}
-                        placeholder="Password"
-                        onChangeText={handleChange("password")}
-                        onBlur={handleBlur("password")}
-                        value={values.password}
+                        ///secureTextEntry={true}
+                        placeholder="OTP"
+                        onChangeText={handleChange("otp")}
+                        onBlur={handleBlur("otp")}
+                        value={values.otp}
+                        keyboardType={'numeric'}
                       />
 
                       {/* <Text
@@ -249,21 +250,24 @@ const ConfirmScreen = ({ navigation }) => {
                       >
                         {touched.password && errors.password}
                       </Text> */}
-                      <TouchableOpacity onPress={ForgotButton}>
-                        <Text style={styles.recover}>Forgot password</Text>
-                      </TouchableOpacity>
+                      
                     </View>
                     <View style={styles.buttonContainer}>
                       <Button onPress={handleSubmit} style={styles.button}>
-                        Sign In
+                        Verify
                       </Button>
                     </View>
+                    <View style={styles.resend}>
+                      <TouchableOpacity onPress={ForgotButton}>
+                        <Text style={styles.recover}>Resend OTP</Text>
+                      </TouchableOpacity>
+                      </View>
                   </>
                 )}
               </Formik>
             </View>
             <View style={styles.dummy}>
-              <View style={styles.dividerContainer}>
+              {/* <View style={styles.dividerContainer}>
                 <View style={styles.div1}></View>
                 <Text style={styles.subtitle}> OR </Text>
                 <View style={styles.div2}></View>
@@ -289,7 +293,7 @@ const ConfirmScreen = ({ navigation }) => {
                     <Text style={styles.register}>Register Now</Text>
                   </TouchableOpacity>
                 </View>
-              </View>
+              </View> */}
             </View>
           </KeyboardAvoidingView>
         </View>
@@ -353,7 +357,7 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     flex: 3,
-    backgroundColor: "violet",
+    //backgroundColor: "violet",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -386,9 +390,10 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     flex: 4,
-    backgroundColor: "pink",
+    //backgroundColor: "pink",
     alignContent: "center",
     justifyContent: "center",
+    minHeight: 80
   },
   recover: {
     fontSize: 16,
@@ -406,6 +411,7 @@ const styles = StyleSheet.create({
     flex: 3,
     //backgroundColor: "violet",
     alignItems: "center",
+    padding: 10
   },
   dividerContainer: {
     //backgroundColor: "red",
@@ -489,6 +495,9 @@ const styles = StyleSheet.create({
     fontFamily: "satoshi-bold",
     color: "#288CE9",
   },
+  resend: {
+    //padding: 10
+  }
 });
 
 /* const styles = StyleSheet.create({
