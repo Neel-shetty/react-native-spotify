@@ -11,14 +11,16 @@ import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
+  Alert,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import Button from "../../components/ui/Button";
 import Input from "../../components/ui/Input";
 import BackArrow from "../../components/ui/backArrow";
 import Logosmall from "../../components/ui/Logosmall";
 import { Formik } from "formik";
 import * as yup from "yup";
+import { Auth } from "aws-amplify";
 //import { ReviewSchema } from "./RegisterScreen";
 
 const ReviewSchema = yup.object({
@@ -41,11 +43,29 @@ const ReviewSchema = yup.object({
 });
 
 const ResetPassword = ({ navigation }) => {
-  function submitButton() {
-    navigation.navigate("SignInScreen");
-  }
+  //const submitUsername = true;
+  const [submitUsername, setSubmitUsername] = useState(false);
+
   function BackButton() {
     navigation.navigate("SignInScreen");
+  }
+  async function ResetButton({username, otp, newpassword}) {
+    if (!submitUsername) {
+      try {
+        const response = await Auth.forgotPassword(username)
+        setSubmitUsername(true)
+        console.log(response)
+        navigation.navigate('SignInScreen')
+      } catch (e) {
+        Alert.alert('oops',e.message)
+      }
+    } else {
+      try {
+        const response =  await Auth.forgotPasswordSubmit(username, otp, newpassword)
+      } catch (e) {
+        Alert.alert('oops',e.message)
+      }
+    }
   }
 
   return (
@@ -78,33 +98,55 @@ const ResetPassword = ({ navigation }) => {
               </View>
               <Formik
                 initialValues={{ username: "", otp: "", newpassword: "" }}
-                onSubmit={(values) => console.log(values)}
-                validationSchema={ReviewSchema}
+                onSubmit={ResetButton}
+                //validationSchema={ReviewSchema}
               >
-                {({ handleChange, handleSubmit, handleBlur, values, errors,touched }) => (
+                {({
+                  handleChange,
+                  handleSubmit,
+                  handleBlur,
+                  values,
+                  errors,
+                  touched,
+                }) => (
                   <>
                     <View style={styles.inputContainer}>
-                      <Input
-                        placeholder="Username"
-                        onChangeText={handleChange("username")}
-                        onBlur={handleBlur("username")}
-                        value={values.username}
-                      />
-                      <Input
-                        placeholder="OTP"
-                        keyboardType="numeric"
-                        onChangeText={handleChange("otp")}
-                        onBlur={handleBlur("otp")}
-                        value={values.otp}
-                      />
-                      <Input
-                        secureTextEntry={true}
-                        placeholder="New Password"
-                        onChangeText={handleChange("newpassword")}
-                        onBlur={handleBlur("newpassword")}
-                        value={values.newpassword}
-                      />
-                      <Text style={[styles.subtitle, {textAlign:'center', color: 'red'}]}>{touched.otp && errors.otp}</Text>
+                      {!submitUsername && (
+                        <View>
+                          <Input
+                            placeholder="Username"
+                            onChangeText={handleChange("username")}
+                            onBlur={handleBlur("username")}
+                            value={values.username}
+                          />
+                        </View>
+                      )}
+                      {submitUsername && (
+                        <View>
+                          <Input
+                            placeholder="OTP"
+                            keyboardType="numeric"
+                            onChangeText={handleChange("otp")}
+                            onBlur={handleBlur("otp")}
+                            value={values.otp}
+                          />
+                          <Input
+                            secureTextEntry={true}
+                            placeholder="New Password"
+                            onChangeText={handleChange("newpassword")}
+                            onBlur={handleBlur("newpassword")}
+                            value={values.newpassword}
+                          />
+                        </View>
+                      )}
+                      <Text
+                        style={[
+                          styles.subtitle,
+                          { textAlign: "center", color: "red" },
+                        ]}
+                      >
+                        {touched.otp && errors.otp}
+                      </Text>
                     </View>
                     <View style={styles.buttonContainer}>
                       <Button onPress={handleSubmit} style={styles.button}>
@@ -177,7 +219,7 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     flex: 2,
-    //backgroundColor: "violet",
+    backgroundColor: "violet",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -191,14 +233,17 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     flex: 5,
-    //backgroundColor: "pink",
+    backgroundColor: "pink",
     alignContent: "center",
     justifyContent: "center",
+    minHeight: 50,
   },
   button: {
     marginBottom: 40,
   },
   buttonContainer: {
     flex: 3,
+    backgroundColor: "coral",
+    minHeight: 80,
   },
 });

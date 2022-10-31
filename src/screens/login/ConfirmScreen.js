@@ -14,7 +14,7 @@ import {
   Linking,
   Alert,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import Button from "../../components/ui/Button";
 import Logosmall from "../../components/ui/Logosmall";
 import BackArrow from "../../components/ui/backArrow";
@@ -44,6 +44,7 @@ const ReviewSchema = yup.object({
 });
 
 const ConfirmScreen = ({ navigation }) => {
+  const [value, setValues] = useState()
   const route = useRoute();
   //const default =
 
@@ -54,6 +55,7 @@ const ConfirmScreen = ({ navigation }) => {
     navigation.navigate("RegisterScreen");
   }
   async function ResendButton() {
+    const {username, otp} = value
     try {
       const response = await Auth.resendSignUp(username)
       Alert.alert('OTP will be resent', 'check your email')
@@ -62,8 +64,9 @@ const ConfirmScreen = ({ navigation }) => {
       Alert.alert('oops', e.message)
     }
   }
-  async function VerifyButton({ username, otp }) {
+  async function VerifyButton({username, otp}) {
     //console.log(values);
+    //const {username, otp} = values
     try {
       const response = await Auth.confirmSignUp(username, otp);
       console.log(response);
@@ -231,7 +234,10 @@ const ConfirmScreen = ({ navigation }) => {
               </View>
               <Formik
                 initialValues={{ username: route?.params?.username, otp: "" }}
-                onSubmit={VerifyButton}
+                onSubmit={(values)=> {
+                  setValues(values)
+                  VerifyButton
+                  }}
                 //validationSchema={ReviewSchema}
               >
                 {({
