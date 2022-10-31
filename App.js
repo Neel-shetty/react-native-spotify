@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import Navigator from "./src/navigation/Navigator";
 import { Amplify } from 'aws-amplify'
 import awsconfig from './src/aws-exports'
+//import { withAuthenticator } from '@aws-amplify/ui-react-native'
 
 Amplify.configure(awsconfig)
 

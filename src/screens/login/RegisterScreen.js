@@ -9,6 +9,7 @@ import {
   ScrollView,
   TouchableWithoutFeedback,
   Keyboard,
+  Alert,
 } from "react-native";
 import React from "react";
 import Button from "../../components/ui/Button";
@@ -17,8 +18,9 @@ import BackArrow from "../../components/ui/backArrow";
 import Input from "../../components/ui/Input";
 import { Formik } from "formik";
 import * as yup from "yup";
+import { Auth } from "aws-amplify";
 
-export const ReviewSchema = yup.object({
+const ReviewSchema = yup.object({
   username: yup
     .string()
     .required("Required!")
@@ -31,7 +33,7 @@ export const ReviewSchema = yup.object({
     .max(50, "Too Long!")
     .uppercase(1, "Must include atleast 1 uppercase letter")
     .required("Required!")
-    .test("isnum", "", (val) => {
+    .test("isnum", "must include atleast 1 number", (val) => {
       return /\d/.test(val);
     }),
   newpassword: yup
@@ -52,6 +54,24 @@ const RegisterScreen = ({ navigation }) => {
   }
   function LoginButton() {
     navigation.navigate("SignInScreen");
+  }
+  async function SignUpButton(values) {
+    const {username, email, password} = values
+
+    try {
+      const user = await Auth.signUp({
+        username,
+        password,
+        attributes: {
+          email,
+          //user: username
+        }
+      });
+      console.log(user);
+    } catch (e) {
+      Alert.alert("oops", e.message);
+      console.log(e)
+    }
   }
 
   return (
@@ -85,8 +105,8 @@ const RegisterScreen = ({ navigation }) => {
         <View style={styles.inputContainer}>
           <Formik
             initialValues={{ username: "", email: "", password: "" }}
-            onSubmit={(values) => console.log(values)}
-            validationSchema={ReviewSchema}
+            onSubmit={SignUpButton}
+            //validationSchema={ReviewSchema}
           >
             {({
               handleChange,

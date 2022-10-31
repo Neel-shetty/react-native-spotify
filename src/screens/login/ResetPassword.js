@@ -18,7 +18,27 @@ import Input from "../../components/ui/Input";
 import BackArrow from "../../components/ui/backArrow";
 import Logosmall from "../../components/ui/Logosmall";
 import { Formik } from "formik";
-import { ReviewSchema } from "./RegisterScreen";
+import * as yup from "yup";
+//import { ReviewSchema } from "./RegisterScreen";
+
+const ReviewSchema = yup.object({
+  username: yup
+    .string()
+    .required("Required!")
+    .min(4, "Too short, like your pp :)")
+    .max(20, "too long, didn't ask your mum's body count"),
+  // email: yup.string().email("Invalid email").required("Required!"),
+  newpassword: yup
+    .string()
+    .min(8, "Too Short!")
+    .max(50, "Too Long!")
+    .uppercase(1, "Must include atleast 1 uppercase letter")
+    .required("Required!")
+    .test("isnum", "Must include atleast 1 number", (val) => {
+      return /\d/.test(val);
+    }),
+  otp: yup.string().required("Required!"),
+});
 
 const ResetPassword = ({ navigation }) => {
   function submitButton() {

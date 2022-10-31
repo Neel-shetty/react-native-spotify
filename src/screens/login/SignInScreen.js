@@ -12,6 +12,7 @@ import {
   SafeAreaView,
   KeyboardAvoidingView,
   Linking,
+  Alert,
 } from "react-native";
 import React from "react";
 import Button from "../../components/ui/Button";
@@ -19,7 +20,26 @@ import Logosmall from "../../components/ui/Logosmall";
 import BackArrow from "../../components/ui/backArrow";
 import Input from "../../components/ui/Input";
 import { Formik } from "formik";
-import { ReviewSchema } from "./RegisterScreen";
+import * as yup from "yup";
+import { Auth } from "aws-amplify";
+//import { ReviewSchema } from "./RegisterScreen";
+
+const ReviewSchema = yup.object({
+  username: yup
+    .string()
+    .required("Required!")
+    .min(4, "Too short, like your pp :)")
+    .max(20, "too long, didn't ask your mum's body count"),
+  password: yup
+    .string()
+    .min(8, "Too Short!")
+    .max(50, "Too Long!")
+    .uppercase(1, "Must include atleast 1 uppercase letter")
+    .required("Required!")
+    .test("isnum", "must include atleast 1 number", (val) => {
+      return /\d/.test(val);
+    }),
+});
 
 const SignInScreen = ({ navigation }) => {
   function BackButton() {
@@ -30,6 +50,17 @@ const SignInScreen = ({ navigation }) => {
   }
   function ForgotButton() {
     navigation.navigate("ResetPassword");
+  }
+  async function SignInButton(values) {
+    console.log(values);
+    const { username, password } = values;
+    try {
+      const user = await Auth.signIn(username,password)
+      console.log(user)
+    } catch (e) {
+      Alert.alert('oops', e.message)
+    }
+    console.log(user)
   }
 
   /* return (
@@ -174,9 +205,9 @@ const SignInScreen = ({ navigation }) => {
                 </View>
               </View>
               <Formik
-                initialValues={{ username: "", newpassword: "" }}
-                onSubmit={(values) => console.log(values)}
-                validationSchema={ReviewSchema}
+                initialValues={{ username: "", password: "" }}
+                onSubmit={SignInButton}
+                //validationSchema={ReviewSchema}
               >
                 {({
                   handleChange,
@@ -194,13 +225,30 @@ const SignInScreen = ({ navigation }) => {
                         onBlur={handleBlur("username")}
                         value={values.username}
                       />
+                      <Text
+                        style={[
+                          styles.subtitle,
+                          { textAlign: "center", color: "red" },
+                        ]}
+                      >
+                        {touched.username && errors.password}
+                      </Text>
                       <Input
                         secureTextEntry={true}
                         placeholder="Password"
                         onChangeText={handleChange("password")}
                         onBlur={handleBlur("password")}
-                        value={values.newpassword}
+                        value={values.password}
                       />
+
+                      <Text
+                        style={[
+                          styles.subtitle,
+                          { textAlign: "center", color: "red" },
+                        ]}
+                      >
+                        {touched.password && errors.password}
+                      </Text>
                       {/* <Text
                         style={[
                           styles.subtitle,
@@ -224,20 +272,16 @@ const SignInScreen = ({ navigation }) => {
             </View>
             <View style={styles.dummy}>
               <View style={styles.dividerContainer}>
-{/*                 <Text style={styles.dividerText}>
+                {/*                 <Text style={styles.dividerText}>
                   {"           "}
                   -------------------------------------------------
                 </Text>
 								*/}
-								<View style={styles.div1}>
+                <View style={styles.div1}></View>
+                <Text style={styles.subtitle}> OR </Text>
+                <View style={styles.div2}></View>
 
-								</View>
-								<Text style={styles.subtitle}> OR </Text>
-								<View style={styles.div2}>
-
-								</View>
-
-								{/*
+                {/*
                 <Text style={styles.dividerTextM}> OR </Text>
                 <Text style={styles.dividerText}>
                   -------------------------------------------------
@@ -289,7 +333,7 @@ const styles = StyleSheet.create({
   },
   dummy: {
     flex: 1,
-		//backgroundColor: 'pink'
+    //backgroundColor: 'pink'
   },
   header: {
     flex: 2,
@@ -371,8 +415,8 @@ const styles = StyleSheet.create({
     padding: 5,
     color: "#383838",
     //left: 90,
-    textAlign: 'center',
-		//paddingHorizontal: 90
+    textAlign: "center",
+    //paddingHorizontal: 90
   },
   button: {
     //marginBottom: 40,
@@ -380,33 +424,33 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flex: 3,
     //backgroundColor: "violet",
-		alignItems:'center'
+    alignItems: "center",
   },
-	dividerContainer: {
+  dividerContainer: {
     //backgroundColor: "red",
     // top: 370,
     flexDirection: "row",
     alignItems: "center",
-		marginHorizontal: 50
+    marginHorizontal: 50,
   },
-	div1: {
-		flex: 1,
-		borderTopWidth: 1,
-		borderColor: '#797979',
-		//borderStyle: 'dashed',
-		alignItems: 'center',
-		justifyContent: 'center',
-		marginRight: 5
-		//backgroundColor: 'blue'
-	},
-	div2: {
-		flex: 1,
-		borderTopWidth: 1,
-		borderColor: '#797979',
-		//borderStyle: 'dashed',
-		marginLeft: 5
-		//backgroundColor: 'red'
-	},
+  div1: {
+    flex: 1,
+    borderTopWidth: 1,
+    borderColor: "#797979",
+    //borderStyle: 'dashed',
+    alignItems: "center",
+    justifyContent: "center",
+    marginRight: 5,
+    //backgroundColor: 'blue'
+  },
+  div2: {
+    flex: 1,
+    borderTopWidth: 1,
+    borderColor: "#797979",
+    //borderStyle: 'dashed',
+    marginLeft: 5,
+    //backgroundColor: 'red'
+  },
   dividerText: {
     color: "#383838",
   },
@@ -414,34 +458,34 @@ const styles = StyleSheet.create({
     fontFamily: "satoshi-medium",
     color: "#383838",
   },
-	bottomMenu: {
+  bottomMenu: {
     //backgroundColor: 'violet',
     //width: width - 50,
     //height: 250,
     alignItems: "center",
     //top: 400,
-		flex: 1,
-		justifyContent: 'center',
-		// borderTopRightRadius: 75,
-		// borderTopLeftRadius: 75,
+    flex: 1,
+    justifyContent: "center",
+    // borderTopRightRadius: 75,
+    // borderTopLeftRadius: 75,
   },
   imagebox: {
     height: 40,
     width: 40,
     alignContent: "center",
-		marginHorizontal: 50
+    marginHorizontal: 50,
   },
   imagebox2: {
     height: 35,
     width: 35,
     alignContent: "center",
-		marginHorizontal: 50
+    marginHorizontal: 50,
   },
   imageContainer: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-evenly",
-		flex: 1,
+    flex: 1,
     //backgroundColor: 'red',
     //minWidth: 250,
     //left: 5,
