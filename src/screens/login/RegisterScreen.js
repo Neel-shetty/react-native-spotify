@@ -57,6 +57,7 @@ const RegisterScreen = ({ navigation }) => {
   }
   async function SignUpButton(values) {
     const { username, email, password } = values;
+    console.log(values)
 
     try {
       const user = await Auth.signUp({
@@ -66,10 +67,10 @@ const RegisterScreen = ({ navigation }) => {
           email,
           //user: username
         },
-        autoSignIn: {
+        /* autoSignIn: {
           // optional - enables auto sign in after user is confirmed
           enabled: true,
-        },
+        }, */
       });
       console.log(user);
       navigation.navigate("ConfirmScreen", { username });

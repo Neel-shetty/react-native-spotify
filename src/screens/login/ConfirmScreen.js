@@ -56,6 +56,7 @@ const ConfirmScreen = ({ navigation }) => {
   }
   async function ResendButton() {
     const {username, otp} = value
+    console.log(value)
     try {
       const response = await Auth.resendSignUp(username)
       Alert.alert('OTP will be resent', 'check your email')
@@ -64,13 +65,13 @@ const ConfirmScreen = ({ navigation }) => {
       Alert.alert('oops', e.message)
     }
   }
-  async function VerifyButton({username, otp}) {
-    //console.log(values);
-    //const {username, otp} = values
+  async function VerifyButton() {
+    console.log(username,otp);
+    const {username, otp} = value
     try {
       const response = await Auth.confirmSignUp(username, otp);
       console.log(response);
-      navigation.navigate("signup");
+      navigation.navigate("SignInScreen");
     } catch (e) {
       Alert.alert("oops", e.message);
     }
@@ -235,8 +236,8 @@ const ConfirmScreen = ({ navigation }) => {
               <Formik
                 initialValues={{ username: route?.params?.username, otp: "" }}
                 onSubmit={(values)=> {
+                  VerifyButton()
                   setValues(values)
-                  VerifyButton
                   }}
                 //validationSchema={ReviewSchema}
               >
@@ -283,7 +284,7 @@ const ConfirmScreen = ({ navigation }) => {
                       </Text> */}
                     </View>
                     <View style={styles.buttonContainer}>
-                      <Button onPress={handleSubmit} style={styles.button}>
+                      <Button onPress={ handleSubmit} style={styles.button}>
                         Verify
                       </Button>
                     </View>

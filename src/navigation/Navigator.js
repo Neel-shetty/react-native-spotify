@@ -39,22 +39,23 @@ const Navigator = () => {
       });
       setUser(authUser);
     } catch (e) {
+      console.log(e)
       setUser(null);
     }
   }
 
-  if (user === undefined) {
+  /* if (user === undefined) {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <ActivityIndicator />
       </View>
     );
-  }
+  } */
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="GetStarted">
-        {user ? (
+      <Stack.Navigator initialRouteName="HomeScreen">
+        {/* {user ? ( */}
           <Stack.Screen
             name="HomeScreen"
             component={HomeScreen}
@@ -66,7 +67,7 @@ const Navigator = () => {
               headerShown: false,
             })}
           />
-        ) : (
+        {/* ) : ( */}
           <>
             <Stack.Screen
               name="GetStarted"
@@ -146,7 +147,7 @@ const Navigator = () => {
               })}
             />
           </>
-        )}
+        {/* )} */}
       </Stack.Navigator>
     </NavigationContainer>
   );

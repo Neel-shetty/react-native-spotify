@@ -1,15 +1,14 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React, { useCallback, useEffect } from 'react'
-import Button from '../../components/ui/Button'
-import { useFonts } from 'expo-font'
+import { StyleSheet, Text, View, SafeAreaView, ScrollView } from "react-native";
+import React, { useCallback, useEffect } from "react";
+import Button from "../../components/ui/Button";
+import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-import { Auth } from 'aws-amplify';
-
+import { Auth } from "aws-amplify";
+import SongPreviewList from "../../components/SongPreview";
 
 const HomeScreen = () => {
-
   function logOut() {
-    Auth.signOut()
+    Auth.signOut();
   }
 
   const [fontsLoaded] = useFonts({
@@ -36,13 +35,23 @@ const HomeScreen = () => {
   }
 
   return (
-    <View onLayout={onLayoutRootView} style={{alignItems: 'center', justifyContent: 'center', flex: 1}}>
-      <Text>HomeScreen</Text>
-      <Button onPress={logOut} >Log out</Button>
-    </View>
-  )
-}
+    <SafeAreaView onLayout={onLayoutRootView} style={styles.root}>
+      <ScrollView contentContainerStyle={styles.root}>
+        <View style={{ height: 242 }}>
+          <SongPreviewList />
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
+};
 
-export default HomeScreen
+export default HomeScreen;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  root: {
+    alignItems: "center",
+    justifyContent: "center",
+    flex: 1,
+    //backgroundColor: "violet",
+  },
+});
