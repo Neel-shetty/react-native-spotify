@@ -11,7 +11,7 @@ const SongPreview = ({preview}) => {
         <View style={styles.thumbnail}>
           <ImageBackground
             style={styles.image}
-            source={require('../../../assets/images/billiebadguy.png')}
+            source={{uri: preview.content.ImageUri}}
           >
           <View style={styles.circle}>
             <Svg
