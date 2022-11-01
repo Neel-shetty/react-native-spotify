@@ -3,15 +3,16 @@ import React from "react";
 import Svg, { Path } from "react-native-svg";
 
 const SongPreview = ({preview}) => {
-  console.log(preview)
+  //console.log(preview)
   return (
-    <View style={{ height: 242 ,width: 147}}>
+    <View style={{ height: 255 ,width: 147}}>
     <View style={styles.root}>
       <View style={styles.box}>
         <View style={styles.thumbnail}>
           <ImageBackground
             style={styles.image}
             source={{uri: preview.content.ImageUri}}
+            imageStyle={styles.image}
           >
           <View style={styles.circle}>
             <Svg
@@ -64,6 +65,7 @@ const styles = StyleSheet.create({
     height: 185,
     width: 147,
     borderRadius: 30,
+    
   },
   circle: {
     width: 29,
