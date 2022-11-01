@@ -1,6 +1,5 @@
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import React, { useState } from "react";
-import CategoryTitle from "./CategoryTitle";
 
 const CategoryBar = () => {
   const categories = ["New", "Videos", "Artists", "Podcasts", "Trending"];
@@ -30,7 +29,7 @@ const CategoryBar = () => {
                 fontSize: 20,
                 fontFamily: "satoshi-medium",
                 paddingHorizontal: 25,
-                backgroundColor: item ==true ? "pink" : 'red',
+                //backgroundColor: item ==true ? "pink" : 'red',
               }}
             >
               {item}

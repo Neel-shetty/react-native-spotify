@@ -49,26 +49,15 @@ const Navigator = () => {
     }
   }
 
-  if (user === undefined) {
+  /* if (user === undefined) {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <ActivityIndicator />
       </View>
     );
-  }
+  } */
   function Header() {
-    return (
-      <View
-        style={{
-          justifyContent: "center",
-          alignItems: "center",
-          //flex: 1,
-          backgroundColor: "red",
-        }}
-      >
-        <Logosmall />
-      </View>
-    );
+    <Logosmall />;
   }
 
   function MainApp() {
@@ -77,25 +66,17 @@ const Navigator = () => {
         <Tab.Screen
           name="HomeScreen"
           component={HomeScreen}
-          options={{
-            headerTitle: () => {
-              <View>
-                <Header />;
-              </View>
-              
-            },
-          }}
         />
-        <Tab.Screen name="ExploreScreen" component={ExploreScreen}/>
-        <Tab.Screen name="PlaylistScreen" component={PlaylistScreen}/>
-        <Tab.Screen name="ProfileScreen" component={ProfileScreen}/>
+        <Tab.Screen name="ExploreScreen" component={ExploreScreen} />
+        <Tab.Screen name="PlaylistScreen" component={PlaylistScreen} />
+        <Tab.Screen name="ProfileScreen" component={ProfileScreen} />
       </Tab.Navigator>
     );
   }
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="MainApp">
+      <Stack.Navigator initialRouteName="GetStarted">
         {/* {user ? ( */}
         <Stack.Screen
           name="MainApp"

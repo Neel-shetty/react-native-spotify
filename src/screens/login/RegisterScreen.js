@@ -10,6 +10,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   Alert,
+  Linking,
 } from "react-native";
 import React from "react";
 import Button from "../../components/ui/Button";
@@ -55,9 +56,15 @@ const RegisterScreen = ({ navigation }) => {
   function LoginButton() {
     navigation.navigate("SignInScreen");
   }
+  function TermsButton() {
+    Linking.openURL('https://www.spotify.com/us/legal/end-user-agreement/')
+  }
+  function PrivacyButton() {
+    Linking.openURL('https://www.spotify.com/us/legal/privacy-policy/')
+  }
   async function SignUpButton(values) {
     const { username, email, password } = values;
-    console.log(values)
+    console.log(values);
 
     try {
       const user = await Auth.signUp({
@@ -170,6 +177,18 @@ const RegisterScreen = ({ navigation }) => {
                     Create Account
                   </Button>
                 </View>
+                <View>
+                <View style={{alignItems: 'center', justifyContent: 'center', paddingHorizontal:30}}>
+                  <Text style={styles.subtitle}>
+                    By registering, you confirm that you accept our
+                    <Text style={styles.subtitle2} onPress={TermsButton}>
+                      {" "}
+                      Terms of Use{" "}
+                    </Text> and{" "}
+                    <Text style={styles.subtitle2} onPress={PrivacyButton}>Privacy Policy </Text>
+                  </Text>
+                  </View>
+                </View>
               </>
             )}
           </Formik>
@@ -264,6 +283,7 @@ const styles = StyleSheet.create({
     fontFamily: "satoshi-medium",
     fontSize: 15,
     color: "#797979",
+    textAlign: 'center'
     //backgroundColor: "red",
   },
   subtitle2: {
@@ -291,7 +311,7 @@ const styles = StyleSheet.create({
     //backgroundColor: "red",
     flex: 1,
     position: "absolute",
-    top: 240 + 80,
+    top: 240 + 130,
     alignSelf: "center",
   },
   button: {

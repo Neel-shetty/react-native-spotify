@@ -51,6 +51,9 @@ const SignInScreen = ({ navigation }) => {
   function ForgotButton() {
     navigation.navigate("ResetPassword");
   }
+  function SupportButton(){
+    Linking.openURL('https://support.spotify.com/us/category/account-help/')
+  }
   async function SignInButton(values) {
     console.log(values);
     const { username, password } = values;
@@ -199,7 +202,7 @@ const SignInScreen = ({ navigation }) => {
                 <Text style={styles.title}>Sign In</Text>
                 <View style={styles.subtitleContainer}>
                   <Text style={styles.subtitle}>If You Need Any Support</Text>
-                  <TouchableOpacity>
+                  <TouchableOpacity onPress={SupportButton}>
                     <Text style={styles.subtitle2}> Click Here</Text>
                   </TouchableOpacity>
                 </View>

@@ -5,7 +5,6 @@ import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { Auth } from "aws-amplify";
 import SongPreviewList from "../../components/SongPreview";
-import CategoryTitle from "../../components/CategoryBar/CategoryTitle";
 import CategoryBar from "../../components/CategoryBar";
 
 const HomeScreen = () => {
@@ -39,6 +38,7 @@ const HomeScreen = () => {
   return (
     <SafeAreaView onLayout={onLayoutRootView} style={styles.root}>
       <ScrollView contentContainerStyle={styles.root}>
+        {/* <Button>logout</Button> */}
         <View style={{height: 30}}>
           <CategoryBar />
         </View>
