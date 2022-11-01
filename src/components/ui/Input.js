@@ -9,9 +9,36 @@ const Input = ({
   secureTextEntry,
   placeholder,
   keyboardType,
-  spellCheck
+  style,
+  error,
+  isSubmitting
 }) => {
-  //const [value, setValue] = useState("");
+  const [red, setRed] = useState(false);
+  //var errors = error
+  //console.log(error.password);
+  console.warn(isSubmitting)
+  if (
+    error.password === "Required!" ||
+    error.username === "Required!" ||
+    error.password === "Must include atleast 1 uppercase letter" ||
+    error.password === "must include atleast 1 number" ||
+    error.password === "Too Long!" ||
+    error.password === "Too Short!" ||
+    error.username === "too long, didn't ask your mum's body count" ||
+    error.username === "Too short, like your pp :)"
+  ) {
+    var isError = true
+    //console.log(isError);
+  } else {
+    var isError = false
+    //console.log(isError);
+  }
+
+  if(isSubmitting===true){
+    setRed(isError)
+  }
+
+  
   return (
     <>
       <View>
@@ -21,7 +48,7 @@ const Input = ({
           </View>
           <TextInput
             placeholder={placeholder}
-            style={styles.input}
+            style={red ? styles.input : styles.inputError}
             onChangeText={onChangeText}
             onBlur={onBlur}
             value={value}
@@ -29,7 +56,6 @@ const Input = ({
             keyboardType={keyboardType}
             spellCheck={false}
             autoCorrect={false}
-            //fontStyle={"satoshi-bold"}
           />
         </View>
       </View>
@@ -44,22 +70,32 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     justifyContent: "center",
     textAlignVertical: "center",
-    //borderWidth: 3,
-    width: 280,
+    width: 333,
     height: 80,
-    borderColor: "black",
+    borderColor: "red",
     borderRadius: 30,
     fontSize: 18,
     fontFamily: "satoshi-medium",
-    //top: 80,
-
-    //backgroundColor: 'green'
+    paddingHorizontal: 26,
+    //color:'black',
+    //backgroundColor: 'red',
+  },
+  inputError: {
+    borderColor: "red",
+    borderWidth: 1,
+    alignSelf: "center",
+    justifyContent: "center",
+    textAlignVertical: "center",
+    width: 333,
+    height: 80,
+    borderColor: "red",
+    borderRadius: 30,
+    fontSize: 18,
+    fontFamily: "satoshi-medium",
+    paddingHorizontal: 26,
   },
   outline: {
-    //position: 'absolute',
     alignItems: "center",
-    //top: 80,
-    //backgroundColor: 'blue'
   },
   rootContainer: {
     //backgroundColor: "red",

@@ -14,7 +14,7 @@ import {
   Linking,
   Alert,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import Button from "../../components/ui/Button";
 import Logosmall from "../../components/ui/Logosmall";
 import BackArrow from "../../components/ui/backArrow";
@@ -42,6 +42,7 @@ const ReviewSchema = yup.object({
 });
 
 const SignInScreen = ({ navigation }) => {
+  const [error, seterror] = useState();
   function BackButton() {
     navigation.navigate("RegisterOrSignIn");
   }
@@ -51,127 +52,20 @@ const SignInScreen = ({ navigation }) => {
   function ForgotButton() {
     navigation.navigate("ResetPassword");
   }
-  function SupportButton(){
-    Linking.openURL('https://support.spotify.com/us/category/account-help/')
+  function SupportButton() {
+    Linking.openURL("https://support.spotify.com/us/category/account-help/");
   }
   async function SignInButton(values) {
     console.log(values);
     const { username, password } = values;
     try {
-      const user = await Auth.signIn(username,password)
-      console.log(user)
+      const user = await Auth.signIn(username, password);
+      console.log(user);
     } catch (e) {
-      Alert.alert('oops', e.message)
+      Alert.alert("oops", e.message);
     }
     //console.log(user)
   }
-
-  /* return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-    <View style={styles.rootContainer}>
-      
-        <View style={styles.header}>
-          <View style={styles.backButtonContainer}>
-            <TouchableOpacity onPress={BackButton}>
-              <Image
-                source={require("../../../assets/images/Ellipse.png")}
-                style={styles.backButton}
-              />
-              <BackArrow />
-            </TouchableOpacity>
-          </View>
-          <View style={styles.logoContainer}>
-            <Logosmall />
-          </View>
-        </View>
-        <View>
-          <View style={styles.titleContainer}>
-            <Text style={styles.title}>Sign in</Text>
-            <View style={styles.subtitleContainer}>
-              <Text style={styles.subtitle}>If You Need Any Support</Text>
-              <TouchableOpacity>
-                <Text style={styles.subtitle2}> Click Here</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-        <View style={styles.inputContainer}>
-          <Formik
-            initialValues={{ username: "", password: "" }}
-            onSubmit={(values, actions) => {
-              console.log(values);
-              
-              actions.resetForm();
-            }}
-            validationSchema={ReviewSchema}
-          >
-            {({ handleChange, handleSubmit, handleBlur, values, errors, touched }) => (
-              <>
-                <View style={styles.input1}>
-                  <Input
-                    placeholder="Username"
-                    onChangeText={handleChange("username")}
-                    onBlur={handleBlur("username")}
-                    value={values.username}
-                  />
-                </View>
-                <View style={styles.input2}>
-                  <Input
-                    placeholder="Password"
-                    secureTextEntry={true}
-                    onChangeText={handleChange("password")}
-                    onBlur={handleBlur("password")}
-                    value={values.password}
-                  />
-                </View>
-                <TouchableOpacity onPress={ForgotButton}>
-                  <Text style={styles.recover}>Forgot password</Text>
-                </TouchableOpacity>
-                <View style={styles.view}>
-                  <Button style={styles.button} onPress={handleSubmit}>
-                    Sign In
-                  </Button>
-                </View>
-              </>
-            )}
-          </Formik>
-        </View>
-        <View style={styles.dividerContainer}>
-          <Text style={styles.dividerText}>
-            {"           "}
-            -------------------------------------------------
-          </Text>
-          <Text style={styles.dividerTextM}> OR </Text>
-          <Text style={styles.dividerText}>
-            -------------------------------------------------
-          </Text>
-        </View>
-        <View style={styles.bottomMenu}>
-          <View style={styles.imageContainer}>
-            <TouchableOpacity>
-              <Image
-                source={require("../../../assets/images/googlelogo.png")}
-                style={styles.imagebox}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Image
-                source={require("../../../assets/images/applelogo.png")}
-                style={styles.imagebox2}
-              />
-            </TouchableOpacity>
-          </View>
-          <View style={styles.questionContainer}>
-            <Text style={styles.question}>Not A Member ? </Text>
-            <TouchableOpacity onPress={RegisterButton}>
-              <Text style={styles.register}>Register Now</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      
-    </View>
-    </TouchableWithoutFeedback>
-  ); */
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -209,8 +103,10 @@ const SignInScreen = ({ navigation }) => {
               </View>
               <Formik
                 initialValues={{ username: "", password: "" }}
-                onSubmit={SignInButton}
-                //validationSchema={ReviewSchema}
+                onSubmit={(values) => {
+                  SignInButton(values);
+                }}
+                validationSchema={ReviewSchema}
               >
                 {({
                   handleChange,
@@ -219,22 +115,28 @@ const SignInScreen = ({ navigation }) => {
                   values,
                   errors,
                   touched,
+                  isSubmitting
                 }) => (
                   <>
+                    {/* {seterror(errors)} */}
                     <View style={styles.inputContainer}>
                       <Input
                         placeholder="Username"
                         onChangeText={handleChange("username")}
                         onBlur={handleBlur("username")}
                         value={values.username}
+                        style={styles.inputError}
+                        error={errors}
+                        isSubmitting={isSubmitting}
                       />
+
                       <Text
                         style={[
                           styles.subtitle,
                           { textAlign: "center", color: "red" },
                         ]}
                       >
-                        {touched.username && errors.password}
+                        {touched.username && errors.username}
                       </Text>
                       <Input
                         secureTextEntry={true}
@@ -242,6 +144,7 @@ const SignInScreen = ({ navigation }) => {
                         onChangeText={handleChange("password")}
                         onBlur={handleBlur("password")}
                         value={values.password}
+                        error={errors}
                       />
 
                       <Text
@@ -252,14 +155,7 @@ const SignInScreen = ({ navigation }) => {
                       >
                         {touched.password && errors.password}
                       </Text>
-                      {/* <Text
-                        style={[
-                          styles.subtitle,
-                          { textAlign: "center", color: "red" },
-                        ]}
-                      >
-                        {touched.username && errors.username}
-                      </Text> */}
+
                       <TouchableOpacity onPress={ForgotButton}>
                         <Text style={styles.recover}>Forgot password</Text>
                       </TouchableOpacity>
@@ -400,7 +296,11 @@ const styles = StyleSheet.create({
     //backgroundColor: "pink",
     alignContent: "center",
     justifyContent: "center",
-    minHeight: 130
+    minHeight: 130,
+  },
+  inputError: {
+    //backgroundColor: 'red',
+    //opacity: 0.2,
   },
   recover: {
     fontSize: width < 400 ? 14 : 16,
