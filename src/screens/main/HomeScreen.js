@@ -1,4 +1,11 @@
-import { StyleSheet, Text, View, SafeAreaView, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  ScrollView,
+  Dimensions,
+} from "react-native";
 import React, { useCallback, useEffect } from "react";
 import Button from "../../components/ui/Button";
 import { useFonts } from "expo-font";
@@ -43,19 +50,40 @@ const HomeScreen = () => {
     <SafeAreaView onLayout={onLayoutRootView} style={styles.root}>
       <ScrollView contentContainerStyle={styles.root}>
         {/* <Button>logout</Button> */}
-        <View><Header/></View>
-        <View style={{ flex: 1 }}>
+        <View
+          style={{
+            width: width,
+            alignItems: "center",
+            justifyContent: "center",
+            paddingTop: 30,
+            paddingBottom: 24,
+            //backgroundColor: "violet",
+            //flex:0.8
+          }}
+        >
+          <Header />
+        </View>
+        <View
+          style={{
+            alignItems: "center",
+            justifyContent: "flex-start",
+            //backgroundColor: "violet",
+            paddingBottom:41
+          }}
+        >
           <NewAlbum />
         </View>
-        <View style={{flex: 1}}>
-          <View style={{ height: 30 }}>
+        <View style={{ flex: 5 }}>
+          <View style={{ height: 30, marginBottom:30}}>
             <CategoryBar />
           </View>
           <View style={{ height: 242 }}>
             <SongPreviewList />
           </View>
-          <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-            <Playlist/>
+          <View
+            style={{ flex: 3, alignItems: "center", justifyContent: "center" }}
+          >
+            <Playlist />
           </View>
         </View>
       </ScrollView>
@@ -65,10 +93,13 @@ const HomeScreen = () => {
 
 export default HomeScreen;
 
+const height = Dimensions.get("window").height;
+const width = Dimensions.get("window").width;
+
 const styles = StyleSheet.create({
   root: {
-    alignItems: "center",
-    justifyContent: "center",
+    //alignItems: "center",
+    //justifyContent: "center",
     flex: 1,
     //backgroundColor: "violet",
   },

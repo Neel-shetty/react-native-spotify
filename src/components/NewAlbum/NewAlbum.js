@@ -3,7 +3,7 @@ import React from "react";
 
 const NewAlbum = () => {
   return (
-    <View style={{ flex: 1 , alignItems: 'center', justifyContent:'center'}}>
+    // <View style={{ flex: 1 , alignItems: 'center', justifyContent:'center'}}>
       <View style={styles.container}>
         <View style={styles.textContainer}>
           <View style={{flex:1}}>
@@ -20,7 +20,7 @@ const NewAlbum = () => {
           <Image style={styles.image} source={require('../../../assets/images/billieAlbum.png')}/>
         </View>
       </View>
-    </View>
+    // </View>
   );
 };
 

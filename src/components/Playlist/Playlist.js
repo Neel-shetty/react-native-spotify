@@ -10,8 +10,10 @@ const Playlist = () => {
       </View>
       <View style={{flex:3}}>
         <PlaylistItem />
+        <PlaylistItem />
+        <PlaylistItem />
       </View>
-      {/* <PlaylistItem />
+      {/* 
       <PlaylistItem /> */}
     </View>
   )
@@ -27,7 +29,7 @@ const styles = StyleSheet.create({
     flex:1,
     alignItems:'center',
     justifyContent: 'center',
-    backgroundColor: 'violet',
+    //backgroundColor: 'violet',
     width:width,
   },
   playlist: {
@@ -36,7 +38,7 @@ const styles = StyleSheet.create({
   },
   playlistContainer: {
     alignItems: 'flex-start',
-    backgroundColor: 'pink',
+    //backgroundColor: 'pink',
     //flex:1,
     width:332,
     paddingLeft: 10,

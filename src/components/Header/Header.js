@@ -4,7 +4,7 @@ import Logosmall from "../../components/ui/Logosmall";
 
 const Header = () => {
   return (
-    <View>
+    <View styles={styles.root}>
       <Logosmall />
     </View>
   )
@@ -12,4 +12,10 @@ const Header = () => {
 
 export default Header
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  root:{
+    //backgroundColor: 'red',
+    flex:1,
+    height: 33
+  }
+})
