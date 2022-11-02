@@ -1,6 +1,6 @@
-import { View, Text, ActivityIndicator } from "react-native";
+import { View, Text, ActivityIndicator, Image } from "react-native";
 import React, { useEffect, useState } from "react";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useRoute } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import GetStartedScreen from "../screens/onboarding/GetStartedScreen";
@@ -16,6 +16,11 @@ import Logosmall from "../components/ui/Logosmall";
 import ExploreScreen from "../screens/main/ExploreScreen";
 import PlaylistScreen from "../screens/main/PlaylistScreen";
 import ProfileScreen from "../screens/main/ProfileScreen";
+import {Ionicons} from '@expo/vector-icons'
+import HomeIcon from '../components/ui/HomeIcon'
+
+
+
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -59,11 +64,29 @@ const Navigator = () => {
 
   function MainApp() {
     return (
-      <Tab.Navigator>
+      <Tab.Navigator screenOptions={({route})=>{
+        tabBarIcon: ({focused, color,size})=>{
+          let iconName 
+          let rn = route.name
+
+          if(rn===HomeScreen){
+            iconName = focused ? 'home' : 'home-outline'
+          }
+
+          return (
+            <View>
+                <Image source={require('../../assets/images/Home.png')} />
+            </View>
+          )
+        }
+      }}>
         <Tab.Screen
           name="HomeScreen"
           component={HomeScreen}
-          options={{headerShown: false}}
+          options={{
+            tabBarIcon:({focused})=>(<View><Ionicons name="home" size={24}/></View>)
+          }}
+          
         />
         <Tab.Screen name="ExploreScreen" component={ExploreScreen} />
         <Tab.Screen name="PlaylistScreen" component={PlaylistScreen} />
