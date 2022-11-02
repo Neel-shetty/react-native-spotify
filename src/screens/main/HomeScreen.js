@@ -7,6 +7,9 @@ import { Auth } from "aws-amplify";
 import SongPreviewList from "../../components/SongPreview";
 import CategoryBar from "../../components/CategoryBar";
 import NewAlbum from "../../components/NewAlbum/NewAlbum";
+import Playlist from "../../components/Playlist/Playlist";
+import Logosmall from "../../components/ui/Logosmall";
+import Header from "../../components/Header/Header";
 
 const HomeScreen = () => {
   function logOut() {
@@ -40,6 +43,7 @@ const HomeScreen = () => {
     <SafeAreaView onLayout={onLayoutRootView} style={styles.root}>
       <ScrollView contentContainerStyle={styles.root}>
         {/* <Button>logout</Button> */}
+        <View><Header/></View>
         <View style={{ flex: 1 }}>
           <NewAlbum />
         </View>
@@ -49,6 +53,9 @@ const HomeScreen = () => {
           </View>
           <View style={{ height: 242 }}>
             <SongPreviewList />
+          </View>
+          <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+            <Playlist/>
           </View>
         </View>
       </ScrollView>
