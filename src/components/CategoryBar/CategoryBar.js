@@ -3,7 +3,6 @@ import React, { useState } from "react";
 
 const CategoryBar = () => {
   const categories = ["New", "Videos", "Artists", "Podcasts", "Trending"];
-  const [data, setData] = useState([false, false, false, false, false]);
 
   function onSelect(ind) {
     const tempData = [];
@@ -29,7 +28,7 @@ const CategoryBar = () => {
                 fontSize: 20,
                 fontFamily: "satoshi-medium",
                 paddingHorizontal: 25,
-                //backgroundColor: item ==true ? "pink" : 'red',
+                backgroundColor:"pink"
               }}
             >
               {item}
