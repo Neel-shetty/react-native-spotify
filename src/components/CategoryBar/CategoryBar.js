@@ -1,38 +1,51 @@
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import {
+  FlatList,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import React, { useState } from "react";
+import categoryData from "../../../assets/dummydata/categoryData";
 
 const CategoryBar = () => {
   const categories = ["New", "Videos", "Artists", "Podcasts", "Trending"];
+  const [select, setSelect] = useState(categoryData);
 
-  function onSelect(ind) {
+  function onSelect(index) {
     const tempData = [];
-    data.map((item, index) => {
-      if (index === ind) {
-        tempData.push(true);
+    const newIndex = select.map((val) => {
+      if (val.key === index.key) {
+        tempData.push({ ...val, selected: true });
       } else {
-        tempData.push(false);
+        tempData.push({ ...val, selected: false });
       }
     });
-    setData(tempData);
+    setSelect(tempData);
   }
+
+  // console.log(select[item].selected);
 
   return (
     <View>
       <FlatList
-        data={categories}
+        data={categoryData}
+        //keyExtractor={(item)=> item.key}
         renderItem={({ item, index }) => {
           return (
-            <Text
-              onPress={()=>{onSelect(index)}}
-              style={{
-                fontSize: 20,
-                fontFamily: "satoshi-medium",
-                paddingHorizontal: 25,
-                backgroundColor:"pink"
-              }}
-            >
-              {item}
-            </Text>
+            <TouchableOpacity onPress={() => onSelect(item)}>
+              <Text
+                style={{
+                  fontSize: 20,
+                  fontFamily: "satoshi-medium",
+                  paddingHorizontal: 25,
+                  //backgroundColor: select[index].selected ? "pink" : "red",
+                }}
+              >
+                {item.title}
+              </Text>
+              {select[index].selected && <View style={styles.indicator}></View>}
+            </TouchableOpacity>
           );
         }}
         horizontal={true}
@@ -50,4 +63,12 @@ const styles = StyleSheet.create({
     fontFamily: "satoshi-medium",
     paddingHorizontal: 25,
   },
+  indicator:{
+    width:26,
+    height:3,
+    backgroundColor: '#42C83C',
+    borderBottomRightRadius:3.5,
+    borderBottomLeftRadius:3.5,
+    alignSelf:'center'
+  }
 });

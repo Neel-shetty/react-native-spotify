@@ -9,7 +9,7 @@ import previewData from "../../../assets/dummydata/previewData";
 const SongPreviewList = () => {
   //console.log(previewData)
   return (
-    <View style={{ flexDirection: "row" }}>
+    <View style={{ flexDirection: "row",paddingHorizontal:10 }}>
       <FlatList
         data={previewData}
         renderItem={({ item }) => (

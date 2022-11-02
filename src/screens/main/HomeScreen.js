@@ -78,6 +78,7 @@ const HomeScreen = () => {
             justifyContent: "flex-start",
             //backgroundColor: "violet",
             paddingBottom: 41,
+            
           }}
         >
           <NewAlbum />

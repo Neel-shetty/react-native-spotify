@@ -1,4 +1,4 @@
-import { View, Text, ActivityIndicator, Image } from "react-native";
+import { View, Text, ActivityIndicator, Image, StyleSheet } from "react-native";
 import React, { useEffect, useState } from "react";
 import { NavigationContainer, useRoute } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -25,7 +25,6 @@ import Heart from "../components/ui/Heart";
 import HeartOutline from "../components/ui/HeartOutline";
 import Profile from "../components/ui/Profile";
 import ProfileOutline from "../components/ui/ProfileOutline";
-
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -72,15 +71,29 @@ const Navigator = () => {
       <Tab.Navigator
         screenOptions={{
           tabBarShowLabel: false,
-          tabBarStyle: { height:73 },
+          tabBarStyle: { height: 73 },
         }}
       >
         <Tab.Screen
           name="HomeScreen"
           component={HomeScreen}
           options={{
-            tabBarIcon: ({ focused }) =>
-              focused ? <HomeIcon /> : <HomeIconOutline />,
+            tabBarIcon: ({ focused }) => (
+              <View>
+                <View style={{ flex: 1 }}>
+                  {focused && <View style={styles.indicator}></View>}
+                </View>
+                <View
+                  style={{
+                    flex: 2.3,
+                    alignItems: "center",
+                    //justifyContent: "center",
+                  }}
+                >
+                  <View>{focused ? <HomeIcon /> : <HomeIconOutline />}</View>
+                </View>
+              </View>
+            ),
             headerShown: false,
           }}
         />
@@ -88,8 +101,22 @@ const Navigator = () => {
           name="ExploreScreen"
           component={ExploreScreen}
           options={{
-            tabBarIcon: ({ focused }) =>
-              focused ? <ExploreOutline /> : <Explore />,
+            tabBarIcon: ({ focused }) => (
+              <View>
+                <View style={{ flex: 1 }}>
+                  {focused && <View style={styles.indicator}></View>}
+                </View>
+                <View
+                  style={{
+                    flex: 2.3,
+                    alignItems: "center",
+                    //justifyContent: "center",
+                  }}
+                >
+                  <View>{focused ? <ExploreOutline /> : <Explore />}</View>
+                </View>
+              </View>
+            ),
             headerShown: false,
             tabBarShowLabel: false,
           }}
@@ -98,8 +125,23 @@ const Navigator = () => {
           name="PlaylistScreen"
           component={PlaylistScreen}
           options={{
-            tabBarIcon: ({ focused }) =>
-              focused ? <Heart/> :<HeartOutline/>,
+            tabBarIcon: ({ focused }) => (
+              <View>
+                <View style={{ flex: 1 }}>
+                  { focused && <View style={styles.indicator}></View>}
+                </View>
+                <View
+                  style={{
+                    flex: 2.3,
+                    alignItems: "center",
+                    //justifyContent: "center",
+                  }}
+                >
+                  <View>{focused ? <Heart /> : <HeartOutline />}</View>
+                </View>
+              </View>
+            )
+              ,
             headerShown: false,
           }}
         />
@@ -107,8 +149,23 @@ const Navigator = () => {
           name="ProfileScreen"
           component={ProfileScreen}
           options={{
-            tabBarIcon: ({ focused }) =>
-              focused ? <Profile/> : <ProfileOutline/>,
+            tabBarIcon: ({ focused }) => (
+              <View>
+                <View style={{ flex: 1 }}>
+                  { focused && <View style={styles.indicator}></View>}
+                </View>
+                <View
+                  style={{
+                    flex: 2.3,
+                    alignItems: "center",
+                    //justifyContent: "center",
+                  }}
+                >
+                  <View>{focused ? <Profile /> : <ProfileOutline />}</View>
+                </View>
+              </View>
+            )
+              ,
             headerShown: false,
           }}
         />
@@ -218,3 +275,15 @@ const Navigator = () => {
 };
 
 export default Navigator;
+
+const styles = StyleSheet.create({
+  indicator: {
+    width: 23,
+    height: 4,
+    backgroundColor: "#42C83C",
+    borderBottomRightRadius: 3.5,
+    borderBottomLeftRadius: 3.5,
+    alignSelf: "baseline",
+    marginBottom: 41.5,
+  },
+});
