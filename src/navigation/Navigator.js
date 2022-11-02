@@ -21,7 +21,11 @@ import HomeIcon from "../components/ui/HomeIcon";
 import HomeIconOutline from "../components/ui/HomeIconOutline";
 import Explore from "../components/ui/Explore";
 import ExploreOutline from "../components/ui/ExploreOutline";
-import { Feather } from "@expo/vector-icons";
+import Heart from "../components/ui/Heart";
+import HeartOutline from "../components/ui/HeartOutline";
+import Profile from "../components/ui/Profile";
+import ProfileOutline from "../components/ui/ProfileOutline";
+
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -95,7 +99,7 @@ const Navigator = () => {
           component={PlaylistScreen}
           options={{
             tabBarIcon: ({ focused }) =>
-              focused ? <HomeIcon /> : <HomeIconOutline />,
+              focused ? <Heart/> :<HeartOutline/>,
             headerShown: false,
           }}
         />
@@ -104,7 +108,7 @@ const Navigator = () => {
           component={ProfileScreen}
           options={{
             tabBarIcon: ({ focused }) =>
-              focused ? <HomeIcon /> : <HomeIconOutline />,
+              focused ? <Profile/> : <ProfileOutline/>,
             headerShown: false,
           }}
         />
