@@ -16,11 +16,12 @@ import Logosmall from "../components/ui/Logosmall";
 import ExploreScreen from "../screens/main/ExploreScreen";
 import PlaylistScreen from "../screens/main/PlaylistScreen";
 import ProfileScreen from "../screens/main/ProfileScreen";
-import {Ionicons} from '@expo/vector-icons'
-import HomeIcon from '../components/ui/HomeIcon'
-
-
-
+import { Ionicons } from "@expo/vector-icons";
+import HomeIcon from "../components/ui/HomeIcon";
+import HomeIconOutline from "../components/ui/HomeIconOutline";
+import Explore from "../components/ui/Explore";
+import ExploreOutline from "../components/ui/ExploreOutline";
+import { Feather } from "@expo/vector-icons";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -64,33 +65,49 @@ const Navigator = () => {
 
   function MainApp() {
     return (
-      <Tab.Navigator screenOptions={({route})=>{
-        tabBarIcon: ({focused, color,size})=>{
-          let iconName 
-          let rn = route.name
-
-          if(rn===HomeScreen){
-            iconName = focused ? 'home' : 'home-outline'
-          }
-
-          return (
-            <View>
-                <Image source={require('../../assets/images/Home.png')} />
-            </View>
-          )
-        }
-      }}>
+      <Tab.Navigator
+        screenOptions={{
+          tabBarShowLabel: false,
+          tabBarStyle: { height:73 },
+        }}
+      >
         <Tab.Screen
           name="HomeScreen"
           component={HomeScreen}
           options={{
-            tabBarIcon:({focused})=>(<View><Ionicons name="home" size={24}/></View>)
+            tabBarIcon: ({ focused }) =>
+              focused ? <HomeIcon /> : <HomeIconOutline />,
+            headerShown: false,
           }}
-          
         />
-        <Tab.Screen name="ExploreScreen" component={ExploreScreen} />
-        <Tab.Screen name="PlaylistScreen" component={PlaylistScreen} />
-        <Tab.Screen name="ProfileScreen" component={ProfileScreen} />
+        <Tab.Screen
+          name="ExploreScreen"
+          component={ExploreScreen}
+          options={{
+            tabBarIcon: ({ focused }) =>
+              focused ? <ExploreOutline /> : <Explore />,
+            headerShown: false,
+            tabBarShowLabel: false,
+          }}
+        />
+        <Tab.Screen
+          name="PlaylistScreen"
+          component={PlaylistScreen}
+          options={{
+            tabBarIcon: ({ focused }) =>
+              focused ? <HomeIcon /> : <HomeIconOutline />,
+            headerShown: false,
+          }}
+        />
+        <Tab.Screen
+          name="ProfileScreen"
+          component={ProfileScreen}
+          options={{
+            tabBarIcon: ({ focused }) =>
+              focused ? <HomeIcon /> : <HomeIconOutline />,
+            headerShown: false,
+          }}
+        />
       </Tab.Navigator>
     );
   }

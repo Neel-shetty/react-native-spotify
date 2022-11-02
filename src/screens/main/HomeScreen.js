@@ -74,7 +74,7 @@ const HomeScreen = () => {
           }}
         >
           <NewAlbum />
-          <HomeIcon />
+          {/* <HomeIcon /> */}
         </View>
         <View style={{ flex: 5 }}>
           <View style={{ height: 30, marginBottom:30}}>
