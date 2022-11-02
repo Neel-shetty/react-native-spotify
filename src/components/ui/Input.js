@@ -13,11 +13,11 @@ const Input = ({
   error,
   isSubmitting
 }) => {
-  const [red, setRed] = useState(false);
+  //const [red, setRed] = useState(false);
   //var errors = error
   //console.log(error.password);
-  console.warn(isSubmitting)
-  if (
+  //console.warn(isSubmitting)
+  /* if (
     error.password === "Required!" ||
     error.username === "Required!" ||
     error.password === "Must include atleast 1 uppercase letter" ||
@@ -37,7 +37,7 @@ const Input = ({
   if(isSubmitting===true){
     setRed(isError)
   }
-
+ */
   
   return (
     <>
@@ -48,7 +48,7 @@ const Input = ({
           </View>
           <TextInput
             placeholder={placeholder}
-            style={red ? styles.input : styles.inputError}
+            style={styles.input}
             onChangeText={onChangeText}
             onBlur={onBlur}
             value={value}

@@ -6,6 +6,7 @@ import * as SplashScreen from "expo-splash-screen";
 import { Auth } from "aws-amplify";
 import SongPreviewList from "../../components/SongPreview";
 import CategoryBar from "../../components/CategoryBar";
+import NewAlbum from "../../components/NewAlbum/NewAlbum";
 
 const HomeScreen = () => {
   function logOut() {
@@ -39,11 +40,16 @@ const HomeScreen = () => {
     <SafeAreaView onLayout={onLayoutRootView} style={styles.root}>
       <ScrollView contentContainerStyle={styles.root}>
         {/* <Button>logout</Button> */}
-        <View style={{height: 30}}>
-          <CategoryBar />
+        <View style={{ flex: 1 }}>
+          <NewAlbum />
         </View>
-        <View style={{ height: 242 }}>
-          <SongPreviewList />
+        <View style={{flex: 1}}>
+          <View style={{ height: 30 }}>
+            <CategoryBar />
+          </View>
+          <View style={{ height: 242 }}>
+            <SongPreviewList />
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>

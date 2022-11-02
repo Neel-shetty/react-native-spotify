@@ -56,9 +56,6 @@ const Navigator = () => {
       </View>
     );
   } */
-  function Header() {
-    <Logosmall />;
-  }
 
   function MainApp() {
     return (
@@ -66,6 +63,7 @@ const Navigator = () => {
         <Tab.Screen
           name="HomeScreen"
           component={HomeScreen}
+          options={{headerShown: false}}
         />
         <Tab.Screen name="ExploreScreen" component={ExploreScreen} />
         <Tab.Screen name="PlaylistScreen" component={PlaylistScreen} />
@@ -76,7 +74,7 @@ const Navigator = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="GetStarted">
+      <Stack.Navigator initialRouteName="MainApp">
         {/* {user ? ( */}
         <Stack.Screen
           name="MainApp"
