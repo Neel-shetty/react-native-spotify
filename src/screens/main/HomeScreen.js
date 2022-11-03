@@ -101,9 +101,9 @@ const HomeScreen = () => {
                 justifyContent: "center",
               }}
             >
-              <ScrollView horizontal={true} style={{ width: "100%" }}>
+              {/* <ScrollView horizontal={true} style={{ width: "100%" }}> */}
                 <Playlist />
-              </ScrollView>
+              {/* </ScrollView> */}
               {/* <Text>test</Text> */}
             </View>
           </View>
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
   root: {
     //alignItems: "center",
     //justifyContent: "center",
-    flex: 1,
+    //flex: 1,
     //backgroundColor: "violet",
   },
 });
