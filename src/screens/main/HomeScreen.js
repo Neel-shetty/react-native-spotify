@@ -18,7 +18,7 @@ import NewAlbum from "../../components/NewAlbum/NewAlbum";
 import Playlist from "../../components/Playlist/Playlist";
 import Header from "../../components/Header/Header";
 import SearchIcon from "../../components/ui/SearchIcon";
-import MenuDots from '../../components/ui/MenuDots'
+import MenuDots from "../../components/ui/MenuDots";
 
 const HomeScreen = () => {
   function logOut() {
@@ -50,52 +50,64 @@ const HomeScreen = () => {
 
   return (
     <SafeAreaView onLayout={onLayoutRootView} style={styles.root}>
-      <ScrollView contentContainerStyle={styles.root}>
+      <ScrollView
+        contentContainerStyle={styles.root}
+        nestedScrollEnabled={true}
+      >
         {/* <Button>logout</Button> */}
-        <View
-          style={{
-            width: width,
-            alignItems: "center",
-            justifyContent: "space-between",
-            paddingTop: 30,
-            paddingBottom: 24,
-            flexDirection: "row",
-            paddingHorizontal: 35,
-            //backgroundColor: "violet",
-            //flex:0.8
-          }}
-        > 
-          <TouchableOpacity>
-            <SearchIcon />
-          </TouchableOpacity>
-          
-          <Header />
-          <MenuDots />
-        </View>
-        <View
-          style={{
-            alignItems: "center",
-            justifyContent: "flex-start",
-            //backgroundColor: "violet",
-            paddingBottom: 41,
-            
-          }}
-        >
-          <NewAlbum />
-        </View>
-        <View style={{ flex: 5 }}>
-          <View style={{ height: 30, marginBottom: 30 }}>
-            <CategoryBar />
-          </View>
-          <View style={{ height: 242, marginBottom: 30 }}>
-            <SongPreviewList />
+        <>
+          <View
+            style={{
+              width: width,
+              alignItems: "center",
+              justifyContent: "space-between",
+              paddingTop: 30,
+              paddingBottom: 24,
+              flexDirection: "row",
+              paddingHorizontal: 35,
+              //backgroundColor: "violet",
+              //flex:0.8
+            }}
+          >
+            <TouchableOpacity>
+              <SearchIcon />
+            </TouchableOpacity>
+
+            <Header />
+            <MenuDots />
           </View>
           <View
-            style={{ flex: 3, alignItems: "center", justifyContent: "center" }}
+            style={{
+              alignItems: "center",
+              justifyContent: "flex-start",
+              //backgroundColor: "violet",
+              paddingBottom: 41,
+              //paddingHorizontal:60
+            }}
           >
-            <Playlist />
+            <NewAlbum />
           </View>
-        </View>
+          <View style={{ flex: 5 }}>
+            <View style={{ height: 30, marginBottom: 30 }}>
+              <CategoryBar />
+            </View>
+            <View style={{ height: 242, marginBottom: 30 }}>
+              <SongPreviewList />
+            </View>
+            <View
+              style={{
+                flex: 3,
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <ScrollView horizontal={true} style={{ width: "100%" }}>
+                <Playlist />
+              </ScrollView>
+              {/* <Text>test</Text> */}
+            </View>
+          </View>
+        </>
       </ScrollView>
     </SafeAreaView>
   );

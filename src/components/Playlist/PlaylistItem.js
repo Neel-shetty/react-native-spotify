@@ -1,8 +1,8 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View,Dimensions } from "react-native";
 import React from "react";
 import Svg, { Path } from "react-native-svg";
 
-const PlaylistItem = () => {
+const PlaylistItem = ({ playlist }) => {
   return (
     <View style={styles.container}>
       <View style={styles.playContainer}>
@@ -22,25 +22,33 @@ const PlaylistItem = () => {
           </TouchableOpacity>
         </View>
       </View>
+
       <View style={styles.titleContainer}>
-        <Text style={styles.song}>As it was</Text>
-        <Text style={styles.artist}>Harry Styles</Text>
+      <TouchableOpacity>
+        <Text style={styles.song}>{playlist.SongName}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity>
+        <Text style={styles.artist}>{playlist.Artist}</Text>
+        </TouchableOpacity>
       </View>
+
       <View style={styles.lengthContainer}>
-        <Text style={styles.length}>5:33</Text>
+        <Text style={styles.length}>{playlist.duration}</Text>
       </View>
       <View style={styles.likeContainer}>
-        <Svg
-          width={21}
-          height={21}
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <Path
-            d="M17.773 3.903C15.73 1.82 13.364 2.7 11.9 3.628c-.828.525-1.974.525-2.802 0-1.464-.93-3.83-1.808-5.872.275C-1.62 8.847 6.694 18.375 10.5 18.375c3.806 0 12.12-9.528 7.273-14.472Z"
-            fill="#B4B4B4"
-          />
-        </Svg>
+        <TouchableOpacity>
+          <Svg
+            width={21}
+            height={21}
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <Path
+              d="M17.773 3.903C15.73 1.82 13.364 2.7 11.9 3.628c-.828.525-1.974.525-2.802 0-1.464-.93-3.83-1.808-5.872.275C-1.62 8.847 6.694 18.375 10.5 18.375c3.806 0 12.12-9.528 7.273-14.472Z"
+              fill="#B4B4B4"
+            />
+          </Svg>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -48,13 +56,17 @@ const PlaylistItem = () => {
 
 export default PlaylistItem;
 
+const width = Dimensions.get("window").width;
+
+
 const styles = StyleSheet.create({
   container: {
-    width: 332,
+    width:width,
     height: 43,
     flexDirection: "row",
     justifyContent: "space-between",
-    margin:5,
+    margin: 5,
+    paddingHorizontal:20,
     //backgroundColor: "pink",
   },
   circle: {
@@ -68,13 +80,13 @@ const styles = StyleSheet.create({
   playContainer: {
     alignItems: "flex-start",
     justifyContent: "center",
-    flex:1
+    flex: 1,
   },
   titleContainer: {
     alignItems: "flex-start",
     justifyContent: "center",
-    flex:3,
-    paddingLeft: 10
+    flex: 3,
+    paddingLeft: 10,
   },
   song: {
     fontSize: 16,
@@ -87,7 +99,7 @@ const styles = StyleSheet.create({
   lengthContainer: {
     alignItems: "center",
     justifyContent: "center",
-    flex:2
+    flex: 2,
   },
   length: {
     fontSize: 15,
@@ -96,6 +108,6 @@ const styles = StyleSheet.create({
   likeContainer: {
     alignItems: "flex-end",
     justifyContent: "center",
-    flex:1
+    flex: 1,
   },
 });

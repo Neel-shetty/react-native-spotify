@@ -1,17 +1,25 @@
-import { StyleSheet, Text, View, Dimensions } from 'react-native'
+import { StyleSheet, Text, View, Dimensions, FlatList, ScrollView } from 'react-native'
 import React from 'react'
 import PlaylistItem from './PlaylistItem'
+import PlaylistData from "../../../assets/dummydata/PlaylistData";
 
 const Playlist = () => {
+  //console.log(PlaylistData)
   return (
     <View style={styles.root}>
       <View style={styles.playlistContainer}>
         <Text style={styles.playlist}>Playlist</Text>
       </View>
       <View style={{flex:3}}>
-        <PlaylistItem />
-        <PlaylistItem />
-        <PlaylistItem />
+      {/* <FlatList 
+        data={PlaylistData} 
+        renderItem={({item})=>(
+          <PlaylistItem playlist={item} />
+        )}  
+        /> */}
+        <ScrollView showsVerticalScrollIndicator={false}>
+        {PlaylistData.map((item)=> <PlaylistItem playlist={item}/>)}
+        </ScrollView>
       </View>
       {/* 
       <PlaylistItem /> */}
@@ -40,8 +48,8 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     //backgroundColor: 'pink',
     //flex:1,
-    width:332,
-    paddingLeft: 10,
+    width:width,
+    paddingLeft: 30,
     paddingVertical:12
   }
 })

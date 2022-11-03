@@ -25,6 +25,7 @@ import Heart from "../components/ui/Heart";
 import HeartOutline from "../components/ui/HeartOutline";
 import Profile from "../components/ui/Profile";
 import ProfileOutline from "../components/ui/ProfileOutline";
+import MusicPlayer from "../screens/main/MusicPlayer";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -188,6 +189,7 @@ const Navigator = () => {
             headerShown: false,
           })}
         />
+        <Stack.Screen name="MusicPlayer" component={MusicPlayer} />
         {/* ) : ( */}
         <>
           <Stack.Screen
