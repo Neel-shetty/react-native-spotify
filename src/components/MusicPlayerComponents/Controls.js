@@ -4,6 +4,7 @@ import Svg, { Path } from "react-native-svg";
 import { Audio } from "expo-av";
 import { Storage } from "@aws-amplify/storage";
 import { useState } from "react";
+import { useEffect } from "react";
 
 const Controls = () => {
   const [sound, setSound] = useState();
