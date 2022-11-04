@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Dimensions, FlatList, ScrollView } from 'react-native'
 import React from 'react'
 import PlaylistItem from './PlaylistItem'
-import PlaylistData from "../../../assets/dummydata/PlaylistData";
+import PlaylistData from "../../../../assets/dummydata/PlaylistData";
 
 const Playlist = () => {
   //console.log(PlaylistData)

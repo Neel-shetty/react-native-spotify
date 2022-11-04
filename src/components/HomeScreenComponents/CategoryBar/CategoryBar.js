@@ -6,7 +6,7 @@ import {
   View,
 } from "react-native";
 import React, { useState } from "react";
-import categoryData from "../../../assets/dummydata/categoryData";
+import categoryData from "../../../../assets/dummydata/categoryData";
 
 const CategoryBar = () => {
   const categories = ["New", "Videos", "Artists", "Podcasts", "Trending"];

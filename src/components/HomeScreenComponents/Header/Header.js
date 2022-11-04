@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import Logosmall from "../../components/ui/Logosmall";
-import SearchIcon from "../../components/ui/SearchIcon";
+import Logosmall from "../../ui/Logosmall";
+import SearchIcon from "../../ui/SearchIcon";
 
 const Header = () => {
   return (
