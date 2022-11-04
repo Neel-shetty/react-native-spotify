@@ -189,7 +189,7 @@ const Navigator = () => {
             headerShown: false,
           })}
         />
-        <Stack.Screen name="MusicPlayer" component={MusicPlayer} />
+        <Stack.Screen name="MusicPlayer" component={MusicPlayer} options={{headerShown: false}}/>
         {/* ) : ( */}
         <>
           <Stack.Screen

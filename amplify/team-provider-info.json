@@ -14,6 +14,9 @@
     "categories": {
       "auth": {
         "SpotifyClone": {}
+      },
+      "storage": {
+        "s3spotifyclonestoraged070c184": {}
       }
     }
   }

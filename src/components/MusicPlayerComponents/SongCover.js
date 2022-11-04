@@ -2,9 +2,13 @@ import { Image, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { Dimensions } from "react-native";
 import previewData from "../../../assets/dummydata/previewData";
+import { useRoute } from "@react-navigation/native";
 
-const SongCover = ({ songId }) => {
+const SongCover = () => {
   // const preview = previewData
+  const route = useRoute()
+  //console.log(route.params.songId)
+  const songId = route.params.songId - 1
   return (
     <View
       style={{

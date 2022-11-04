@@ -7,11 +7,16 @@ import {
 } from "react-native";
 import React from "react";
 import Svg, { Path } from "react-native-svg";
+import { useRoute } from "@react-navigation/native";
+import previewData from "../../../assets/dummydata/previewData";
 
-const SongInfo = ({ songId }) => {
+const SongInfo = () => {
   const padding =
     Dimensions.get("window").width - Dimensions.get("window").width * 0.9;
   //console.log(padding)
+  const route = useRoute()
+  //console.log(route.params.songId)
+  const songId = route.params.songId - 1 
 
   return (
     <View
@@ -24,8 +29,8 @@ const SongInfo = ({ songId }) => {
       }}
     >
       <View>
-        <Text style={styles.name}>Say So</Text>
-        <Text style={styles.artist}>Doja Cat</Text>
+        <Text style={styles.name}>{previewData[songId].content.SongName}</Text>
+        <Text style={styles.artist}>{previewData[songId].content.ArtistName}</Text>
       </View>
       <View>
         <TouchableOpacity>

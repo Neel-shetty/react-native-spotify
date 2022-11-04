@@ -8,14 +8,13 @@ const Controls = () => {
       style={{
         flex: 1,
         flexDirection: "row",
-        width: 390,
-        backgroundColor: "pink",
-        alignItems: 'center',
-        justifyContent: 'space-evenly'
+        //backgroundColor: "pink",
+        alignItems: "center",
+        justifyContent: "space-evenly",
       }}
     >
       <View style={{ flex: 1 }}></View>
-      <View style={{ flex: 1, alignItems: "center"}}>
+      <View style={{ flex: 1, alignItems: "center" }}>
         <TouchableOpacity>
           <Svg //repeat
             width={24}
@@ -48,24 +47,26 @@ const Controls = () => {
       </View>
 
       <View
-        style={{ flex: 2, alignItems: "center", backgroundColor: "violet" }}
+        style={{ flex: 2, alignItems: "center" }}
       >
         <TouchableOpacity>
-          <Svg //pause
-            width={28}
-            height={28}
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <Path
-              d="M11.375 3.5a.875.875 0 0 0-1.75 0v21a.875.875 0 0 0 1.75 0v-21ZM18.375 3.5a.875.875 0 0 0-1.75 0v21a.875.875 0 0 0 1.75 0v-21Z"
-              fill="#fff"
-            />
-          </Svg>
+          <View style={{height: 72, width: 72, borderRadius: 72/2,backgroundColor: '#42C83C', alignItems: "center", justifyContent:'center'}}>
+            <Svg //pause
+              width={28}
+              height={28}
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <Path
+                d="M11.375 3.5a.875.875 0 0 0-1.75 0v21a.875.875 0 0 0 1.75 0v-21ZM18.375 3.5a.875.875 0 0 0-1.75 0v21a.875.875 0 0 0 1.75 0v-21Z"
+                fill="#fff"
+              />
+            </Svg>
+          </View>
         </TouchableOpacity>
       </View>
 
-      <View style={{ flex: 1,alignItems: "center" }}>
+      <View style={{ flex: 1, alignItems: "center" }}>
         <TouchableOpacity>
           <Svg //right
             width={26}
@@ -81,7 +82,7 @@ const Controls = () => {
         </TouchableOpacity>
       </View>
 
-      <View style={{ flex: 1,alignItems: "center" }}>
+      <View style={{ flex: 1, alignItems: "center" }}>
         <TouchableOpacity>
           <Svg //shuffle
             width={24}

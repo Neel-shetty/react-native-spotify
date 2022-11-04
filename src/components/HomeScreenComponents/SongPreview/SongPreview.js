@@ -13,9 +13,9 @@ import { useNavigation } from "@react-navigation/native";
 const SongPreview = ({ preview }) => {
   const navigation = useNavigation()
   function onPress() {
-    navigation.navigate('MusicPlayer')
+    navigation.navigate('MusicPlayer', {songId:preview.id})
   }
-  //console.log(preview)
+  //console.log(preview.id)
   return (
     <View style={{ height: 255, width: 147 }}>
       <View style={styles.root}>
