@@ -1,8 +1,40 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import Svg, { Path } from "react-native-svg";
+import { Audio } from "expo-av";
+import { Storage } from "@aws-amplify/storage";
+import { useState } from "react";
 
 const Controls = () => {
+  const [sound, setSound] = useState();
+  // const [songLink, setSongLink] = useState()
+
+  async function getSong() {}
+
+  async function playSound() {
+    /* const file = await Storage.get("01-WAP-(feat.-Megan-Thee-Stallion).m4a", {
+      level: "public",
+    });
+    console.log(file); */
+    //setSongLink(file);
+    console.log("Loading Sound");
+    const { sound } = await Audio.Sound.createAsync(require('../../../assets/songs/hb.m4a'));
+    setSound(sound);
+
+    console.log("Playing Sound");
+    await sound.playAsync();
+  }
+
+  useEffect(() => {
+    return sound
+      ? () => {
+          console.log('Unloading Sound');
+          sound.unloadAsync();
+        }
+      : undefined;
+  }, [sound]);
+
+  //console.log(status)
   return (
     <View
       style={{
@@ -46,11 +78,18 @@ const Controls = () => {
         </TouchableOpacity>
       </View>
 
-      <View
-        style={{ flex: 2, alignItems: "center" }}
-      >
-        <TouchableOpacity>
-          <View style={{height: 72, width: 72, borderRadius: 72/2,backgroundColor: '#42C83C', alignItems: "center", justifyContent:'center'}}>
+      <View style={{ flex: 2, alignItems: "center" }}>
+        <TouchableOpacity onPress={playSound}>
+          <View
+            style={{
+              height: 72,
+              width: 72,
+              borderRadius: 72 / 2,
+              backgroundColor: "#42C83C",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
             <Svg //pause
               width={28}
               height={28}

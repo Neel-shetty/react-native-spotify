@@ -19,6 +19,7 @@
     "aws-amplify": "^4.3.42",
     "expo": "~46.0.16",
     "expo-app-loading": "~2.1.0",
+    "expo-av": "~12.0.4",
     "expo-font": "~10.2.0",
     "expo-splash-screen": "~0.16.2",
     "expo-status-bar": "~1.4.0",
