@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, FlatList } from "react-native";
 import React from "react";
 import SongPreview from "./SongPreview";
-import previewData from "../../../assets/dummydata/previewData";
+import previewData from "../../../../assets/dummydata/previewData";
 
 // const preview1 = previewData[0];
 // const preview2 = previewData[1];

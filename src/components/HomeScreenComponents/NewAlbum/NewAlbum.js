@@ -15,7 +15,7 @@ const NewAlbum = () => {
       <View style={styles.imagecontainer}>
         <Image
           style={styles.image}
-          source={require("../../../assets/images/billieAlbum.png")}
+          source={require("../../../../assets/images/billieAlbum.png")}
         />
       </View>
       <View style={styles.textContainer}>

@@ -12,11 +12,11 @@ import Button from "../../components/ui/Button";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { Auth } from "aws-amplify";
-import SongPreviewList from "../../components/SongPreview";
-import CategoryBar from "../../components/CategoryBar";
-import NewAlbum from "../../components/NewAlbum/NewAlbum";
-import Playlist from "../../components/Playlist/Playlist";
-import Header from "../../components/Header/Header";
+import SongPreviewList from "../../components/HomeScreenComponents/SongPreview";
+import CategoryBar from "../../components/HomeScreenComponents/CategoryBar";
+import NewAlbum from "../../components/HomeScreenComponents/NewAlbum/NewAlbum";
+import Playlist from "../../components/HomeScreenComponents/Playlist/Playlist";
+import Header from "../../components/HomeScreenComponents/Header/Header";
 import SearchIcon from "../../components/ui/SearchIcon";
 import MenuDots from "../../components/ui/MenuDots";
 

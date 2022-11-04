@@ -1,6 +1,13 @@
-import { StyleSheet, Text, View, Dimensions, FlatList, ScrollView } from 'react-native'
-import React from 'react'
-import PlaylistItem from './PlaylistItem'
+import {
+  StyleSheet,
+  Text,
+  View,
+  Dimensions,
+  FlatList,
+  ScrollView,
+} from "react-native";
+import React from "react";
+import PlaylistItem from "./PlaylistItem";
 import PlaylistData from "../../../../assets/dummydata/PlaylistData";
 
 const Playlist = () => {
@@ -10,46 +17,48 @@ const Playlist = () => {
       <View style={styles.playlistContainer}>
         <Text style={styles.playlist}>Playlist</Text>
       </View>
-      <View style={{flex:3}}>
-      {/* <FlatList 
+      <View style={{ flex: 3 }}>
+        {/* <FlatList 
         data={PlaylistData} 
         renderItem={({item})=>(
           <PlaylistItem playlist={item} />
         )}  
         /> */}
         <ScrollView showsVerticalScrollIndicator={false}>
-        {PlaylistData.map((item)=> <PlaylistItem playlist={item}/>)}
+          {PlaylistData.map((item) => (
+            <PlaylistItem playlist={item} />
+          ))}
         </ScrollView>
       </View>
       {/* 
       <PlaylistItem /> */}
     </View>
-  )
-}
+  );
+};
 
-export default Playlist
+export default Playlist;
 
 const height = Dimensions.get("window").height;
 const width = Dimensions.get("window").width;
 
 const styles = StyleSheet.create({
-  root:{
-    flex:1,
-    alignItems:'center',
-    justifyContent: 'center',
+  root: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
     //backgroundColor: 'violet',
-    width:width,
+    width: width,
   },
   playlist: {
-    fontSize:20,
-    fontFamily: 'satoshi-bold'
+    fontSize: 20,
+    fontFamily: "satoshi-bold",
   },
   playlistContainer: {
-    alignItems: 'flex-start',
+    alignItems: "flex-start",
     //backgroundColor: 'pink',
     //flex:1,
-    width:width,
+    width: width,
     paddingLeft: 30,
-    paddingVertical:12
-  }
-})
+    paddingVertical: 12,
+  },
+});
