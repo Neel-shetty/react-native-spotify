@@ -21,7 +21,7 @@ const Controls = () => {
     console.log("Loading Sound");
     const { sound } = await Audio.Sound.createAsync(require('../../../assets/songs/hb.m4a'));
     setSound(sound);
-
+    console.log(sound)
     console.log("Playing Sound");
     await sound.playAsync();
   }
