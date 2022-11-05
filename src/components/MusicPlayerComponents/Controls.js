@@ -5,10 +5,30 @@ import { Audio } from "expo-av";
 import { Storage } from "@aws-amplify/storage";
 import { useState } from "react";
 import { useEffect } from "react";
+import TrackPlayer from "react-native-track-player";
+// The player is ready to be used
+await TrackPlayer.setupPlayer();
 
 const Controls = () => {
   const [sound, setSound] = useState();
   // const [songLink, setSongLink] = useState()
+  TrackPlayer.updateOptions({
+    android: {
+      // This is the default behavior
+      appKilledPlaybackBehavior: AppKilledPlaybackBehavior.ContinuePlayback,
+    },
+  });
+
+  var track1 = {
+    url: "../../../assets/songs/hb.m4a", // Load media from the network
+    title: "Avaritia",
+    artist: "deadmau5",
+    album: "while(1<2)",
+    genre: "Progressive House, Electro House",
+    date: "2014-05-20T07:00:00+00:00", // RFC 3339
+    artwork: "http://example.com/cover.png", // Load artwork from the network
+    duration: 402, // Duration in seconds
+  };
 
   async function getSong() {}
 
@@ -18,18 +38,22 @@ const Controls = () => {
     });
     console.log(file); */
     //setSongLink(file);
-    console.log("Loading Sound");
-    const { sound } = await Audio.Sound.createAsync(require('../../../assets/songs/hb.m4a'));
-    setSound(sound);
-    console.log(sound)
-    console.log("Playing Sound");
-    await sound.playAsync();
+    // console.log("Loading Sound");
+    // const { sound } = await Audio.Sound.createAsync(require('../../../assets/songs/hb.m4a'));
+    // setSound(sound);
+    // console.log(sound)
+    // console.log("Playing Sound");
+    // await sound.playAsync();
+    console.log("loading");
+    await TrackPlayer.add([track1]);
+    TrackPlayer.play();
+    console.log("playing");
   }
 
   useEffect(() => {
     return sound
       ? () => {
-          console.log('Unloading Sound');
+          console.log("Unloading Sound");
           sound.unloadAsync();
         }
       : undefined;

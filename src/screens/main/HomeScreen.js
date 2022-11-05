@@ -20,6 +20,8 @@ import Header from "../../components/HomeScreenComponents/Header/Header";
 import SearchIcon from "../../components/ui/SearchIcon";
 import MenuDots from "../../components/ui/MenuDots";
 
+// The player is ready to be used
+
 const HomeScreen = () => {
   function logOut() {
     Auth.signOut();

@@ -7,6 +7,8 @@ import Controls from "../../components/MusicPlayerComponents/Controls";
 import DefaultHeader from "../../components/MusicPlayerComponents/DefaultHeader";
 import LyricsButton from "../../components/MusicPlayerComponents/LyricsButton";
 
+// The player is ready to be used
+
 const MusicPlayer = () => {
  // console.log(props)
 
