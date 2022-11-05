@@ -11,7 +11,6 @@ Amplify.configure(awsconfig)
 export default function App() {
   return (
     <>
-      {/* {Auth.SignOut} */}
       <Navigator />
     </>
   );
