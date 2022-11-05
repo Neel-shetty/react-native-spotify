@@ -1,23 +1,23 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View, } from "react-native";
 import React from "react";
 import Svg, { Path } from "react-native-svg";
 import { Audio } from "expo-av";
 import { Storage } from "@aws-amplify/storage";
 import { useState } from "react";
 import { useEffect } from "react";
-import TrackPlayer from "react-native-track-player";
+import TrackPlayer, { State } from "react-native-track-player";
 // The player is ready to be used
-await TrackPlayer.setupPlayer();
+// await TrackPlayer.setupPlayer();
 
 const Controls = () => {
   const [sound, setSound] = useState();
   // const [songLink, setSongLink] = useState()
-  TrackPlayer.updateOptions({
+  /* TrackPlayer.updateOptions({
     android: {
       // This is the default behavior
       appKilledPlaybackBehavior: AppKilledPlaybackBehavior.ContinuePlayback,
     },
-  });
+  }); */
 
   var track1 = {
     url: "../../../assets/songs/hb.m4a", // Load media from the network
@@ -38,26 +38,27 @@ const Controls = () => {
     });
     console.log(file); */
     //setSongLink(file);
-    // console.log("Loading Sound");
-    // const { sound } = await Audio.Sound.createAsync(require('../../../assets/songs/hb.m4a'));
-    // setSound(sound);
-    // console.log(sound)
-    // console.log("Playing Sound");
-    // await sound.playAsync();
+    /* console.log("Loading Sound");
+    const { sound } = await Audio.Sound.createAsync(require('../../../assets/songs/hb.m4a'));
+    setSound(sound);
+    console.log(sound)
+    console.log("Playing Sound");
+    await sound.playAsync(); */
     console.log("loading");
-    await TrackPlayer.add([track1]);
-    TrackPlayer.play();
+    const load = await TrackPlayer.add([track1]);
+    const sound  = await TrackPlayer.play();
     console.log("playing");
+    console.log(sound)
   }
 
-  useEffect(() => {
+  /* useEffect(() => {
     return sound
       ? () => {
           console.log("Unloading Sound");
           sound.unloadAsync();
         }
       : undefined;
-  }, [sound]);
+  }, [sound]); */
 
   //console.log(status)
   return (
