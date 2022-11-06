@@ -5,19 +5,41 @@ import { Audio } from "expo-av";
 import { Storage } from "@aws-amplify/storage";
 import { useState } from "react";
 import { useEffect } from "react";
+import { useRoute } from "@react-navigation/native";
+import * as MediaLibrary from 'expo-media-library';
 // import { Sound } from "expo-av/build/Audio";
 
-const Controls = () => {
+const Controls = (props) => {
+  const route = useRoute()
+  //console.log(route)
+  const songId = route.params.songId
   const [sound, setSound] = useState();
   const [songStatus, setSongStatus] = useState();
   // const [songLink, setSongLink] = useState()
 
-  async function getSong() {}
+  async function getFiles(){
+    let files = await MediaLibrary.getAssetsAsync({
+      mediaType: 'audio'
+    })
+
+    for (let i=0;i<files.assets.length;i++){
+      console.log(files.assets[i].uri)
+    }
+    
+  }
+
+  useEffect(()=>{
+    getFiles()
+  },[])
+
+  async function getUri() {
+
+  }
 
   async function playSound() {
     const playbackObj = new Audio.Sound();
     const status = await playbackObj.loadAsync({
-      uri: "file:///storage/emulated/0/Download/Eve - Kaikai Kitan.flac",
+      uri: "file:///storage/emulated/0/Music/music/Doja Cat/Planet Her/05 Need to Know.m4a",
     },
       {shouldPlay:true}
     );
