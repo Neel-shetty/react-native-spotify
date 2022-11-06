@@ -5,6 +5,7 @@ import { Audio } from "expo-av";
 import { Storage } from "@aws-amplify/storage";
 import { useState } from "react";
 import { useEffect } from "react";
+import { Sound } from "expo-av/build/Audio";
 
 const Controls = () => {
   const [sound, setSound] = useState();
@@ -13,17 +14,11 @@ const Controls = () => {
   async function getSong() {}
 
   async function playSound() {
-    /* const file = await Storage.get("01-WAP-(feat.-Megan-Thee-Stallion).m4a", {
-      level: "public",
-    });
-    console.log(file); */
-    //setSongLink(file);
     console.log("Loading Sound");
     const { sound } = await Audio.Sound.createAsync(require('../../../assets/songs/hb.m4a'));
     setSound(sound);
     console.log(sound)
     console.log("Playing Sound");
-    await sound.playAsync();
   }
 
   useEffect(() => {

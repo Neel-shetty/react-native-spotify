@@ -3,8 +3,6 @@ export type AmplifyDependentResourcesAttributes = {
         "SpotifyClone": {
             "IdentityPoolId": "string",
             "IdentityPoolName": "string",
-            "HostedUIDomain": "string",
-            "OAuthMetadata": "string",
             "UserPoolId": "string",
             "UserPoolArn": "string",
             "UserPoolName": "string",
@@ -13,7 +11,7 @@ export type AmplifyDependentResourcesAttributes = {
         }
     },
     "storage": {
-        "s3spotifyclonestoraged070c184": {
+        "s3spotifyclonestorage382ece39": {
             "BucketName": "string",
             "Region": "string"
         }

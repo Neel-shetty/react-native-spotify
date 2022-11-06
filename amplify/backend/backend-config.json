@@ -6,10 +6,7 @@
       "dependsOn": [],
       "customAuth": false,
       "frontendAuthConfig": {
-        "socialProviders": [
-          "GOOGLE",
-          "AMAZON"
-        ],
+        "socialProviders": [],
         "usernameAttributes": [],
         "signupAttributes": [
           "EMAIL"
@@ -22,9 +19,9 @@
             "REQUIRES_UPPERCASE"
           ]
         },
-        "mfaConfiguration": "OPTIONAL",
+        "mfaConfiguration": "OFF",
         "mfaTypes": [
-          "TOTP"
+          "SMS"
         ],
         "verificationMechanisms": [
           "EMAIL"
@@ -33,7 +30,7 @@
     }
   },
   "storage": {
-    "s3spotifyclonestoraged070c184": {
+    "s3spotifyclonestorage382ece39": {
       "service": "S3",
       "providerPlugin": "awscloudformation",
       "dependsOn": []

@@ -33,11 +33,11 @@ const Tab = createBottomTabNavigator();
 const Navigator = () => {
   const [user, setUser] = useState(undefined);
 
-  useEffect(() => {
+  /* useEffect(() => {
     checkUser();
-  }, []);
+  }, []); */
 
-  useEffect(() => {
+ /*  useEffect(() => {
     function listener(data) {
       if (data.payload.event === "signIn" || data.payload.event === "signOut") {
         checkUser();
@@ -45,7 +45,7 @@ const Navigator = () => {
     }
     Hub.listen("auth", listener);
     return () => Hub.remove("auth", listener);
-  }, []);
+  }, []); */
 
   async function checkUser() {
     try {
