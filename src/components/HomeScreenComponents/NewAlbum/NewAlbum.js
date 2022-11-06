@@ -6,7 +6,7 @@ const NewAlbum = () => {
   const navigation = useNavigation()
 
   function onPress() {
-    navigation.navigate('MusicPlayer')
+    navigation.navigate('MusicPlayer', {songId:9})
   }
 
   return (
