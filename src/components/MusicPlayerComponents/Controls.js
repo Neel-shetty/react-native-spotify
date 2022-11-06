@@ -5,7 +5,7 @@ import { Audio } from "expo-av";
 import { Storage } from "@aws-amplify/storage";
 import { useState } from "react";
 import { useEffect } from "react";
-import { Sound } from "expo-av/build/Audio";
+// import { Sound } from "expo-av/build/Audio";
 
 const Controls = () => {
   const [sound, setSound] = useState();
@@ -14,11 +14,13 @@ const Controls = () => {
   async function getSong() {}
 
   async function playSound() {
-    console.log("Loading Sound");
-    const { sound } = await Audio.Sound.createAsync(require('../../../assets/songs/hb.m4a'));
+    console.log('Loading Sound');
+    const { sound } = await Audio.Sound.createAsync( require('../../../assets/songs/hb.m4a')
+    );
     setSound(sound);
-    console.log(sound)
-    console.log("Playing Sound");
+
+    console.log('Playing Sound');
+    await sound.playAsync();
   }
 
   useEffect(() => {

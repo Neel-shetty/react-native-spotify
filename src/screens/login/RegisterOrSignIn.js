@@ -80,7 +80,7 @@ export default RegisterOrSignIn;
 const height = Dimensions.get("window").height;
 const width = Dimensions.get("window").width;
 const left = -23;
-console.log(height,width)
+//console.log(height,width)
 
 const styles = StyleSheet.create({
   backButtonContainer: {

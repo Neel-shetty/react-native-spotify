@@ -26,7 +26,7 @@ const Playlist = () => {
         /> */}
         <ScrollView showsVerticalScrollIndicator={false}>
           {PlaylistData.map((item) => (
-            <PlaylistItem playlist={item} />
+            <PlaylistItem playlist={item} key={item.key} />
           ))}
         </ScrollView>
       </View>
