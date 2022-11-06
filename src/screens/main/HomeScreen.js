@@ -19,6 +19,7 @@ import Playlist from "../../components/HomeScreenComponents/Playlist/Playlist";
 import Header from "../../components/HomeScreenComponents/Header/Header";
 import SearchIcon from "../../components/ui/SearchIcon";
 import MenuDots from "../../components/ui/MenuDots";
+import * as MediaLibrary from 'expo-media-library';
 
 const HomeScreen = () => {
   function logOut() {
@@ -30,6 +31,23 @@ const HomeScreen = () => {
     "satoshi-regular": require("../../../assets/fonts/satoshi/Satoshi-Regular.otf"),
     "satoshi-medium": require("../../../assets/fonts/satoshi/Satoshi-Medium.otf"),
   });
+
+  // useEffect(()=>{
+  //   async function getPermission(){
+  //     const permission = await MediaLibrary.getPermissionsAsync()
+  //     console.log(permission)
+  //   }
+  //   async function requestPermission() {
+  //     const request = await MediaLibrary.requestPermissionsAsync()
+  //     console.log(request)
+  //   }
+  //   getPermission()
+  //   requestPermission()
+  // },[])
+
+  async function getFiles(){
+
+  }
 
   useEffect(() => {
     async function prepare() {

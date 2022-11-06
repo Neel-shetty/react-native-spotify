@@ -9,20 +9,33 @@ import { useEffect } from "react";
 
 const Controls = () => {
   const [sound, setSound] = useState();
+  const [songStatus, setSongStatus] = useState();
   // const [songLink, setSongLink] = useState()
 
   async function getSong() {}
 
   async function playSound() {
-    console.log("Loading Sound");
-    const { sound } = await Audio.Sound.createAsync(
-      require("../../../assets/songs/hb.m4a")
+    const playbackObj = new Audio.Sound();
+    const status = await playbackObj.loadAsync({
+      uri: "file:///storage/emulated/0/Download/Eve - Kaikai Kitan.flac",
+    },
+      {shouldPlay:true}
     );
-    setSound(sound);
-    
-    // pausePlay(sound)
-  }
+    console.log(status.isPlaying)
 
+    if(status.isPlaying && status.isLoaded){
+      status.isPlaying = false
+    }
+    
+  }
+  //console.log(songStatus.isPlaying);
+  function pp() {
+    if (songStatus.isPlaying === true && songStatus.isLoaded === true) {
+      sound.pauseAsync();
+    } else if (songStatus.isPlaying === false ) {
+      sound.playAsync();
+    }
+  }
 
   async function permissionCheck() {
     const perms = await Audio.getPermissionsAsync();
@@ -36,11 +49,9 @@ const Controls = () => {
     }
   }
 
-  
-
   useEffect(() => {
     permissionCheck();
-    requestPermission()
+    requestPermission();
   }, []);
 
   useEffect(() => {
