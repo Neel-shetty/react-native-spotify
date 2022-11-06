@@ -15,5 +15,12 @@ export type AmplifyDependentResourcesAttributes = {
             "BucketName": "string",
             "Region": "string"
         }
+    },
+    "analytics": {
+        "spotifyclone": {
+            "Region": "string",
+            "Id": "string",
+            "appName": "string"
+        }
     }
 }

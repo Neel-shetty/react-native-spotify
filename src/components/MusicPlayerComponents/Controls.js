@@ -14,19 +14,39 @@ const Controls = () => {
   async function getSong() {}
 
   async function playSound() {
-    console.log('Loading Sound');
-    const { sound } = await Audio.Sound.createAsync( require('../../../assets/songs/hb.m4a')
+    console.log("Loading Sound");
+    const { sound } = await Audio.Sound.createAsync(
+      require("../../../assets/songs/hb.m4a")
     );
     setSound(sound);
-
-    console.log('Playing Sound');
-    await sound.playAsync();
+    
+    // pausePlay(sound)
   }
+
+
+  async function permissionCheck() {
+    const perms = await Audio.getPermissionsAsync();
+    //console.log(perms);
+  }
+
+  async function requestPermission() {
+    if (permissionCheck.granted === false) {
+      const permResponse = await Audio.requestPermissionsAsync();
+      //console.log(permResponse);
+    }
+  }
+
+  
+
+  useEffect(() => {
+    permissionCheck();
+    requestPermission()
+  }, []);
 
   useEffect(() => {
     return sound
       ? () => {
-          console.log('Unloading Sound');
+          console.log("Unloading Sound");
           sound.unloadAsync();
         }
       : undefined;
