@@ -4,7 +4,7 @@ export default  [
     SongName: 'Beggin\'',
     Artist: 'Måneskin',
     duration: '3:31',
-    like: false,
+    like: 1,
     play: false
   },
   {
@@ -12,7 +12,7 @@ export default  [
     SongName: 'As it was',
     Artist: 'Harry Styles',
     duration: '5:33',
-    like: false,
+    like: 1,
     play: false
   },
   {
@@ -20,7 +20,7 @@ export default  [
     SongName: 'Life goes on',
     Artist: 'Oliver Tree',
     duration: '2:41',
-    like: false,
+    like: 1,
     play: false
   },
   {
@@ -28,7 +28,7 @@ export default  [
     SongName: 'WAP',
     Artist: 'CardiB',
     duration: '6:90',
-    like: false,
+    like: 1,
     play: false
   },
   {
@@ -36,7 +36,7 @@ export default  [
     SongName: 'Beggin\'',
     Artist: 'Måneskin',
     duration: '3:31',
-    like: false,
+    like: 1,
     play: false
   },
   {
@@ -44,7 +44,7 @@ export default  [
     SongName: 'As it was',
     Artist: 'Harry Styles',
     duration: '5:33',
-    like: false,
+    like: 1,
     play: false
   },
   {
@@ -52,7 +52,7 @@ export default  [
     SongName: 'Life goes on',
     Artist: 'Oliver Tree',
     duration: '2:41',
-    like: false,
+    like: 1,
     play: false
   },
   {
@@ -60,7 +60,7 @@ export default  [
     SongName: 'WAP',
     Artist: 'CardiB',
     duration: '6:90',
-    like: false,
+    like: 1,
     play: false
   },
   
