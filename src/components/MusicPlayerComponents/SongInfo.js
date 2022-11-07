@@ -15,8 +15,9 @@ const SongInfo = () => {
     Dimensions.get("window").width - Dimensions.get("window").width * 0.9;
   //console.log(padding)
   const route = useRoute()
-  //console.log(route.params.songId)
-  const songId = route.params.songId - 1 
+  console.log(route.params)
+  const songId = (route?.params?.songId - 1 )
+
 
   return (
     <View
@@ -29,8 +30,9 @@ const SongInfo = () => {
       }}
     >
       <View>
-        <Text style={styles.name}>{previewData[songId].content.SongName}</Text>
-        <Text style={styles.artist}>{previewData[songId].content.ArtistName}</Text>
+        
+        {/* <Text style={styles.name}>{previewData[songId].content.SongName}</Text> */}
+        {/* <Text style={styles.artist}>{previewData[songId].content.ArtistName}</Text> */}
       </View>
       <View>
         <TouchableOpacity>

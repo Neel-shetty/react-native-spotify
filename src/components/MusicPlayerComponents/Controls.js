@@ -12,7 +12,8 @@ import * as MediaLibrary from 'expo-media-library';
 const Controls = (props) => {
   const route = useRoute()
   //console.log(route)
-  const songId = route.params.songId
+  //const songId = route.params.songId
+  const filePath = route.params.uri
   const [sound, setSound] = useState();
   const [songStatus, setSongStatus] = useState();
   // const [songLink, setSongLink] = useState()
@@ -22,15 +23,16 @@ const Controls = (props) => {
       mediaType: 'audio'
     })
 
-    for (let i=0;i<files.assets.length;i++){
+    for (let i=0;i<20;i++){
       console.log(files.assets[i].uri)
+      console.log('\n')
     }
     
   }
 
-  useEffect(()=>{
-    getFiles()
-  },[])
+  // useEffect(()=>{
+  //   getFiles()
+  // },[])
 
   async function getUri() {
 
@@ -38,12 +40,14 @@ const Controls = (props) => {
 
   async function playSound() {
     const playbackObj = new Audio.Sound();
+    console.log(playbackObj)
     const status = await playbackObj.loadAsync({
-      uri: "file:///storage/emulated/0/Music/music/Doja Cat/Planet Her/05 Need to Know.m4a",
+      uri: filePath,
     },
       {shouldPlay:true}
     );
     console.log(status.isPlaying)
+    setSound(playbackObj)
 
     if(status.isPlaying && status.isLoaded){
       status.isPlaying = false

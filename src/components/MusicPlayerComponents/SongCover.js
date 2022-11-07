@@ -18,10 +18,10 @@ const SongCover = () => {
         //backgroundColor: "pink",
       }}
     >
-      <Image
+      {/* <Image
         style={styles.image}
         source={{ uri: previewData[songId].content.ImageUri }}
-      />
+      /> */}
     </View>
   );
 };

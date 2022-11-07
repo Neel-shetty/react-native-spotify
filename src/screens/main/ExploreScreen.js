@@ -1,11 +1,17 @@
-import { Image, StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { Image, StyleSheet, Text, View, Dimensions } from "react-native";
+import React, { useEffect, useState } from "react";
 import * as MediaLibrary from "expo-media-library";
 import Button from "../../components/ui/Button";
 import * as FileSystem from "expo-file-system";
+import DefaultHeader from "../../components/MusicPlayerComponents/DefaultHeader";
+import { FlashList } from "@shopify/flash-list";
+import PlaylistItem from "../../components/HomeScreenComponents/Playlist/PlaylistItem";
+import PlaylistData from "../../../assets/dummydata/PlaylistData";
+import PlaylistScreenItem from "../../components/PlaylistScreenComponents/PlaylistScreenItem";
 // import * as Permissions from "expo-permissions";
 
 const ExploreScreen = () => {
+  const [files, setFiles] = useState([])
   async function move({ downloadFile }) {
     // const perm = await Permissions.askAsync(Permissions.MEDIA_LIBRARY);
     // if (perm.status != "granted") {
@@ -40,25 +46,37 @@ const ExploreScreen = () => {
   }
 
   async function getFiles() {
-    // let files = await MediaLibrary.getAssetsAsync()
-
-    // for (let i = 0; i < 30; i++) {
-    //   console.log(files);
-    // }
-
-    download();
+    let files = await MediaLibrary.getAssetsAsync({
+      mediaType: "audio",
+    });
+    files = await MediaLibrary.getAssetsAsync({
+      mediaType: "audio",
+      first: files.totalCount
+    });
+    const tempFile = files.assets
+    setFiles(tempFile)
+    //console.log(files.assets)
+    //download();
   }
+
+  useEffect(()=>{
+    getFiles()
+  },[])
+
+  const width = Dimensions.get("window").width;
 
   return (
     <View style={{ alignItems: "center", justifyContent: "center", flex: 1 }}>
-      <Text>ExploreScreen</Text>
-      <Button onPress={getFiles}>get Files</Button>
-      <View style={{ flex: 1 }}>
-        <Image
-          source={{
-            uri: "file:///data/user/0/host.exp.exponent/files/ExperienceData/%2540newfox%252FSpotifyClone/%2Bgigachad.png",
-          }}
-          style={{ height: 300, width: 300 }}
+      <View style={{ flex: 1, width: width }}>
+        <DefaultHeader />
+      </View>
+      <View style={{ flex: 8, width: width }}>
+        <FlashList
+          data={files}
+          //style={{width:width,height:500}}
+          renderItem={({ item }) => <PlaylistScreenItem playlist={item}/>}
+          key={files.id}
+          estimatedItemSize={100}
         />
       </View>
     </View>
