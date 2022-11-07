@@ -12,6 +12,8 @@ import PlaylistScreenItem from "../../components/PlaylistScreenComponents/Playli
 
 const ExploreScreen = () => {
   const [files, setFiles] = useState([])
+
+  
   async function move({ downloadFile }) {
     // const perm = await Permissions.askAsync(Permissions.MEDIA_LIBRARY);
     // if (perm.status != "granted") {
@@ -77,6 +79,16 @@ const ExploreScreen = () => {
           renderItem={({ item }) => <PlaylistScreenItem playlist={item}/>}
           key={files.id}
           estimatedItemSize={100}
+          ListHeaderComponent={()=>{
+            return(
+              <View style={{flexDirection:'row', justifyContent:'space-between'}}>
+                <Text>play/pause</Text>
+                <Text>name</Text>
+                <Text>duration</Text>
+                <Text>like</Text>
+              </View>
+            )
+          }}
           //endFillColor={'green'}
           
         />

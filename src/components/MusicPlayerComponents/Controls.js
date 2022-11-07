@@ -6,63 +6,70 @@ import { Storage } from "@aws-amplify/storage";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useRoute } from "@react-navigation/native";
-import * as MediaLibrary from 'expo-media-library';
+import * as MediaLibrary from "expo-media-library";
+import { a } from "aws-amplify";
 // import { Sound } from "expo-av/build/Audio";
 
 const Controls = (props) => {
-  const route = useRoute()
+  const route = useRoute();
   //console.log(route)
   //const songId = route.params.songId
-  const filePath = route.params.uri
+  const filePath = route.params.uri;
   const [sound, setSound] = useState();
   const [songStatus, setSongStatus] = useState();
   // const [songLink, setSongLink] = useState()
 
-  async function getFiles(){
+  async function getFiles() {
     let files = await MediaLibrary.getAssetsAsync({
-      mediaType: 'audio'
-    })
+      mediaType: "audio",
+    });
 
-    for (let i=0;i<20;i++){
-      console.log(files.assets[i].uri)
-      console.log('\n')
+    for (let i = 0; i < 20; i++) {
+      console.log(files.assets[i].uri);
+      console.log("\n");
     }
-    
   }
 
   // useEffect(()=>{
   //   getFiles()
   // },[])
 
-  async function getUri() {
-
-  }
+  async function getUri() {}
 
   async function playSound() {
     const playbackObj = new Audio.Sound();
-    console.log(await(playbackObj.getStatusAsync()))
-    const status = await playbackObj.loadAsync({
-      uri: filePath,
-    },
-      {shouldPlay:true}
+    console.log(await playbackObj.getStatusAsync());
+    const status = await playbackObj.loadAsync(
+      {
+        uri: filePath,
+      },
+      { shouldPlay: true }
     );
-    console.log(await(playbackObj.getStatusAsync()))
-    //console.log(status.isPlaying)
-    setSound(playbackObj)
-
-    if(status.isPlaying && status.isLoaded){
-      status.isPlaying = false
-    }
-    
+    console.log(await playbackObj.getStatusAsync());
+    /* const {
+      isPlaying,
+      isLoaded,
+      isLooping,
+      isMuted,
+      durationMillis,
+      isBuffering,
+      playableDurationMillis,
+      shouldPlay,
+      positionMillis,
+    } = await playbackObj.getStatusAsync();
+    console.log(isLooping) */
+    const songStatus = await playbackObj.getStatusAsync()
+    setSongStatus(songStatus)
+    setSound(playbackObj);
   }
   //console.log(songStatus.isPlaying);
-  function pp() {
+  /* function pp() {
     if (songStatus.isPlaying === true && songStatus.isLoaded === true) {
       sound.pauseAsync();
-    } else if (songStatus.isPlaying === false ) {
+    } else if (songStatus.isPlaying === false) {
       sound.playAsync();
     }
-  }
+  } */
 
   async function permissionCheck() {
     const perms = await Audio.getPermissionsAsync();
@@ -74,6 +81,10 @@ const Controls = (props) => {
       const permResponse = await Audio.requestPermissionsAsync();
       //console.log(permResponse);
     }
+  }
+
+  async function pause() {
+    await sound.pauseAsync();
   }
 
   useEffect(() => {
@@ -119,7 +130,7 @@ const Controls = (props) => {
       </View>
 
       <View style={{ flex: 1, alignItems: "center" }}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={pause}>
           <Svg // left
             width={26}
             height={26}

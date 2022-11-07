@@ -9,6 +9,29 @@ const PlaylistScreenItem = ({ playlist }) => {
   function titleButton() {
     navogation.navigate('MusicPlayer', {songId: playlist.id, uri: playlist.uri, filename: playlist.filename})
   }
+
+  const convertTime = minutes => {
+    if (minutes) {
+      const hrs = minutes / 60;
+      const minute = hrs.toString().split('.')[0];
+      const percent = parseInt(hrs.toString().split('.')[1].slice(0, 2));
+      const sec = Math.ceil((60 * percent) / 100);
+  
+      if (parseInt(minute) < 10 && sec < 10) {
+        return `0${minute}:0${sec}`;
+      }
+  
+      if (parseInt(minute) < 10) {
+        return `0${minute}:${sec}`;
+      }
+  
+      if (sec < 10) {
+        return `${minute}:0${sec}`;
+      }
+  
+      return `${minute}:${sec}`;
+    }
+  };
   
   return (
     <View style={styles.container}>
@@ -40,7 +63,7 @@ const PlaylistScreenItem = ({ playlist }) => {
       </View>
 
       <View style={styles.lengthContainer}>
-        <Text style={styles.length}>{playlist.duration/60}</Text>
+        <Text style={styles.length}>{convertTime(playlist.duration)}</Text>
       </View>
       <View style={styles.likeContainer}>
         <TouchableOpacity>
