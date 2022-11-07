@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, Dimensions } from "react-native";
+import { Image, StyleSheet, Text, View, Dimensions , FlatList} from "react-native";
 import React, { useEffect, useState } from "react";
 import * as MediaLibrary from "expo-media-library";
 import Button from "../../components/ui/Button";
@@ -64,7 +64,7 @@ const ExploreScreen = () => {
   },[])
 
   const width = Dimensions.get("window").width;
-
+  const green = "green"
   return (
     <View style={{ alignItems: "center", justifyContent: "center", flex: 1 }}>
       <View style={{ flex: 1, width: width }}>
@@ -77,6 +77,8 @@ const ExploreScreen = () => {
           renderItem={({ item }) => <PlaylistScreenItem playlist={item}/>}
           key={files.id}
           estimatedItemSize={100}
+          //endFillColor={'green'}
+          
         />
       </View>
     </View>

@@ -40,13 +40,14 @@ const Controls = (props) => {
 
   async function playSound() {
     const playbackObj = new Audio.Sound();
-    console.log(playbackObj)
+    console.log(await(playbackObj.getStatusAsync()))
     const status = await playbackObj.loadAsync({
       uri: filePath,
     },
       {shouldPlay:true}
     );
-    console.log(status.isPlaying)
+    console.log(await(playbackObj.getStatusAsync()))
+    //console.log(status.isPlaying)
     setSound(playbackObj)
 
     if(status.isPlaying && status.isLoaded){

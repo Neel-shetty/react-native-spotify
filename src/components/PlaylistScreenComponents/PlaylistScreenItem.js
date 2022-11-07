@@ -40,7 +40,7 @@ const PlaylistScreenItem = ({ playlist }) => {
       </View>
 
       <View style={styles.lengthContainer}>
-        <Text style={styles.length}>{playlist.duration}</Text>
+        <Text style={styles.length}>{playlist.duration/60}</Text>
       </View>
       <View style={styles.likeContainer}>
         <TouchableOpacity>
