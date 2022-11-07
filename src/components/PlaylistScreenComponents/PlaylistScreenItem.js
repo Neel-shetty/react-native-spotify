@@ -4,10 +4,13 @@ import Svg, { Path } from "react-native-svg";
 import { useNavigation } from "@react-navigation/native";
 
 const PlaylistScreenItem = ({ playlist }) => {
-  const navogation = useNavigation()
+  const navigation = useNavigation()
 
   function titleButton() {
-    navogation.navigate('MusicPlayer', {songId: playlist.id, uri: playlist.uri, filename: playlist.filename})
+    navigation.navigate('MusicPlayer', {songId: playlist.id, uri: playlist.uri, filename: playlist.filename})
+  }
+  function playButton(){
+    //playsong
   }
 
   const convertTime = minutes => {
@@ -66,7 +69,7 @@ const PlaylistScreenItem = ({ playlist }) => {
         <Text style={styles.length}>{convertTime(playlist.duration)}</Text>
       </View>
       <View style={styles.likeContainer}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={playButton}>
           <Svg
             width={21}
             height={21}
