@@ -71,6 +71,7 @@ const HomeScreen = () => {
       <ScrollView
         contentContainerStyle={styles.root}
         nestedScrollEnabled={true}
+        showsVerticalScrollIndicator={false}
       >
         {/* <Button>logout</Button> */}
         <>

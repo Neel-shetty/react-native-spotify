@@ -28,7 +28,9 @@ const SongCover = () => {
 
 export default SongCover;
 
-const ImageSize = Dimensions.get("window").width * 0.85;
+const height  = Dimensions.get("window").height
+const ImageSize = height < 750 ? Dimensions.get("window").width * 0.65  : Dimensions.get("window").width * 0.85;
+// console.log(height)
 
 const styles = StyleSheet.create({
   image: {
