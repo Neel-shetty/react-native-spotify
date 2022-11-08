@@ -7,7 +7,7 @@ import { useRoute } from "@react-navigation/native";
 const SongCover = () => {
   // const preview = previewData
   const route = useRoute()
-  //console.log(route.params.songId)
+  const cover = route.params.cover
   const songId = route.params.songId - 1
   return (
     <View
@@ -18,10 +18,10 @@ const SongCover = () => {
         //backgroundColor: "pink",
       }}
     >
-      {/* <Image
+      <Image
         style={styles.image}
-        source={{ uri: previewData[songId].content.ImageUri }}
-      /> */}
+        source={{ uri: cover }}
+      />
     </View>
   );
 };

@@ -32,18 +32,13 @@ const HomeScreen = () => {
     "satoshi-medium": require("../../../assets/fonts/satoshi/Satoshi-Medium.otf"),
   });
 
-  // useEffect(()=>{
-  //   async function getPermission(){
-  //     const permission = await MediaLibrary.getPermissionsAsync()
-  //     console.log(permission)
-  //   }
-  //   async function requestPermission() {
-  //     const request = await MediaLibrary.requestPermissionsAsync()
-  //     console.log(request)
-  //   }
-  //   getPermission()
-  //   requestPermission()
-  // },[])
+  useEffect(()=>{
+    async function getPerms(){
+    const perms = await MediaLibrary.requestPermissionsAsync()
+    console.log(perms)
+    }
+    getPerms()
+  },[])
 
   async function getFiles(){
 

@@ -15,7 +15,7 @@ const SongInfo = () => {
     Dimensions.get("window").width - Dimensions.get("window").width * 0.9;
   //console.log(padding)
   const route = useRoute()
-  console.log(route.params)
+  //console.log(route.params)
   const songId = (route?.params?.songId - 1 )
 
 

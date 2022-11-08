@@ -12,7 +12,7 @@ import { a } from "aws-amplify";
 
 const Controls = (props) => {
   const route = useRoute();
-  //console.log(route)
+  console.log(route)
   //const songId = route.params.songId
   const filePath = route.params.uri;
   const [sound, setSound] = useState();
@@ -38,14 +38,14 @@ const Controls = (props) => {
 
   async function playSound() {
     const playbackObj = new Audio.Sound();
-    console.log(await playbackObj.getStatusAsync());
+    //console.log(await playbackObj.getStatusAsync());
     const status = await playbackObj.loadAsync(
       {
         uri: filePath,
       },
       { shouldPlay: true }
     );
-    console.log(await playbackObj.getStatusAsync());
+    //console.log(await playbackObj.getStatusAsync());
     /* const {
       isPlaying,
       isLoaded,

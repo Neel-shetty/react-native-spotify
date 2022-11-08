@@ -1,46 +1,58 @@
-import { StyleSheet, Text, TouchableOpacity, View,Dimensions } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  Dimensions,
+} from "react-native";
 import React from "react";
 import Svg, { Path } from "react-native-svg";
 import { useNavigation } from "@react-navigation/native";
 
 const PlaylistScreenItem = ({ playlist }) => {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   function titleButton() {
-    navigation.navigate('MusicPlayer', {songId: playlist.id, uri: playlist.uri, filename: playlist.filename})
+    navigation.navigate("MusicPlayer", {
+      songId: playlist.id,
+      uri: playlist.uri,
+      filename: playlist.filename,
+      cover:
+        "file:///storage/emulated/0/Music/music/Masayuki Suzuki/All Time Rock _n_ Roll/cover.png",
+    });
   }
-  function playButton(){
+  function playButton() {
     //playsong
   }
 
-  const convertTime = minutes => {
+  const convertTime = (minutes) => {
     if (minutes) {
       const hrs = minutes / 60;
-      const minute = hrs.toString().split('.')[0];
-      const percent = parseInt(hrs.toString().split('.')[1].slice(0, 2));
+      const minute = hrs.toString().split(".")[0];
+      const percent = parseInt(hrs.toString().split(".")[1].slice(0, 2));
       const sec = Math.ceil((60 * percent) / 100);
-  
+
       if (parseInt(minute) < 10 && sec < 10) {
         return `0${minute}:0${sec}`;
       }
-  
+
       if (parseInt(minute) < 10) {
         return `0${minute}:${sec}`;
       }
-  
+
       if (sec < 10) {
         return `${minute}:0${sec}`;
       }
-  
+
       return `${minute}:${sec}`;
     }
   };
-  
+
   return (
     <View style={styles.container}>
       <View style={styles.playContainer}>
         <View style={styles.circle}>
-          <TouchableOpacity >
+          <TouchableOpacity>
             <Svg
               width={17}
               height={17}
@@ -57,11 +69,13 @@ const PlaylistScreenItem = ({ playlist }) => {
       </View>
 
       <View style={styles.titleContainer}>
-      <TouchableOpacity onPress={titleButton}>
-        <Text numberOfLines={2} style={styles.song}>{playlist.filename}</Text>
+        <TouchableOpacity onPress={titleButton}>
+          <Text numberOfLines={2} style={styles.song}>
+            {playlist.filename}
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity>
-        {/* <Text style={styles.artist}>{playlist.Artist}</Text> */}
+          {/* <Text style={styles.artist}>{playlist.Artist}</Text> */}
         </TouchableOpacity>
       </View>
 
@@ -91,15 +105,14 @@ export default PlaylistScreenItem;
 
 const width = Dimensions.get("window").width;
 
-
 const styles = StyleSheet.create({
   container: {
-    width:width,
+    width: width,
     height: 43,
     flexDirection: "row",
     justifyContent: "space-between",
     margin: 5,
-    paddingHorizontal:20,
+    paddingHorizontal: 20,
     //backgroundColor: "pink",
   },
   circle: {
