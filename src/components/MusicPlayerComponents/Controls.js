@@ -38,6 +38,10 @@ const Controls = (props) => {
     await sound.setIsLoopingAsync()
   }
 
+  async function mute(){
+    await sound.setIsMutedAsync()
+  }
+
   // useEffect(()=>{
   //   getFiles()
   // },[])
