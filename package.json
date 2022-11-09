@@ -25,6 +25,7 @@
     "expo-file-system": "~14.1.0",
     "expo-font": "~10.2.0",
     "expo-media-library": "~14.2.0",
+    "expo-music-info": "^1.0.1",
     "expo-permissions": "^13.2.0",
     "expo-splash-screen": "~0.16.2",
     "expo-status-bar": "~1.4.0",

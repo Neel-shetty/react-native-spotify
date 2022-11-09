@@ -2,10 +2,13 @@ import { StyleSheet, Text, View, Dimensions } from "react-native";
 import React from "react";
 import * as Progress from "react-native-progress";
 import Slider from "@react-native-community/slider";
+import { useRoute } from "@react-navigation/native";
 
 const ProgressBar = () => {
   const width = Dimensions.get("window").width * 0.9;
   const widthProgress = Dimensions.get("window").width * 0.84;
+  const route = useRoute()
+  const duration = route.params.duration
 
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
@@ -37,7 +40,7 @@ const ProgressBar = () => {
         }}
       >
         <Text>0:00</Text>
-        <Text>4:02</Text>
+        <Text>{duration}</Text>
       </View>
     </View>
   );

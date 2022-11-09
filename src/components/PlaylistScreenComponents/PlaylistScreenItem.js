@@ -5,22 +5,35 @@ import {
   View,
   Dimensions,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import Svg, { Path } from "react-native-svg";
 import { useNavigation } from "@react-navigation/native";
+import * as FileSystem from "expo-file-system";
+import MusicInfo from "expo-music-info";
 
 const PlaylistScreenItem = ({ playlist }) => {
   const navigation = useNavigation();
+  const [info, setInfo] = useState([]);
+
+  async function fileInfo() {
+    const info = await FileSystem.getInfoAsync(playlist.uri)
+    console.log(info)
+    setInfo(info)
+  }
 
   function titleButton() {
+    fileInfo();
     navigation.navigate("MusicPlayer", {
       songId: playlist.id,
       uri: playlist.uri,
       filename: playlist.filename,
       cover:
-        "file:///storage/emulated/0/Music/music/Masayuki Suzuki/All Time Rock _n_ Roll/cover.png",
+        "file:///storage/emulated/0/Music/music/NiziU/Make you happy//cover.png",
+      duration: convertTime(playlist.duration),
+      info: info,
     });
   }
+
   function playButton() {
     //playsong
   }
