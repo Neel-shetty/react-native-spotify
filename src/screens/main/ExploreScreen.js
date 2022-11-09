@@ -66,6 +66,7 @@ const ExploreScreen = () => {
   async function getFiles() {
     let files = await MediaLibrary.getAssetsAsync({
       mediaType: "audio",
+      album: 'music'
     });
     files = await MediaLibrary.getAssetsAsync({
       mediaType: "audio",

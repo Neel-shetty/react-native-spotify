@@ -53,11 +53,11 @@ const PlaylistScreenItem = ({ playlist }) => {
     const folderInfo = await MediaLibrary.getAssetsAsync({
       album: info.albumId,
     });
-    console.log("FOLDER INFO - ", folderInfo.assets[0].uri);
-    console.log("folder log", folders[0].id);
-    console.log(info.albumId);
+    // console.log("FOLDER INFO - ", folderInfo.assets[0].uri);
+    // console.log("folder log", folders[0].id);
+    // console.log(info.albumId);
     const cover = folderInfo.assets[0].uri;
-    console.log(cover)
+    // console.log(cover)
     navigation.navigate("MusicPlayer", {
       songId: playlist.id,
       uri: playlist.uri,
