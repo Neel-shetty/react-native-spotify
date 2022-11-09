@@ -8,6 +8,7 @@ const SongCover = () => {
   // const preview = previewData
   const route = useRoute()
   const cover = route.params.cover
+  console.log('cover screen - ', cover)
   const songId = route.params.songId - 1
   return (
     <View

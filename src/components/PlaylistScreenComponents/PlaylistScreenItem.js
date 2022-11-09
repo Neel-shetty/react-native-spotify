@@ -9,28 +9,61 @@ import React, { useState } from "react";
 import Svg, { Path } from "react-native-svg";
 import { useNavigation } from "@react-navigation/native";
 import * as FileSystem from "expo-file-system";
-import MusicInfo from "expo-music-info";
+import * as MediaLibrary from "expo-media-library";
+// import MusicInfo from "expo-music-info";
 
 const PlaylistScreenItem = ({ playlist }) => {
   const navigation = useNavigation();
-  const [info, setInfo] = useState([]);
+  // const [info, setInfo] = useState();
+  //console.log(playlist.id)
 
   async function fileInfo() {
-    const info = await FileSystem.getInfoAsync(playlist.uri)
-    console.log(info)
-    setInfo(info)
+    const info = await MediaLibrary.getAssetInfoAsync(playlist.id);
+    const folders = await MediaLibrary.getAlbumsAsync();
+    const foldersCount = (await MediaLibrary.getAlbumsAsync()).length;
+
+    for (let i = 0; i < foldersCount; i++) {
+      if (info.albumId === folders[i].id) {
+        var folderTitle = folders[i].title;
+        console.log(folderTitle);
+      }
+    }
+    const folderInfo = await MediaLibrary.getAssetsAsync({
+      album: info.albumId,
+    });
+    console.log("FOLDER INFO - ", folderInfo.assets[0].uri);
+    console.log("folder log", folders[0].id);
+    console.log(info.albumId);
+    const cover = folderInfo.assets[0].uri;
+    console.log(cover)
+    // setCover(cover);
   }
 
-  function titleButton() {
-    fileInfo();
+  async function titleButton() {
+    const info = await MediaLibrary.getAssetInfoAsync(playlist.id);
+    const folders = await MediaLibrary.getAlbumsAsync();
+    const foldersCount = (await MediaLibrary.getAlbumsAsync()).length;
+
+    for (let i = 0; i < foldersCount; i++) {
+      if (info.albumId === folders[i].id) {
+        var folderTitle = folders[i].title;
+        console.log(folderTitle);
+      }
+    }
+    const folderInfo = await MediaLibrary.getAssetsAsync({
+      album: info.albumId,
+    });
+    console.log("FOLDER INFO - ", folderInfo.assets[0].uri);
+    console.log("folder log", folders[0].id);
+    console.log(info.albumId);
+    const cover = folderInfo.assets[0].uri;
+    console.log(cover)
     navigation.navigate("MusicPlayer", {
       songId: playlist.id,
       uri: playlist.uri,
       filename: playlist.filename,
-      cover:
-        "file:///storage/emulated/0/Music/music/NiziU/Make you happy//cover.png",
+      cover: cover,
       duration: convertTime(playlist.duration),
-      info: info,
     });
   }
 

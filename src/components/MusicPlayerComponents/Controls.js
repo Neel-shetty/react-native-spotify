@@ -86,6 +86,9 @@ const Controls = (props) => {
   async function pause() {
     await sound.pauseAsync();
   }
+  async function play() {
+    await sound.playAsync();
+  }
 
   useEffect(() => {
     permissionCheck();
@@ -173,7 +176,7 @@ const Controls = (props) => {
       </View>
 
       <View style={{ flex: 1, alignItems: "center" }}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={play}>
           <Svg //right
             width={26}
             height={26}
