@@ -47,7 +47,7 @@ const Controls = (props) => {
   async function playSound() {
     const playbackObj = new Audio.Sound();
     //console.log(await playbackObj.getStatusAsync());
-    playbackObj.
+    
     const status = await playbackObj.loadAsync(
       {
         uri: filePath,
