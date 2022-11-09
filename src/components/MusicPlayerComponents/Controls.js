@@ -34,6 +34,10 @@ const Controls = (props) => {
     await sound.loadAsync({uri: filepath})
   }
 
+  async function loop(){
+    await sound.setIsLoopingAsync()
+  }
+
   // useEffect(()=>{
   //   getFiles()
   // },[])
@@ -43,6 +47,7 @@ const Controls = (props) => {
   async function playSound() {
     const playbackObj = new Audio.Sound();
     //console.log(await playbackObj.getStatusAsync());
+    playbackObj.
     const status = await playbackObj.loadAsync(
       {
         uri: filePath,
