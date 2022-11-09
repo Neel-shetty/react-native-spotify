@@ -30,6 +30,10 @@ const Controls = (props) => {
     }
   }
 
+  async function load(){
+    await sound.loadAsync({uri: filepath})
+  }
+
   // useEffect(()=>{
   //   getFiles()
   // },[])
