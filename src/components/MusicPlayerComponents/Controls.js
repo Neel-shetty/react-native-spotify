@@ -90,13 +90,15 @@ const Controls = () => {
       // await sound.pauseAsync()
       console.log('pausing')
       // return
-      sound.setStatusAsync({shouldPlay: false})
+      const status = await sound.setStatusAsync({shouldPlay: false})
+      return setSongStatus(status)
     }
     
     //play song
     if(songStatus.isLoaded && !songStatus.isPlaying && currentAudio.songId === route.params.songId ){
       console.log('resuming................')
-      
+      const status = await sound.playAsync()
+      return setSongStatus(status)
     }
 
   }
