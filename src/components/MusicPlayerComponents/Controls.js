@@ -12,7 +12,7 @@ import { a } from "aws-amplify";
 
 const Controls = (props) => {
   const route = useRoute();
-  console.log(route)
+  console.log(route);
   //const songId = route.params.songId
   const filePath = route.params.uri;
   const [sound, setSound] = useState();
@@ -30,16 +30,16 @@ const Controls = (props) => {
     }
   }
 
-  async function load(){
-    await sound.loadAsync({uri: filepath})
+  async function load() {
+    await sound.loadAsync({ uri: filepath });
   }
 
-  async function loop(){
-    await sound.setIsLoopingAsync()
+  async function loop() {
+    await sound.setIsLoopingAsync();
   }
 
-  async function mute(){
-    await sound.setIsMutedAsync()
+  async function mute() {
+    await sound.setIsMutedAsync();
   }
 
   // useEffect(()=>{
@@ -51,7 +51,7 @@ const Controls = (props) => {
   async function playSound() {
     const playbackObj = new Audio.Sound();
     //console.log(await playbackObj.getStatusAsync());
-    
+
     const status = await playbackObj.loadAsync(
       {
         uri: filePath,
@@ -71,8 +71,8 @@ const Controls = (props) => {
       positionMillis,
     } = await playbackObj.getStatusAsync();
     console.log(isLooping) */
-    const songStatus = await playbackObj.getStatusAsync()
-    setSongStatus(songStatus)
+    const songStatus = await playbackObj.getStatusAsync();
+    setSongStatus(songStatus);
     setSound(playbackObj);
   }
   //console.log(songStatus.isPlaying);
@@ -106,6 +106,11 @@ const Controls = (props) => {
   useEffect(() => {
     permissionCheck();
     requestPermission();
+    Audio.setAudioModeAsync({
+      shouldDuckAndroid: true,
+      staysActiveInBackground: true,
+      interruptionModeAndroid: 1
+    });
   }, []);
 
   useEffect(() => {

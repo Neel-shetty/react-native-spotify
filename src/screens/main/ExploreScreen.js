@@ -104,7 +104,7 @@ const ExploreScreen = () => {
           //decelerationRate={0.9}
           renderItem={({ item }) => <PlaylistScreenItem playlist={item}/>}
           key={files.id}
-          estimatedItemSize={100}
+          estimatedItemSize={150}
           fadingEdgeLength={0.5}
           overScrollMode='always'
           ListHeaderComponent={()=>{

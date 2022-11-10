@@ -8,8 +8,6 @@ import DefaultHeader from "../../components/MusicPlayerComponents/DefaultHeader"
 import LyricsButton from "../../components/MusicPlayerComponents/LyricsButton";
 
 const MusicPlayer = () => {
- // console.log(props)
-
   return (
     <View style={{ flex: 1 }}>
       <View style={{ flex: 1 }}>

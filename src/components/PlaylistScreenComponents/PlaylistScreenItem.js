@@ -43,7 +43,7 @@ const PlaylistScreenItem = ({ playlist }) => {
     const info = await MediaLibrary.getAssetInfoAsync(playlist.id);
     const folders = await MediaLibrary.getAlbumsAsync();
     const foldersCount = (await MediaLibrary.getAlbumsAsync()).length;
-
+    console.log(foldersCount)
     for (let i = 0; i < foldersCount; i++) {
       if (info.albumId === folders[i].id) {
         var folderTitle = folders[i].title;
