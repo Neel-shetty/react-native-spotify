@@ -39,7 +39,7 @@ const SongInfo = () => {
       <View>
         <Text style={styles.name} numberOfLines={1}>{removeExtension(name)}</Text>
         {/* <Text style={styles.artist}>{previewData[songId].content.ArtistName}</Text> */}
-        <Text style={styles.artist}>{album}</Text>
+        <Text style={styles.artist} numberOfLines={1}>Artist . {album}</Text>
       </View>
       <View>
         <TouchableOpacity>
