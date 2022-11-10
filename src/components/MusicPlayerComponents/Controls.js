@@ -12,11 +12,11 @@ import { a } from "aws-amplify";
 
 const Controls = () => {
   const route = useRoute();
-  //console.log(route);
+  console.log(route.params);
   //const songId = route.params.songId
   const filePath = route.params.uri;
   const [sound, setSound] = useState(null);
-  const [songStatus, setSongStatus] = useState();
+  const [songStatus, setSongStatus] = useState(null);
   const [position, setPosition] = useState();
   const [currentAudio, setCurrentAudio] = useState()
   // const [songLink, setSongLink] = useState()
@@ -60,6 +60,7 @@ const Controls = () => {
         },
         { shouldPlay: true }
       );
+      setCurrentAudio(route.params)
       //console.log(status)
       //console.log(await playbackObj.getStatusAsync());
       const {
@@ -91,9 +92,9 @@ const Controls = () => {
       // return
       sound.setStatusAsync({shouldPlay: false})
     }
-    console.log(!songStatus.isPlaying)
+    
     //play song
-    if(songStatus.isLoaded && !songStatus.isPlaying){
+    if(songStatus.isLoaded && !songStatus.isPlaying && currentAudio.songId === route.params.songId ){
       console.log('resuming................')
       
     }
@@ -141,14 +142,14 @@ const Controls = () => {
   //   console.log(position)
   // },[position])
 
-  useEffect(() => {
-    return sound
-      ? () => {
-          console.log("Unloading Sound");
-          sound.unloadAsync();
-        }
-      : undefined;
-  }, [sound]);
+  // useEffect(() => {
+  //   return sound
+  //     ? () => {
+  //         console.log("Unloading Sound");
+  //         sound.unloadAsync();
+  //       }
+  //     : undefined;
+  // }, [sound]);
 
   //console.log(status)
   return (
