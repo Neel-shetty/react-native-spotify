@@ -10,15 +10,20 @@ import * as MediaLibrary from "expo-media-library";
 import { a } from "aws-amplify";
 // import { Sound } from "expo-av/build/Audio";
 
-const Controls = (props) => {
+const Controls = () => {
   const route = useRoute();
-  console.log(route);
+  //console.log(route);
   //const songId = route.params.songId
   const filePath = route.params.uri;
   const [sound, setSound] = useState();
   const [songStatus, setSongStatus] = useState();
-  // const [songLink, setSongLink] = useState()
+  const [position, setPosition] = useState()
+  // const [songLink, setSongLink] = useState() 
+  // setPosition(songStatus)
 
+  
+
+  console.log(songStatus)
   async function getFiles() {
     let files = await MediaLibrary.getAssetsAsync({
       mediaType: "audio",
@@ -46,12 +51,9 @@ const Controls = (props) => {
   //   getFiles()
   // },[])
 
-  async function getUri() {}
-
   async function playSound() {
     const playbackObj = new Audio.Sound();
-    //console.log(await playbackObj.getStatusAsync());
-
+    
     const status = await playbackObj.loadAsync(
       {
         uri: filePath,
@@ -59,7 +61,7 @@ const Controls = (props) => {
       { shouldPlay: true }
     );
     //console.log(await playbackObj.getStatusAsync());
-    /* const {
+    const {
       isPlaying,
       isLoaded,
       isLooping,
@@ -70,10 +72,13 @@ const Controls = (props) => {
       shouldPlay,
       positionMillis,
     } = await playbackObj.getStatusAsync();
-    console.log(isLooping) */
+    //setPosition(positionMillis)
     const songStatus = await playbackObj.getStatusAsync();
     setSongStatus(songStatus);
     setSound(playbackObj);
+    // const getstatus1 = await playbackObj.getStatusAsync()
+
+    //console.log(getstatus1.isPlaying)
   }
   //console.log(songStatus.isPlaying);
   /* function pp() {
@@ -112,6 +117,10 @@ const Controls = (props) => {
       interruptionModeAndroid: 1
     });
   }, []);
+
+  // useEffect(()=>{
+  //   console.log(position)
+  // },[position])
 
   useEffect(() => {
     return sound
