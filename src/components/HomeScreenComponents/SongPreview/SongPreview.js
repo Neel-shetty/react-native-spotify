@@ -12,11 +12,42 @@ import { useNavigation } from "@react-navigation/native";
 import * as MediaLibrary from "expo-media-library";
 
 const SongPreview = ({ preview }) => {
-  const [cover, setCover] = useState()
+  const [cover, setCover] = useState();
   const navigation = useNavigation();
+
   function onPress() {
-    navigation.navigate("MusicPlayer", { songId: preview.id });
+    navigation.navigate("MusicPlayer", {
+      songId: preview.id,
+      uri: preview.uri,
+      filename: preview.filename,
+      cover: cover,
+      duration: convertTime(preview.duration),
+    });
   }
+
+  const convertTime = (minutes) => {
+    if (minutes) {
+      const hrs = minutes / 60;
+      const minute = hrs.toString().split(".")[0];
+      const percent = parseInt(hrs.toString().split(".")[1].slice(0, 2));
+      const sec = Math.ceil((60 * percent) / 100);
+
+      if (parseInt(minute) < 10 && sec < 10) {
+        return `0${minute}:0${sec}`;
+      }
+
+      if (parseInt(minute) < 10) {
+        return `0${minute}:${sec}`;
+      }
+
+      if (sec < 10) {
+        return `${minute}:0${sec}`;
+      }
+
+      return `${minute}:${sec}`;
+    }
+  };
+
   useEffect(() => {
     async function getCover() {
       const info = await MediaLibrary.getAssetInfoAsync(preview);
@@ -37,6 +68,7 @@ const SongPreview = ({ preview }) => {
       //console.log(info.albumId);
       const cover = folderInfo.assets[0].uri;
       console.log(cover);
+      setCover(cover);
       /* navigation.navigate("MusicPlayer", {
       songId: playlist.id,
       uri: playlist.uri,
@@ -45,8 +77,15 @@ const SongPreview = ({ preview }) => {
       duration: convertTime(playlist.duration),
     }); */
     }
-    getCover()
+    getCover();
   }, []);
+
+  function removeExtension(filename) {
+    // filename = filename.replace(/\d+/g, '');
+    filename = filename.substring(filename.indexOf(" ") + 1);
+    return filename.substring(0, filename.lastIndexOf(".")) || filename;
+  }
+  
   //console.log(preview.filename)
   return (
     <View style={{ height: 255, width: 147 }}>
@@ -56,7 +95,7 @@ const SongPreview = ({ preview }) => {
             <TouchableOpacity onPress={onPress}>
               <ImageBackground
                 style={styles.image}
-                // source={{ uri: preview.filename }}
+                source={{ uri: cover }}
                 imageStyle={styles.image}
               >
                 <TouchableOpacity>
@@ -79,7 +118,7 @@ const SongPreview = ({ preview }) => {
           </View>
           <View style={styles.titleContainer}>
             <Text numberOfLines={1} style={styles.title}>
-              {preview.filename}
+              {removeExtension(preview.filename)}
             </Text>
             <Text numberOfLines={1} style={styles.subtitle}>
               {/* {preview.content.ArtistName} */}

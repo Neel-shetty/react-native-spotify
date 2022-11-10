@@ -14,10 +14,15 @@ const SongInfo = () => {
   const padding =
     Dimensions.get("window").width - Dimensions.get("window").width * 0.9;
   //console.log(padding)
-  const route = useRoute()
-  const name = route.params.filename
-  const songId = (route?.params?.songId - 1 )
+  const route = useRoute();
+  const name = route.params.filename;
+  const songId = route?.params?.songId - 1;
 
+  function removeExtension(filename) {
+    // filename = filename.replace(/\d+/g, '');
+    filename = filename.substring(filename.indexOf(" ") + 1);
+    return filename.substring(0, filename.lastIndexOf(".")) || filename;
+  }
 
   return (
     <View
@@ -30,8 +35,7 @@ const SongInfo = () => {
       }}
     >
       <View>
-        
-        <Text style={styles.name}>{name}</Text>
+        <Text style={styles.name}>{removeExtension(name)}</Text>
         {/* <Text style={styles.artist}>{previewData[songId].content.ArtistName}</Text> */}
       </View>
       <View>

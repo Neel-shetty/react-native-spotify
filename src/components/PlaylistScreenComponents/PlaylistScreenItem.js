@@ -94,6 +94,12 @@ const PlaylistScreenItem = ({ playlist }) => {
     }
   };
 
+  function removeExtension(filename) {
+    // filename = filename.replace(/\d+/g, '');
+    filename = filename.substring(filename.indexOf(" ") + 1);
+    return filename.substring(0, filename.lastIndexOf(".")) || filename;
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.playContainer}>
@@ -117,7 +123,7 @@ const PlaylistScreenItem = ({ playlist }) => {
       <View style={styles.titleContainer}>
         <TouchableOpacity onPress={titleButton}>
           <Text numberOfLines={2} style={styles.song}>
-            {playlist.filename}
+            {removeExtension(playlist.filename)}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity>
