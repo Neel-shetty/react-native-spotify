@@ -18,7 +18,7 @@ const Controls = () => {
   const [sound, setSound] = useState(null);
   const [songStatus, setSongStatus] = useState(null);
   const [position, setPosition] = useState();
-  const [currentAudio, setCurrentAudio] = useState()
+  const [currentAudio, setCurrentAudio] = useState();
   // const [songLink, setSongLink] = useState()
   // setPosition(songStatus)
 
@@ -51,7 +51,8 @@ const Controls = () => {
   // },[])
 
   async function playSound() {
-    if (sound === null) {  // initial audio playback
+    if (sound === null) {
+      // initial audio playback
       const playbackObj = new Audio.Sound();
 
       const status = await playbackObj.loadAsync(
@@ -60,7 +61,7 @@ const Controls = () => {
         },
         { shouldPlay: true }
       );
-      setCurrentAudio(route.params)
+      setCurrentAudio(route.params);
       //console.log(status)
       //console.log(await playbackObj.getStatusAsync());
       const {
@@ -77,30 +78,32 @@ const Controls = () => {
       //setPosition(positionMillis)
       //const songStatus = await playbackObj.getStatusAsync();
       setSongStatus(status);
-      console.log(status.isPlaying)
+      console.log(status.isPlaying);
       setSound(playbackObj);
       // const getstatus1 = await playbackObj.getStatusAsync()
 
       //console.log(getstatus1.isPlaying
-      
     }
 
     //pause song
-    if(songStatus.isLoaded && songStatus.isPlaying){
+    if (songStatus.isLoaded && songStatus.isPlaying) {
       // await sound.pauseAsync()
-      console.log('pausing')
+      console.log("pausing");
       // return
-      const status = await sound.setStatusAsync({shouldPlay: false})
-      return setSongStatus(status)
-    }
-    
-    //play song
-    if(songStatus.isLoaded && !songStatus.isPlaying && currentAudio.songId === route.params.songId ){
-      console.log('resuming................')
-      const status = await sound.playAsync()
-      return setSongStatus(status)
+      const status = await sound.setStatusAsync({ shouldPlay: false });
+      return setSongStatus(status);
     }
 
+    //play song
+    if (
+      songStatus.isLoaded &&
+      !songStatus.isPlaying &&
+      currentAudio.songId === route.params.songId
+    ) {
+      console.log("resuming................");
+      const status = await sound.playAsync();
+      return setSongStatus(status);
+    }
   }
   //console.log(songStatus.isPlaying);
   /* function pp() {
@@ -209,17 +212,45 @@ const Controls = () => {
               justifyContent: "center",
             }}
           >
-            <Svg //pause
-              width={28}
-              height={28}
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <Path
-                d="M11.375 3.5a.875.875 0 0 0-1.75 0v21a.875.875 0 0 0 1.75 0v-21ZM18.375 3.5a.875.875 0 0 0-1.75 0v21a.875.875 0 0 0 1.75 0v-21Z"
-                fill="#fff"
-              />
-            </Svg>
+            {songStatus === null && (
+              <Svg //play
+                width={28}
+                height={28}
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <Path
+                  d="M17.585 6.074c-2.02-1.152-3.59-2.047-4.865-2.627-1.28-.583-2.39-.912-3.47-.8a6.108 6.108 0 0 0-4.292 2.448c-.642.873-.91 1.994-1.038 3.381-.129 1.382-.128 3.173-.128 5.476v.096c0 2.303 0 4.094.128 5.476.129 1.387.396 2.508 1.038 3.38a6.108 6.108 0 0 0 4.292 2.45c1.08.111 2.19-.218 3.47-.8 1.275-.581 2.845-1.476 4.865-2.628l.082-.047c2.02-1.152 3.59-2.047 4.737-2.847 1.15-.803 1.998-1.59 2.442-2.576a5.971 5.971 0 0 0 0-4.912c-.444-.986-1.292-1.773-2.442-2.576-1.146-.8-2.716-1.695-4.737-2.847l-.082-.047Z"
+                  fill="#fff"
+                />
+              </Svg>
+            )}
+            {songStatus.isLoaded && songStatus.isPlaying && (
+              <Svg //pause
+                width={28}
+                height={28}
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <Path
+                  d="M11.375 3.5a.875.875 0 0 0-1.75 0v21a.875.875 0 0 0 1.75 0v-21ZM18.375 3.5a.875.875 0 0 0-1.75 0v21a.875.875 0 0 0 1.75 0v-21Z"
+                  fill="#fff"
+                />
+              </Svg>
+            )}
+            {songStatus.isLoaded && !songStatus.isPlaying && (
+              <Svg //play
+                width={28}
+                height={28}
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <Path
+                  d="M17.585 6.074c-2.02-1.152-3.59-2.047-4.865-2.627-1.28-.583-2.39-.912-3.47-.8a6.108 6.108 0 0 0-4.292 2.448c-.642.873-.91 1.994-1.038 3.381-.129 1.382-.128 3.173-.128 5.476v.096c0 2.303 0 4.094.128 5.476.129 1.387.396 2.508 1.038 3.38a6.108 6.108 0 0 0 4.292 2.45c1.08.111 2.19-.218 3.47-.8 1.275-.581 2.845-1.476 4.865-2.628l.082-.047c2.02-1.152 3.59-2.047 4.737-2.847 1.15-.803 1.998-1.59 2.442-2.576a5.971 5.971 0 0 0 0-4.912c-.444-.986-1.292-1.773-2.442-2.576-1.146-.8-2.716-1.695-4.737-2.847l-.082-.047Z"
+                  fill="#fff"
+                />
+              </Svg>
+            )}
           </View>
         </TouchableOpacity>
       </View>
