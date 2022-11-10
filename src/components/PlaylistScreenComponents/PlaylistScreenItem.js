@@ -64,6 +64,7 @@ const PlaylistScreenItem = ({ playlist }) => {
       filename: playlist.filename,
       cover: cover,
       duration: convertTime(playlist.duration),
+      Album: folderTitle
     });
   }
 

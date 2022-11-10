@@ -13,7 +13,7 @@ const SongPreviewList = ({data}) => {
   //console.log(previewData)
   return (
     <View style={{ flexDirection: "row", width:width, height: 242}}>
-      <FlashList
+      <FlatList
         data={data}
         renderItem={({ item }) => (
           <View style={{ paddingLeft: 13,paddingRight:1 }}>
@@ -22,7 +22,7 @@ const SongPreviewList = ({data}) => {
         )}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
-        estimatedItemSize={160}
+        //estimatedItemSize={160}
       />
     </View>
   );

@@ -13,6 +13,7 @@ import * as MediaLibrary from "expo-media-library";
 
 const SongPreview = ({ preview }) => {
   const [cover, setCover] = useState();
+  const [album, setAlbum] = useState();
   const navigation = useNavigation();
 
   function onPress() {
@@ -22,6 +23,7 @@ const SongPreview = ({ preview }) => {
       filename: preview.filename,
       cover: cover,
       duration: convertTime(preview.duration),
+      Album: album,
     });
   }
 
@@ -60,6 +62,7 @@ const SongPreview = ({ preview }) => {
           //console.log(folderTitle);
         }
       }
+      setAlbum(folderTitle);
       const folderInfo = await MediaLibrary.getAssetsAsync({
         album: info.albumId,
       });
@@ -67,7 +70,7 @@ const SongPreview = ({ preview }) => {
       //console.log("folder log", folders[0].id);
       //console.log(info.albumId);
       const cover = folderInfo.assets[0].uri;
-      console.log(cover);
+      //console.log(cover);
       setCover(cover);
       /* navigation.navigate("MusicPlayer", {
       songId: playlist.id,
@@ -85,7 +88,7 @@ const SongPreview = ({ preview }) => {
     filename = filename.substring(filename.indexOf(" ") + 1);
     return filename.substring(0, filename.lastIndexOf(".")) || filename;
   }
-  
+
   //console.log(preview.filename)
   return (
     <View style={{ height: 255, width: 147 }}>

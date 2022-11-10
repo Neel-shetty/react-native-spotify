@@ -16,6 +16,8 @@ const SongInfo = () => {
   //console.log(padding)
   const route = useRoute();
   const name = route.params.filename;
+  const album = route?.params?.Album
+  //console.log(album)
   const songId = route?.params?.songId - 1;
 
   function removeExtension(filename) {
@@ -35,8 +37,9 @@ const SongInfo = () => {
       }}
     >
       <View>
-        <Text style={styles.name}>{removeExtension(name)}</Text>
+        <Text style={styles.name} numberOfLines={1}>{removeExtension(name)}</Text>
         {/* <Text style={styles.artist}>{previewData[songId].content.ArtistName}</Text> */}
+        <Text style={styles.artist}>{album}</Text>
       </View>
       <View>
         <TouchableOpacity>
