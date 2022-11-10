@@ -66,7 +66,7 @@ const ExploreScreen = () => {
   async function getFiles() {
     let files = await MediaLibrary.getAssetsAsync({
       mediaType: "audio",
-      album: 'music'
+      // album: 'music'
     });
     files = await MediaLibrary.getAssetsAsync({
       mediaType: "audio",
@@ -101,10 +101,12 @@ const ExploreScreen = () => {
       <View style={{ flex: 8, width: width }}>
         <FlashList
           data={files}
-          //style={{width:width,height:500}}
+          //decelerationRate={0.9}
           renderItem={({ item }) => <PlaylistScreenItem playlist={item}/>}
           key={files.id}
           estimatedItemSize={100}
+          fadingEdgeLength={0.5}
+          overScrollMode='always'
           ListHeaderComponent={()=>{
             return(
               <View style={{flexDirection:'row', justifyContent:'space-between'}}>

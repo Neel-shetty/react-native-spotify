@@ -7,7 +7,7 @@ import {
   Dimensions,
   TouchableOpacity,
 } from "react-native";
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useLayoutEffect, useState } from "react";
 import Button from "../../components/ui/Button";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
@@ -22,6 +22,29 @@ import MenuDots from "../../components/ui/MenuDots";
 import * as MediaLibrary from 'expo-media-library';
 
 const HomeScreen = () => {
+  const [files, setFiles] = useState([]);
+
+  async function getFiles() {
+    let files = await MediaLibrary.getAssetsAsync({
+      mediaType: "audio",
+      // album: 'music'
+    });
+    // files = await MediaLibrary.getAssetsAsync({
+    //   mediaType: "audio",
+    //   first: files.totalCount,
+    // });
+    //const folder = await MediaLibrary.getAssetInfoAsync('33 DADDY ! DADDY ! DO !.m4a')
+    const tempFile = files.assets;
+    setFiles(tempFile);
+    //console.log(folder)
+    //console.log(files.assets)
+    //download();
+  }
+
+  useLayoutEffect(() => {
+    getFiles();
+  }, []);
+
   function logOut() {
     Auth.signOut();
   }
@@ -40,9 +63,6 @@ const HomeScreen = () => {
     getPerms()
   },[])
 
-  async function getFiles(){
-
-  }
 
   useEffect(() => {
     async function prepare() {
@@ -106,7 +126,7 @@ const HomeScreen = () => {
               <CategoryBar />
             </View>
             <View style={{ height: 242, marginBottom: 30 }}>
-              <SongPreviewList />
+              <SongPreviewList data={files} />
             </View>
             <View
               style={{

@@ -6,16 +6,48 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Svg, { Path } from "react-native-svg";
 import { useNavigation } from "@react-navigation/native";
+import * as MediaLibrary from "expo-media-library";
 
 const SongPreview = ({ preview }) => {
-  const navigation = useNavigation()
+  const [cover, setCover] = useState()
+  const navigation = useNavigation();
   function onPress() {
-    navigation.navigate('MusicPlayer', {songId:preview.id})
+    navigation.navigate("MusicPlayer", { songId: preview.id });
   }
-  //console.log(preview.id)
+  useEffect(() => {
+    async function getCover() {
+      const info = await MediaLibrary.getAssetInfoAsync(preview);
+      const folders = await MediaLibrary.getAlbumsAsync();
+      const foldersCount = (await MediaLibrary.getAlbumsAsync()).length;
+
+      for (let i = 0; i < foldersCount; i++) {
+        if (info.albumId === folders[i].id) {
+          var folderTitle = folders[i].title;
+          //console.log(folderTitle);
+        }
+      }
+      const folderInfo = await MediaLibrary.getAssetsAsync({
+        album: info.albumId,
+      });
+      //console.log("FOLDER INFO - ", folderInfo.assets[0].uri);
+      //console.log("folder log", folders[0].id);
+      //console.log(info.albumId);
+      const cover = folderInfo.assets[0].uri;
+      console.log(cover);
+      /* navigation.navigate("MusicPlayer", {
+      songId: playlist.id,
+      uri: playlist.uri,
+      filename: playlist.filename,
+      cover: cover,
+      duration: convertTime(playlist.duration),
+    }); */
+    }
+    getCover()
+  }, []);
+  //console.log(preview.filename)
   return (
     <View style={{ height: 255, width: 147 }}>
       <View style={styles.root}>
@@ -24,7 +56,7 @@ const SongPreview = ({ preview }) => {
             <TouchableOpacity onPress={onPress}>
               <ImageBackground
                 style={styles.image}
-                source={{ uri: preview.content.ImageUri }}
+                // source={{ uri: preview.filename }}
                 imageStyle={styles.image}
               >
                 <TouchableOpacity>
@@ -47,10 +79,10 @@ const SongPreview = ({ preview }) => {
           </View>
           <View style={styles.titleContainer}>
             <Text numberOfLines={1} style={styles.title}>
-              {preview.content.SongName}
+              {preview.filename}
             </Text>
             <Text numberOfLines={1} style={styles.subtitle}>
-              {preview.content.ArtistName}
+              {/* {preview.content.ArtistName} */}
             </Text>
           </View>
         </View>
