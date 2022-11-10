@@ -10,25 +10,26 @@ import React from "react";
 import PlaylistItem from "./PlaylistItem";
 import PlaylistData from "../../../../assets/dummydata/PlaylistData";
 
-const Playlist = () => {
+const Playlist = ({data}) => {
   //console.log(PlaylistData)
+  const song = data
   return (
     <View style={styles.root}>
       <View style={styles.playlistContainer}>
         <Text style={styles.playlist}>Playlist</Text>
       </View>
       <View style={{ flex: 3 }}>
-        {/* <FlatList 
-        data={PlaylistData} 
+        <FlatList 
+        data={song} 
         renderItem={({item})=>(
           <PlaylistItem playlist={item} />
         )}  
-        /> */}
-        <ScrollView showsVerticalScrollIndicator={false}>
-          {PlaylistData.map((item) => (
-            <PlaylistItem playlist={item} key={item.key} />
+        />
+        {/* <ScrollView showsVerticalScrollIndicator={false}>
+          {PlaylistData.map((song) => (
+            <PlaylistItem playlist={song} key={song.id} />
           ))}
-        </ScrollView>
+        </ScrollView> */}
       </View>
       {/* 
       <PlaylistItem /> */}

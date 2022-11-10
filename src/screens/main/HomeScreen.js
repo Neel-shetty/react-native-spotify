@@ -126,7 +126,7 @@ const HomeScreen = () => {
               <CategoryBar />
             </View>
             <View style={{ height: 242, marginBottom: 30 }}>
-              <SongPreviewList data={files} />
+              <SongPreviewList data={files}  />
             </View>
             <View
               style={{
@@ -136,7 +136,7 @@ const HomeScreen = () => {
               }}
             >
               {/* <ScrollView horizontal={true} style={{ width: "100%" }}> */}
-                <Playlist />
+                <Playlist data={files} />
               {/* </ScrollView> */}
               {/* <Text>test</Text> */}
             </View>

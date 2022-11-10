@@ -15,15 +15,14 @@ const Controls = () => {
   //console.log(route);
   //const songId = route.params.songId
   const filePath = route.params.uri;
-  const [sound, setSound] = useState();
+  const [sound, setSound] = useState(null);
   const [songStatus, setSongStatus] = useState();
-  const [position, setPosition] = useState()
-  // const [songLink, setSongLink] = useState() 
+  const [position, setPosition] = useState();
+  const [currentAudio, setCurrentAudio] = useState()
+  // const [songLink, setSongLink] = useState()
   // setPosition(songStatus)
 
-  
-
-  console.log(songStatus)
+  console.log(songStatus);
   async function getFiles() {
     let files = await MediaLibrary.getAssetsAsync({
       mediaType: "audio",
@@ -52,33 +51,53 @@ const Controls = () => {
   // },[])
 
   async function playSound() {
-    const playbackObj = new Audio.Sound();
-    
-    const status = await playbackObj.loadAsync(
-      {
-        uri: filePath,
-      },
-      { shouldPlay: true }
-    );
-    //console.log(await playbackObj.getStatusAsync());
-    const {
-      isPlaying,
-      isLoaded,
-      isLooping,
-      isMuted,
-      durationMillis,
-      isBuffering,
-      playableDurationMillis,
-      shouldPlay,
-      positionMillis,
-    } = await playbackObj.getStatusAsync();
-    //setPosition(positionMillis)
-    const songStatus = await playbackObj.getStatusAsync();
-    setSongStatus(songStatus);
-    setSound(playbackObj);
-    // const getstatus1 = await playbackObj.getStatusAsync()
+    if (sound === null) {  // initial audio playback
+      const playbackObj = new Audio.Sound();
 
-    //console.log(getstatus1.isPlaying)
+      const status = await playbackObj.loadAsync(
+        {
+          uri: filePath,
+        },
+        { shouldPlay: true }
+      );
+      //console.log(status)
+      //console.log(await playbackObj.getStatusAsync());
+      const {
+        isPlaying,
+        isLoaded,
+        isLooping,
+        isMuted,
+        durationMillis,
+        isBuffering,
+        playableDurationMillis,
+        shouldPlay,
+        positionMillis,
+      } = await playbackObj.getStatusAsync();
+      //setPosition(positionMillis)
+      //const songStatus = await playbackObj.getStatusAsync();
+      setSongStatus(status);
+      console.log(status.isPlaying)
+      setSound(playbackObj);
+      // const getstatus1 = await playbackObj.getStatusAsync()
+
+      //console.log(getstatus1.isPlaying
+      
+    }
+
+    //pause song
+    if(songStatus.isLoaded && songStatus.isPlaying){
+      // await sound.pauseAsync()
+      console.log('pausing')
+      // return
+      sound.setStatusAsync({shouldPlay: false})
+    }
+    console.log(!songStatus.isPlaying)
+    //play song
+    if(songStatus.isLoaded && !songStatus.isPlaying){
+      console.log('resuming................')
+      
+    }
+
   }
   //console.log(songStatus.isPlaying);
   /* function pp() {
@@ -114,7 +133,7 @@ const Controls = () => {
     Audio.setAudioModeAsync({
       shouldDuckAndroid: true,
       staysActiveInBackground: true,
-      interruptionModeAndroid: 1
+      interruptionModeAndroid: 1,
     });
   }, []);
 

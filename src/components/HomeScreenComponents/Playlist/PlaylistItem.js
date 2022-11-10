@@ -3,6 +3,9 @@ import React from "react";
 import Svg, { Path } from "react-native-svg";
 
 const PlaylistItem = ({ playlist }) => {
+
+
+
   return (
     <View style={styles.container}>
       <View style={styles.playContainer}>
@@ -25,15 +28,15 @@ const PlaylistItem = ({ playlist }) => {
 
       <View style={styles.titleContainer}>
       <TouchableOpacity>
-        <Text style={styles.song}>{playlist.SongName}</Text>
+        <Text style={styles.song} numberOfLines={1}>{playlist.filename}</Text>
         </TouchableOpacity>
         <TouchableOpacity>
-        <Text style={styles.artist}>{playlist.Artist}</Text>
+        {/* <Text style={styles.artist}>{playlist.Artist}</Text> */}
         </TouchableOpacity>
       </View>
 
       <View style={styles.lengthContainer}>
-        <Text style={styles.length}>{playlist.duration}</Text>
+        {/* <Text style={styles.length}>{playlist.duration}</Text> */}
       </View>
       <View style={styles.likeContainer}>
         <TouchableOpacity>
@@ -67,7 +70,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     margin: 5,
     paddingHorizontal:20,
-    //backgroundColor: "pink",
+    // backgroundColor: "pink",
   },
   circle: {
     width: 37,
@@ -85,12 +88,13 @@ const styles = StyleSheet.create({
   titleContainer: {
     alignItems: "flex-start",
     justifyContent: "center",
-    flex: 3,
+    flex: 5,
     paddingLeft: 10,
+    // backgroundColor: 'pink'
   },
   song: {
     fontSize: 16,
-    fontFamily: "satoshi-bold",
+    fontFamily: "satoshi-medium",
   },
   artist: {
     fontSize: 12,
