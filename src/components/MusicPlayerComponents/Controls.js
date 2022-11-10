@@ -16,7 +16,7 @@ const Controls = () => {
   //const songId = route.params.songId
   const filePath = route.params.uri;
   const [sound, setSound] = useState(null);
-  const [songStatus, setSongStatus] = useState(null);
+  const [songStatus, setSongStatus] = useState('');
   const [position, setPosition] = useState();
   const [currentAudio, setCurrentAudio] = useState();
   // const [songLink, setSongLink] = useState()
@@ -147,14 +147,14 @@ const Controls = () => {
   //   console.log(position)
   // },[position])
 
-  // useEffect(() => {
-  //   return sound
-  //     ? () => {
-  //         console.log("Unloading Sound");
-  //         sound.unloadAsync();
-  //       }
-  //     : undefined;
-  // }, [sound]);
+  useEffect(() => {
+    return sound
+      ? () => {
+          console.log("Unloading Sound");
+          sound.unloadAsync();
+        }
+      : undefined;
+  }, [sound]);
 
   //console.log(status)
   return (
@@ -212,7 +212,7 @@ const Controls = () => {
               justifyContent: "center",
             }}
           >
-            {songStatus === null && (
+            {songStatus === '' && (
               <Svg //play
                 width={28}
                 height={28}
