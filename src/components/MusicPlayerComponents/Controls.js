@@ -16,7 +16,7 @@ const Controls = () => {
   //const songId = route.params.songId
   const filePath = route.params.uri;
   const [sound, setSound] = useState(null);
-  const [songStatus, setSongStatus] = useState('');
+  const [songStatus, setSongStatus] = useState("");
   const [position, setPosition] = useState();
   const [currentAudio, setCurrentAudio] = useState();
   // const [songLink, setSongLink] = useState()
@@ -86,7 +86,11 @@ const Controls = () => {
     }
 
     //pause song
-    if (songStatus.isLoaded && songStatus.isPlaying) {
+    if (
+      songStatus.isLoaded &&
+      songStatus.isPlaying &&
+      currentAudio.songId === route.params.songId
+    ) {
       // await sound.pauseAsync()
       console.log("pausing");
       // return
@@ -212,7 +216,7 @@ const Controls = () => {
               justifyContent: "center",
             }}
           >
-            {songStatus === '' && (
+            {songStatus === "" && (
               <Svg //play
                 width={28}
                 height={28}
