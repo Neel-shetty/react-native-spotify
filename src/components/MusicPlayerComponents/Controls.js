@@ -133,11 +133,11 @@ const Controls = () => {
   async function pause() {
     await sound.pauseAsync();
   }
-  async function play(playbackObj, uri) {
+  async function playNext(playbackObj, uri) {
     if (sound.isLoaded && currentAudio.songId === route.params.songId) {
       try {
-        await playbackObj.stopAsync();
-        await playbackObj.unloadAsync();
+        await sound.stopAsync();
+        await sound.unloadAsync();
         await play(playbackObj, uri);
       } catch (e) {
         console.log("error playing next song - ", e);
