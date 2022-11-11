@@ -268,7 +268,7 @@ const Controls = () => {
       </View>
 
       <View style={{ flex: 1, alignItems: "center" }}>
-        <TouchableOpacity onPress={play}>
+        <TouchableOpacity >
           <Svg //right
             width={26}
             height={26}
