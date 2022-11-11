@@ -138,7 +138,7 @@ const Controls = () => {
       try {
         await sound.stopAsync();
         await sound.unloadAsync();
-        await play(playbackObj, uri);
+        // await play(playbackObj, uri);
       } catch (e) {
         console.log("error playing next song - ", e);
       }
