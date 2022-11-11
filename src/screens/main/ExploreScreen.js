@@ -15,16 +15,18 @@ import { FlashList } from "@shopify/flash-list";
 import PlaylistItem from "../../components/HomeScreenComponents/Playlist/PlaylistItem";
 import PlaylistData from "../../../assets/dummydata/PlaylistData";
 import PlaylistScreenItem from "../../components/PlaylistScreenComponents/PlaylistScreenItem";
-// import * as Permissions from "expo-permissions";
+import * as SQLite from "expo-sqlite";
+
+const db = SQLite.openDatabase("songDetails.db");
 
 const ExploreScreen = () => {
   const [files, setFiles] = useState([]);
 
+  // db.transaction((tx) => {
+  //   tx.executeSql("");
+  // });
+
   async function move({ downloadFile }) {
-    // const perm = await Permissions.askAsync(Permissions.MEDIA_LIBRARY);
-    // if (perm.status != "granted") {
-    //   return;
-    // }
     console.log(downloadFile);
     try {
       const asset = await MediaLibrary.createAssetAsync(downloadFile);
@@ -84,6 +86,25 @@ const ExploreScreen = () => {
     getFiles();
   }, []);
 
+  useEffect(() => {
+    db.transaction((tx,res) => {
+      tx.executeSql(
+        "create table if not exists songs (id integer primary key, filename text, uri text);",
+      );
+    });
+    //console.log('db created')
+  }, []);
+
+  function songInfo(){
+    db.transaction((tx)=>{
+      tx.executeSql("insert into songs (id , filename, uri) values (?,?,?)",
+      ['1','Blinding Lights', 'music/song.m4a'],(tx,res)=>{console.log(res)});
+      tx.executeSql("select * from songs ",[],(tx,res)=>{
+        console.log(res)
+      })
+    })
+  }
+
   const width = Dimensions.get("window").width;
   const green = "green";
   return (
@@ -93,34 +114,38 @@ const ExploreScreen = () => {
         source={{
           uri: "file:///data/user/0/host.exp.exponent/files/ExperienceData/%2540newfox%252FSpotifyClone/%2Bgigachad.png",
         }}
-      />
-      <Button onPress={download}>download</Button> */}
-      <View style={{ flex: 1, width: width }}>
+      /> */}
+      <Button onPress={songInfo}>download</Button>
+      {/* <View style={{ flex: 1, width: width }}>
         <DefaultHeader />
       </View>
       <View style={{ flex: 8, width: width }}>
         <FlashList
           data={files}
           //decelerationRate={0.9}
-          renderItem={({ item }) => <PlaylistScreenItem playlist={item}/>}
+          renderItem={({ item }) => <PlaylistScreenItem playlist={item} />}
           key={files.id}
           estimatedItemSize={150}
           fadingEdgeLength={0.5}
-          overScrollMode='always'
-          ListHeaderComponent={()=>{
-            return(
-              <View style={{flexDirection:'row', justifyContent:'space-between'}}>
+          overScrollMode="always"
+          ListHeaderComponent={() => {
+            return (
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                }}
+              >
                 <Text>play/pause</Text>
                 <Text>name</Text>
                 <Text>duration</Text>
                 <Text>like</Text>
               </View>
-            )
+            );
           }}
           //endFillColor={'green'}
-          
         />
-      </View>
+      </View> */}
     </View>
   );
 };

@@ -70,6 +70,7 @@ const Navigator = () => {
   function MainApp() {
     return (
       <Tab.Navigator
+        //initialRouteName="ExploreScreen"
         screenOptions={{
           tabBarShowLabel: false,
           tabBarStyle: { height: 73 },
