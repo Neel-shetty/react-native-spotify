@@ -86,21 +86,40 @@ const ExploreScreen = () => {
     getFiles();
   }, []);
 
+  // useEffect(() => {
+  //   db.transaction((tx) => {
+  //     tx.executeSql(
+  //       "create table if not exists songs (id integer primary key, filename text, uri text);",
+  //     );
+  //   });
+  //   //console.log('db created')
+  // }, []);
+
   useEffect(() => {
-    db.transaction((tx,res) => {
-      tx.executeSql(
-        "create table if not exists songs (id integer primary key, filename text, uri text);",
+    db.transaction(function (txn) {
+      txn.executeSql(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name='songs_table'",
+        [],
+        function (tx, res) {
+          console.log('item:', res.rows.length);
+          if (res.rows.length == 0) {
+            txn.executeSql('DROP TABLE IF EXISTS songs_table', []);
+            txn.executeSql(
+              'CREATE TABLE IF NOT EXISTS songs_table(song_id INTEGER PRIMARY KEY AUTOINCREMENT, song_filename text, song_uri text, song_duration text)',
+              []
+            );
+          }
+        }
       );
     });
-    //console.log('db created')
   }, []);
 
   function songInfo(){
     db.transaction((tx)=>{
-      tx.executeSql("insert into songs (id , filename, uri) values (?,?,?)",
-      ['1','Blinding Lights', 'music/song.m4a'],(tx,res)=>{console.log(res)});
-      tx.executeSql("select * from songs ",[],(tx,res)=>{
-        console.log(res)
+      tx.executeSql("insert into songs_table (song_filename, song_uri, song_duration) values (?,?,?)",
+      ['Bad guy', 'music/song.m4a', '69:20'],(tx,res)=>{console.log(res)});
+      tx.executeSql("select * from songs_table ",[],(tx,res)=>{
+        console.log(res.rows)
       })
     })
   }
