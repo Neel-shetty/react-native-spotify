@@ -74,27 +74,22 @@ const ExploreScreen = () => {
       mediaType: "audio",
       first: files.totalCount,
     });
+    const folders = await MediaLibrary.getAlbumsAsync();
+    const foldersCount = (await MediaLibrary.getAlbumsAsync()).length;
     //const folder = await MediaLibrary.getAssetInfoAsync('33 DADDY ! DADDY ! DO !.m4a')
     const tempFile = files.assets;
     setFiles(tempFile);
     for (let i = 0; i < files.totalCount; i++) {
-      const filename =(files.assets[i].filename);
-      const uri =  (files.assets[i].uri);
-      const duration = (files.assets[i].duration);
-      const modificationTime = (files.assets[i].modificationTime);
-      const albumId = (files.assets[i].albumId);
-      const id = (files.assets[i].id);
+      const filename = files.assets[i].filename;
+      const uri = files.assets[i].uri;
+      const duration = files.assets[i].duration;
+      const modificationTime = files.assets[i].modificationTime;
+      const albumId = files.assets[i].albumId;
+      const id = files.assets[i].id;
       db.transaction((tx) => {
         tx.executeSql(
-          "insert into songs_table(song_id INTEGER PRIMARY KEY, song_filename text, song_uri text, song_duration text, song_modificationTime text, song_albumId text) values (?,?,?,?,?,?)",
-          [
-            id,
-            filename,
-            uri,
-            duration,
-            modificationTime,
-            albumId,
-          ],
+          "insert into songs_table(song_id , song_filename , song_uri , song_duration , song_modificationTime , song_albumId ) values (?,?,?,?,?,?)",
+          [id, filename, uri, duration, modificationTime, albumId],
           (tx, res) => {
             console.log(res);
           }
@@ -113,7 +108,7 @@ const ExploreScreen = () => {
   }
 
   useEffect(() => {
-    getFiles();
+    //getFiles();
   }, []);
 
   useEffect(() => {
@@ -126,7 +121,7 @@ const ExploreScreen = () => {
           if (res.rows.length == 0) {
             txn.executeSql("DROP TABLE IF EXISTS songs_table", []);
             txn.executeSql(
-              "CREATE TABLE IF NOT EXISTS songs_table(song_id INTEGER PRIMARY KEY, song_filename text, song_uri text, song_duration text, song_modificationTime text, song_cover text, song_albumId text)",
+              "CREATE TABLE IF NOT EXISTS songs_table(song_id INTEGER PRIMARY KEY, song_filename text, song_uri text, song_duration int, song_modificationTime int, song_cover text, song_albumId int)",
               []
             );
           }
@@ -137,16 +132,20 @@ const ExploreScreen = () => {
 
   function songInfo() {
     db.transaction((tx) => {
+      // tx.executeSql(
+      //   "insert into songs_table (song_filename, song_uri, song_duration) values (?,?,?)",
+      //   ["Bad guy", "music/song.m4a", "69:20"],
+      //   (tx, res) => {
+      //     console.log(res);
+      //   }
+      // );
       tx.executeSql(
-        "insert into songs_table (song_filename, song_uri, song_duration) values (?,?,?)",
-        ["Bad guy", "music/song.m4a", "69:20"],
+        "select * from songs_table where song_id=?",
+        [841],
         (tx, res) => {
-          console.log(res);
+          console.log(res.rows);
         }
       );
-      tx.executeSql("select * from songs_table ", [], (tx, res) => {
-        console.log(res.rows);
-      });
     });
   }
 
