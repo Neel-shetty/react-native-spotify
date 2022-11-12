@@ -121,7 +121,7 @@ const ExploreScreen = () => {
 
   function getId(){
     db.transaction((tx)=>{
-      tx.executeSql('')
+      tx.executeSql('select id from songs_table')
     })
   }
 
