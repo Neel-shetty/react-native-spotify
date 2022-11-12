@@ -20,9 +20,9 @@ import * as SQLite from "expo-sqlite";
 const db = SQLite.openDatabase("songDetails.db");
 
 const ExploreScreen = () => {
-  const [files, setFiles] = useState();
-  //songInfo()
-  //console.log(files);
+  const [files, setFiles] = useState([]);
+  songInfo()
+  //console.log(files[0]);
 
   // db.transaction((tx) => {
   //   tx.executeSql("");
@@ -81,7 +81,7 @@ const ExploreScreen = () => {
     //console.log(tempFile)
     //const folder = await MediaLibrary.getAssetInfoAsync('33 DADDY ! DADDY ! DO !.m4a')
     const tempFile = files.assets;
-    setFiles(tempFile);
+    //setFiles(tempFile);
     for (let i = 0; i < files.totalCount; i++) {
       const filename = files.assets[i].filename;
       const uri = files.assets[i].uri;
@@ -109,7 +109,7 @@ const ExploreScreen = () => {
       });
       db.transaction((tx) => {
         tx.executeSql("select * from songs_table ", [], (tx, res) => {
-          console.log(res.rows.item(i));
+          console.log(res.rows);
         });
       });
     }
@@ -117,12 +117,6 @@ const ExploreScreen = () => {
     //console.log(folder)
     //console.log(files)
     //download();
-  }
-
-  function getId(){
-    db.transaction((tx)=>{
-      tx.executeSql('select id from songs_table')
-    })
   }
 
   useEffect(() => {
@@ -158,14 +152,13 @@ const ExploreScreen = () => {
       //   }
       // );
       tx.executeSql("select * from songs_table", [], (tx, res) => {
-        const songData = res.rows;
+        var songData = res.rows._array;
         setFiles(songData);
       });
     });
   }
 
   const width = Dimensions.get("window").width;
-  const green = "green";
   return (
     <View style={{ alignItems: "center", justifyContent: "center", flex: 1 }}>
       {/* <Image
@@ -182,7 +175,7 @@ const ExploreScreen = () => {
         <FlashList
           data={files}
           //decelerationRate={0.9}
-          renderItem={({ item }) => <PlaylistScreenItem playlist={item} />}
+          renderItem={({ item }) => <PlaylistScreenItem playlist={item} id={item.song_id} />}
           // key={files.id}
           estimatedItemSize={150}
           fadingEdgeLength={0.5}

@@ -15,13 +15,13 @@ import * as SQLite from "expo-sqlite";
 
 const db = SQLite.openDatabase("songDetails.db");
 
-const PlaylistScreenItem = ({ playlist }) => {
+const PlaylistScreenItem = ({ playlist, id }) => {
   const navigation = useNavigation();
   // const [info, setInfo] = useState();
-  //console.log(playlist)
+  //console.log(id)
   db.transaction((tx) => {
     tx.executeSql("select * from songs_table", [], (tx, res) => {
-      console.log(res.rows._array[0]);
+      //console.log(res.rows._array[0]);
     });
   });
 
@@ -66,14 +66,14 @@ const PlaylistScreenItem = ({ playlist }) => {
     // console.log(info.albumId);
     const cover = folderInfo.assets[0].uri;
     // console.log(cover)
-    navigation.navigate("MusicPlayer", {
+    /* navigation.navigate("MusicPlayer", {
       songId: playlist.id,
       uri: playlist.uri,
       filename: playlist.filename,
       cover: cover,
       duration: convertTime(playlist.duration),
       Album: folderTitle,
-    });
+    }); */
   }
 
   function playButton() {
@@ -132,7 +132,7 @@ const PlaylistScreenItem = ({ playlist }) => {
       <View style={styles.titleContainer}>
         <TouchableOpacity onPress={titleButton}>
           <Text numberOfLines={2} style={styles.song}>
-            {removeExtension(playlist.filename)}
+            {/* {removeExtension(playlist.filename)} */}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity>
@@ -141,7 +141,7 @@ const PlaylistScreenItem = ({ playlist }) => {
       </View>
 
       <View style={styles.lengthContainer}>
-        <Text style={styles.length}>{convertTime(playlist.duration)}</Text>
+        {/* <Text style={styles.length}>{convertTime(playlist.duration)}</Text> */}
       </View>
       <View style={styles.likeContainer}>
         <TouchableOpacity onPress={playButton}>
