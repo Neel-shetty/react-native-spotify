@@ -77,23 +77,44 @@ const ExploreScreen = () => {
     //const folder = await MediaLibrary.getAssetInfoAsync('33 DADDY ! DADDY ! DO !.m4a')
     const tempFile = files.assets;
     setFiles(tempFile);
+    for (let i = 0; i < files.totalCount; i++) {
+      const filename =(files.assets[i].filename);
+      const uri =  (files.assets[i].uri);
+      const duration = (files.assets[i].duration);
+      const modificationTime = (files.assets[i].modificationTime);
+      const albumId = (files.assets[i].albumId);
+      const id = (files.assets[i].id);
+      db.transaction((tx) => {
+        tx.executeSql(
+          "insert into songs_table(song_id INTEGER PRIMARY KEY, song_filename text, song_uri text, song_duration text, song_modificationTime text, song_albumId text) values (?,?,?,?,?,?)",
+          [
+            id,
+            filename,
+            uri,
+            duration,
+            modificationTime,
+            albumId,
+          ],
+          (tx, res) => {
+            console.log(res);
+          }
+        );
+      });
+      db.transaction((tx) => {
+        tx.executeSql("select * from songs_table ", [], (tx, res) => {
+          console.log(res.rows.item(i));
+        });
+      });
+    }
+
     //console.log(folder)
-    //console.log(files.assets)
+    //console.log(files)
     //download();
   }
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     getFiles();
   }, []);
-
-  // useEffect(() => {
-  //   db.transaction((tx) => {
-  //     tx.executeSql(
-  //       "create table if not exists songs (id integer primary key, filename text, uri text);",
-  //     );
-  //   });
-  //   //console.log('db created')
-  // }, []);
 
   useEffect(() => {
     db.transaction(function (txn) {
@@ -101,11 +122,11 @@ const ExploreScreen = () => {
         "SELECT name FROM sqlite_master WHERE type='table' AND name='songs_table'",
         [],
         function (tx, res) {
-          console.log('item:', res.rows.length);
+          console.log("item:", res.rows.length);
           if (res.rows.length == 0) {
-            txn.executeSql('DROP TABLE IF EXISTS songs_table', []);
+            txn.executeSql("DROP TABLE IF EXISTS songs_table", []);
             txn.executeSql(
-              'CREATE TABLE IF NOT EXISTS songs_table(song_id INTEGER PRIMARY KEY AUTOINCREMENT, song_filename text, song_uri text, song_duration text)',
+              "CREATE TABLE IF NOT EXISTS songs_table(song_id INTEGER PRIMARY KEY, song_filename text, song_uri text, song_duration text, song_modificationTime text, song_cover text, song_albumId text)",
               []
             );
           }
@@ -114,14 +135,19 @@ const ExploreScreen = () => {
     });
   }, []);
 
-  function songInfo(){
-    db.transaction((tx)=>{
-      tx.executeSql("insert into songs_table (song_filename, song_uri, song_duration) values (?,?,?)",
-      ['Bad guy', 'music/song.m4a', '69:20'],(tx,res)=>{console.log(res)});
-      tx.executeSql("select * from songs_table ",[],(tx,res)=>{
-        console.log(res.rows)
-      })
-    })
+  function songInfo() {
+    db.transaction((tx) => {
+      tx.executeSql(
+        "insert into songs_table (song_filename, song_uri, song_duration) values (?,?,?)",
+        ["Bad guy", "music/song.m4a", "69:20"],
+        (tx, res) => {
+          console.log(res);
+        }
+      );
+      tx.executeSql("select * from songs_table ", [], (tx, res) => {
+        console.log(res.rows);
+      });
+    });
   }
 
   const width = Dimensions.get("window").width;
