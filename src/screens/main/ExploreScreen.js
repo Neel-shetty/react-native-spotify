@@ -21,8 +21,8 @@ const db = SQLite.openDatabase("songDetails.db");
 
 const ExploreScreen = () => {
   const [files, setFiles] = useState();
-  songInfo()
-  console.log(files)
+  //songInfo()
+  //console.log(files);
 
   // db.transaction((tx) => {
   //   tx.executeSql("");
@@ -78,6 +78,7 @@ const ExploreScreen = () => {
     });
     const folders = await MediaLibrary.getAlbumsAsync();
     const foldersCount = (await MediaLibrary.getAlbumsAsync()).length;
+    //console.log(tempFile)
     //const folder = await MediaLibrary.getAssetInfoAsync('33 DADDY ! DADDY ! DO !.m4a')
     const tempFile = files.assets;
     setFiles(tempFile);
@@ -92,14 +93,15 @@ const ExploreScreen = () => {
         album: albumId,
       });
       //let cover = null
-      const cover = folderInfo?.assets[0]?.uri ? folderInfo?.assets[0]?.uri :null
+      const cover = folderInfo?.assets[0]?.uri
+        ? folderInfo?.assets[0]?.uri
+        : null;
       //console.log(filename)
-
 
       db.transaction((tx) => {
         tx.executeSql(
           "insert into songs_table(song_id , song_filename , song_uri , song_duration , song_modificationTime , song_albumId, song_cover ) values (?,?,?,?,?,?,?)",
-          [id, filename, uri, duration, modificationTime, albumId,cover],
+          [id, filename, uri, duration, modificationTime, albumId, cover],
           (tx, res) => {
             console.log(res);
           }
@@ -127,7 +129,7 @@ const ExploreScreen = () => {
         "SELECT name FROM sqlite_master WHERE type='table' AND name='songs_table'",
         [],
         function (tx, res) {
-          //console.log("item:", res.rows.length);
+          console.log("item:", res.rows.length);
           if (res.rows.length == 0) {
             txn.executeSql("DROP TABLE IF EXISTS songs_table", []);
             txn.executeSql(
@@ -149,14 +151,10 @@ const ExploreScreen = () => {
       //     console.log(res);
       //   }
       // );
-      tx.executeSql(
-        "select * from songs_table",
-        [],
-        (tx, res) => {
-          const songData = (res.rows);
-          setFiles(songData)
-        }
-      );
+      tx.executeSql("select * from songs_table", [], (tx, res) => {
+        const songData = res.rows;
+        setFiles(songData);
+      });
     });
   }
 
