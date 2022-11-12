@@ -130,7 +130,7 @@ const ExploreScreen = () => {
         [],
         function (tx, res) {
           console.log("item:", res.rows.length);
-          if (res.rows.length == 0) {
+          if (res.rows.length === 0) {
             txn.executeSql("DROP TABLE IF EXISTS songs_table", []);
             txn.executeSql(
               "CREATE TABLE IF NOT EXISTS songs_table(song_id INTEGER PRIMARY KEY, song_filename text, song_uri text, song_duration int, song_modificationTime int, song_cover text, song_albumId int)",

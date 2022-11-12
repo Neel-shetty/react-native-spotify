@@ -11,11 +11,19 @@ import { useNavigation } from "@react-navigation/native";
 import * as FileSystem from "expo-file-system";
 import * as MediaLibrary from "expo-media-library";
 // import MusicInfo from "expo-music-info";
+import * as SQLite from "expo-sqlite";
+
+const db = SQLite.openDatabase("songDetails.db");
 
 const PlaylistScreenItem = ({ playlist }) => {
   const navigation = useNavigation();
   // const [info, setInfo] = useState();
-  console.log(playlist)
+  //console.log(playlist)
+  db.transaction((tx) => {
+    tx.executeSql("select * from songs_table", [], (tx, res) => {
+      console.log(res.rows._array[0]);
+    });
+  });
 
   async function fileInfo() {
     const info = await MediaLibrary.getAssetInfoAsync(playlist.id);
@@ -43,7 +51,7 @@ const PlaylistScreenItem = ({ playlist }) => {
     const info = await MediaLibrary.getAssetInfoAsync(playlist.id);
     const folders = await MediaLibrary.getAlbumsAsync();
     const foldersCount = (await MediaLibrary.getAlbumsAsync()).length;
-    console.log(foldersCount)
+    console.log(foldersCount);
     for (let i = 0; i < foldersCount; i++) {
       if (info.albumId === folders[i].id) {
         var folderTitle = folders[i].title;
@@ -64,7 +72,7 @@ const PlaylistScreenItem = ({ playlist }) => {
       filename: playlist.filename,
       cover: cover,
       duration: convertTime(playlist.duration),
-      Album: folderTitle
+      Album: folderTitle,
     });
   }
 
