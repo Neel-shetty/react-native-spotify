@@ -119,6 +119,12 @@ const ExploreScreen = () => {
     //download();
   }
 
+  function getId(){
+    db.transaction((tx)=>{
+      tx.executeSql('')
+    })
+  }
+
   useEffect(() => {
     //getFiles();
   }, []);
