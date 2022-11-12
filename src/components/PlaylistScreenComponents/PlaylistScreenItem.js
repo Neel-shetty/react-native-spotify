@@ -15,7 +15,7 @@ import * as MediaLibrary from "expo-media-library";
 const PlaylistScreenItem = ({ playlist }) => {
   const navigation = useNavigation();
   // const [info, setInfo] = useState();
-  //console.log(playlist.id)
+  console.log(playlist)
 
   async function fileInfo() {
     const info = await MediaLibrary.getAssetInfoAsync(playlist.id);
@@ -31,11 +31,11 @@ const PlaylistScreenItem = ({ playlist }) => {
     const folderInfo = await MediaLibrary.getAssetsAsync({
       album: info.albumId,
     });
-    console.log("FOLDER INFO - ", folderInfo.assets[0].uri);
-    console.log("folder log", folders[0].id);
-    console.log(info.albumId);
-    const cover = folderInfo.assets[0].uri;
-    console.log(cover)
+    //console.log("FOLDER INFO - ", folderInfo.assets[0].uri);
+    //console.log("folder log", folders[0].id);
+    //console.log(info.albumId);
+    //const cover = folderInfo.assets[0].uri;
+    //console.log(cover)
     // setCover(cover);
   }
 

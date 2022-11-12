@@ -20,7 +20,9 @@ import * as SQLite from "expo-sqlite";
 const db = SQLite.openDatabase("songDetails.db");
 
 const ExploreScreen = () => {
-  const [files, setFiles] = useState([]);
+  const [files, setFiles] = useState();
+  songInfo()
+  console.log(files)
 
   // db.transaction((tx) => {
   //   tx.executeSql("");
@@ -86,10 +88,18 @@ const ExploreScreen = () => {
       const modificationTime = files.assets[i].modificationTime;
       const albumId = files.assets[i].albumId;
       const id = files.assets[i].id;
+      const folderInfo = await MediaLibrary.getAssetsAsync({
+        album: albumId,
+      });
+      //let cover = null
+      const cover = folderInfo?.assets[0]?.uri ? folderInfo?.assets[0]?.uri :null
+      //console.log(filename)
+
+
       db.transaction((tx) => {
         tx.executeSql(
-          "insert into songs_table(song_id , song_filename , song_uri , song_duration , song_modificationTime , song_albumId ) values (?,?,?,?,?,?)",
-          [id, filename, uri, duration, modificationTime, albumId],
+          "insert into songs_table(song_id , song_filename , song_uri , song_duration , song_modificationTime , song_albumId, song_cover ) values (?,?,?,?,?,?,?)",
+          [id, filename, uri, duration, modificationTime, albumId,cover],
           (tx, res) => {
             console.log(res);
           }
@@ -117,7 +127,7 @@ const ExploreScreen = () => {
         "SELECT name FROM sqlite_master WHERE type='table' AND name='songs_table'",
         [],
         function (tx, res) {
-          console.log("item:", res.rows.length);
+          //console.log("item:", res.rows.length);
           if (res.rows.length == 0) {
             txn.executeSql("DROP TABLE IF EXISTS songs_table", []);
             txn.executeSql(
@@ -140,10 +150,11 @@ const ExploreScreen = () => {
       //   }
       // );
       tx.executeSql(
-        "select * from songs_table where song_id=?",
-        [841],
+        "select * from songs_table",
+        [],
         (tx, res) => {
-          console.log(res.rows);
+          const songData = (res.rows);
+          setFiles(songData)
         }
       );
     });
@@ -159,8 +170,8 @@ const ExploreScreen = () => {
           uri: "file:///data/user/0/host.exp.exponent/files/ExperienceData/%2540newfox%252FSpotifyClone/%2Bgigachad.png",
         }}
       /> */}
-      <Button onPress={songInfo}>download</Button>
-      {/* <View style={{ flex: 1, width: width }}>
+      {/* <Button onPress={songInfo}>download</Button> */}
+      <View style={{ flex: 1, width: width }}>
         <DefaultHeader />
       </View>
       <View style={{ flex: 8, width: width }}>
@@ -168,7 +179,7 @@ const ExploreScreen = () => {
           data={files}
           //decelerationRate={0.9}
           renderItem={({ item }) => <PlaylistScreenItem playlist={item} />}
-          key={files.id}
+          // key={files.id}
           estimatedItemSize={150}
           fadingEdgeLength={0.5}
           overScrollMode="always"
@@ -189,7 +200,7 @@ const ExploreScreen = () => {
           }}
           //endFillColor={'green'}
         />
-      </View> */}
+      </View>
     </View>
   );
 };
