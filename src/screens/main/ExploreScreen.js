@@ -22,6 +22,7 @@ const db = SQLite.openDatabase("songDetails.db");
 
 const ExploreScreen = () => {
   const [files, setFiles] = useState([]);
+  const [songData, setSongData] = useState()
 
   const { isLoading, isSuccess, isError, data, error, refetch } = useQuery(
     "search",
@@ -33,6 +34,7 @@ const ExploreScreen = () => {
       retry: 2,
       onSuccess: (res) => {
         const result = res;
+        setSongData(result)
         console.log(result);
       },
       onError: (err) => {
@@ -41,6 +43,8 @@ const ExploreScreen = () => {
       },
     }
   );
+
+  console.log(songData)
 
   songInfo();
   //console.log(files[0]);
