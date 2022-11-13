@@ -193,21 +193,21 @@ const ExploreScreen = () => {
           estimatedItemSize={150}
           fadingEdgeLength={0.5}
           overScrollMode="always"
-          ListHeaderComponent={() => {
-            return (
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Text>play/pause</Text>
-                <Text>name</Text>
-                <Text>duration</Text>
-                <Text>like</Text>
-              </View>
-            );
-          }}
+          // ListHeaderComponent={() => {
+          //   return (
+          //     <View
+          //       style={{
+          //         flexDirection: "row",
+          //         justifyContent: "space-between",
+          //       }}
+          //     >
+          //       <Text>play/pause</Text>
+          //       <Text>name</Text>
+          //       <Text>duration</Text>
+          //       <Text>like</Text>
+          //     </View>
+          //   );
+          // }}
           //endFillColor={'green'}
         />
       </View>
