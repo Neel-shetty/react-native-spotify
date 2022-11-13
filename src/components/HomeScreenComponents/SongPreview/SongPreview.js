@@ -22,7 +22,7 @@ const SongPreview = ({ preview }) => {
       uri: preview.uri,
       filename: preview.filename,
       cover: cover,
-      duration: convertTime(preview.duration),
+      duration: duration,
       Album: album,
     });
   }
@@ -49,6 +49,8 @@ const SongPreview = ({ preview }) => {
       return `${minute}:${sec}`;
     }
   };
+
+  const duration = convertTime(preview.duration)
 
   function checkCover(uri) {
     if(uri.includes('cover'))
