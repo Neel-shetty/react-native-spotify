@@ -1,10 +1,14 @@
 import { StyleSheet, Text, TouchableOpacity, View,Dimensions } from "react-native";
 import React from "react";
 import Svg, { Path } from "react-native-svg";
+import { useNavigation } from "@react-navigation/native";
 
 const PlaylistItem = ({ playlist }) => {
-
+  const navigation = useNavigation()
   //console.log(playlist)
+  function playButton() {
+    navigation.navigate('MusicPlayer', {data: playlist})
+  }
 
   return (
     <View style={styles.container}>
