@@ -222,7 +222,7 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     flex: 2,
-    backgroundColor: "violet",
+    //backgroundColor: "violet",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -236,7 +236,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     flex: 5,
-    backgroundColor: "pink",
+    //backgroundColor: "pink",
     alignContent: "center",
     justifyContent: "center",
     minHeight: 50,
@@ -246,7 +246,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 3,
-    backgroundColor: "coral",
+    //backgroundColor: "coral",
     minHeight: 80,
   },
 });
