@@ -50,6 +50,16 @@ const SongPreview = ({ preview }) => {
     }
   };
 
+  function checkCover(uri) {
+    if(uri.includes('cover'))
+    {
+      //console.log('COVER')
+      return uri
+    }else {
+      return 'http://www.scottishculture.org/themes/scottishculture/images/music_placeholder.png'
+    }
+  }
+
   useEffect(() => {
     async function getCover() {
       const info = await MediaLibrary.getAssetInfoAsync(preview);
@@ -69,7 +79,7 @@ const SongPreview = ({ preview }) => {
       // console.log("FOLDER INFO - ", folderInfo.assets);
       //console.log("folder log", folders[0].id);
       //console.log(info.albumId);
-      const cover = folderInfo?.assets[0]?.uri ? folderInfo?.assets[0]?.uri : 'https://e7.pngegg.com/pngimages/710/955/png-clipart-vinyl-record-artwork-phonograph-record-compact-disc-lp-record-disc-jockey-symbol-miscellaneous-classical-music.png';
+      const cover = folderInfo?.assets[0]?.uri ? checkCover(folderInfo?.assets[0]?.uri) : 'http://www.scottishculture.org/themes/scottishculture/images/music_placeholder.png';
       //console.log(cover);
       setCover(cover);
       /* navigation.navigate("MusicPlayer", {

@@ -4,7 +4,7 @@ import Svg, { Path } from "react-native-svg";
 
 const PlaylistItem = ({ playlist }) => {
 
-  console.log(playlist)
+  //console.log(playlist)
 
   return (
     <View style={styles.container}>
