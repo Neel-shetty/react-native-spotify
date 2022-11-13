@@ -27,17 +27,14 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF",
-        "permissons": [
-          "WRITE_EXTERNAL_STORAGE",
-          "READ_EXTERNAL_STORAGE"
-        ]
+        "backgroundColor": "#FFFFFF"
       },
       "permissions": [
         "android.permission.READ_EXTERNAL_STORAGE",
         "android.permission.WRITE_EXTERNAL_STORAGE",
         "android.permission.ACCESS_MEDIA_LOCATION"
-      ]
+      ],
+      "package": "com.newfox.MusicPlayer"
     },
     "web": {
       "favicon": "./assets/favicon.png"

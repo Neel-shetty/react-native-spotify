@@ -66,10 +66,10 @@ const SongPreview = ({ preview }) => {
       const folderInfo = await MediaLibrary.getAssetsAsync({
         album: info.albumId,
       });
-      //console.log("FOLDER INFO - ", folderInfo.assets[0].uri);
+      // console.log("FOLDER INFO - ", folderInfo.assets);
       //console.log("folder log", folders[0].id);
       //console.log(info.albumId);
-      const cover = folderInfo.assets[0].uri;
+      const cover = folderInfo?.assets[0]?.uri ? folderInfo?.assets[0]?.uri : null;
       //console.log(cover);
       setCover(cover);
       /* navigation.navigate("MusicPlayer", {

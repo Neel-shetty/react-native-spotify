@@ -33,11 +33,11 @@ const Tab = createBottomTabNavigator();
 const Navigator = () => {
   const [user, setUser] = useState(undefined);
 
-  /* useEffect(() => {
+  useEffect(() => {
     checkUser();
-  }, []); */
+  }, []);
 
- /*  useEffect(() => {
+   useEffect(() => {
     function listener(data) {
       if (data.payload.event === "signIn" || data.payload.event === "signOut") {
         checkUser();
@@ -45,7 +45,7 @@ const Navigator = () => {
     }
     Hub.listen("auth", listener);
     return () => Hub.remove("auth", listener);
-  }, []); */
+  }, []);
 
   async function checkUser() {
     try {
@@ -59,13 +59,13 @@ const Navigator = () => {
     }
   }
 
-  /* if (user === undefined) {
+  if (user === undefined) {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <ActivityIndicator />
       </View>
     );
-  } */
+  }
 
   function MainApp() {
     return (
@@ -130,7 +130,7 @@ const Navigator = () => {
             tabBarIcon: ({ focused }) => (
               <View>
                 <View style={{ flex: 1 }}>
-                  { focused && <View style={styles.indicator}></View>}
+                  {focused && <View style={styles.indicator}></View>}
                 </View>
                 <View
                   style={{
@@ -142,8 +142,7 @@ const Navigator = () => {
                   <View>{focused ? <Heart /> : <HeartOutline />}</View>
                 </View>
               </View>
-            )
-              ,
+            ),
             headerShown: false,
           }}
         />
@@ -154,7 +153,7 @@ const Navigator = () => {
             tabBarIcon: ({ focused }) => (
               <View>
                 <View style={{ flex: 1 }}>
-                  { focused && <View style={styles.indicator}></View>}
+                  {focused && <View style={styles.indicator}></View>}
                 </View>
                 <View
                   style={{
@@ -166,8 +165,7 @@ const Navigator = () => {
                   <View>{focused ? <Profile /> : <ProfileOutline />}</View>
                 </View>
               </View>
-            )
-              ,
+            ),
             headerShown: false,
           }}
         />
@@ -178,100 +176,106 @@ const Navigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="MainApp">
-        {/* {user ? ( */}
-        <Stack.Screen
-          name="MainApp"
-          component={MainApp}
-          options={() => ({
-            tabBarStyle: {
-              display: "none",
-            },
-            tabBarButton: () => null,
-            headerShown: false,
-          })}
-        />
-        <Stack.Screen name="MusicPlayer" component={MusicPlayer} options={{headerShown: false}}/>
-        {/* ) : ( */}
-        <>
-          <Stack.Screen
-            name="GetStarted"
-            component={GetStartedScreen}
-            options={() => ({
-              tabBarStyle: {
-                display: "none",
-              },
-              tabBarButton: () => null,
-              headerShown: false,
-            })}
-          />
-          <Stack.Screen
-            name="ChooseMode"
-            component={ChooseMode}
-            options={() => ({
-              tabBarStyle: {
-                display: "none",
-              },
-              tabBarButton: () => null,
-              headerShown: false,
-            })}
-          />
-          <Stack.Screen
-            name="RegisterOrSignIn"
-            component={RegisterOrSignIn}
-            options={() => ({
-              tabBarStyle: {
-                display: "none",
-              },
-              tabBarButton: () => null,
-              headerShown: false,
-            })}
-          />
-          <Stack.Screen
-            name="RegisterScreen"
-            component={RegisterScreen}
-            options={() => ({
-              tabBarStyle: {
-                display: "none",
-              },
-              tabBarButton: () => null,
-              headerShown: false,
-            })}
-          />
-          <Stack.Screen
-            name="ConfirmScreen"
-            component={ConfirmScreen}
-            options={() => ({
-              tabBarStyle: {
-                display: "none",
-              },
-              tabBarButton: () => null,
-              headerShown: false,
-            })}
-          />
-          <Stack.Screen
-            name="SignInScreen"
-            component={SignInScreen}
-            options={() => ({
-              tabBarStyle: {
-                display: "none",
-              },
-              tabBarButton: () => null,
-              headerShown: false,
-            })}
-          />
-          <Stack.Screen
-            name="ResetPassword"
-            component={ResetPassword}
-            options={() => ({
-              tabBarStyle: {
-                display: "none",
-              },
-              tabBarButton: () => null,
-              headerShown: false,
-            })}
-          />
-        </>
-        {/* )} */}
+        {user ? (
+          <>
+            <Stack.Screen
+              name="MainApp"
+              component={MainApp}
+              options={() => ({
+                tabBarStyle: {
+                  display: "none",
+                },
+                tabBarButton: () => null,
+                headerShown: false,
+              })}
+            />
+            <Stack.Screen
+              name="MusicPlayer"
+              component={MusicPlayer}
+              options={{ headerShown: false }}
+            />
+          </>
+        ) : (
+          <>
+            <Stack.Screen
+              name="GetStarted"
+              component={GetStartedScreen}
+              options={() => ({
+                tabBarStyle: {
+                  display: "none",
+                },
+                tabBarButton: () => null,
+                headerShown: false,
+              })}
+            />
+            <Stack.Screen
+              name="ChooseMode"
+              component={ChooseMode}
+              options={() => ({
+                tabBarStyle: {
+                  display: "none",
+                },
+                tabBarButton: () => null,
+                headerShown: false,
+              })}
+            />
+            <Stack.Screen
+              name="RegisterOrSignIn"
+              component={RegisterOrSignIn}
+              options={() => ({
+                tabBarStyle: {
+                  display: "none",
+                },
+                tabBarButton: () => null,
+                headerShown: false,
+              })}
+            />
+            <Stack.Screen
+              name="RegisterScreen"
+              component={RegisterScreen}
+              options={() => ({
+                tabBarStyle: {
+                  display: "none",
+                },
+                tabBarButton: () => null,
+                headerShown: false,
+              })}
+            />
+            <Stack.Screen
+              name="ConfirmScreen"
+              component={ConfirmScreen}
+              options={() => ({
+                tabBarStyle: {
+                  display: "none",
+                },
+                tabBarButton: () => null,
+                headerShown: false,
+              })}
+            />
+            <Stack.Screen
+              name="SignInScreen"
+              component={SignInScreen}
+              options={() => ({
+                tabBarStyle: {
+                  display: "none",
+                },
+                tabBarButton: () => null,
+                headerShown: false,
+              })}
+            />
+            <Stack.Screen
+              name="ResetPassword"
+              component={ResetPassword}
+              options={() => ({
+                tabBarStyle: {
+                  display: "none",
+                },
+                tabBarButton: () => null,
+                headerShown: false,
+              })}
+            />
+          </>
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );

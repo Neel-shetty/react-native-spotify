@@ -4,7 +4,7 @@ import Svg, { Path } from "react-native-svg";
 
 const PlaylistItem = ({ playlist }) => {
 
-
+  console.log(playlist)
 
   return (
     <View style={styles.container}>
@@ -28,15 +28,15 @@ const PlaylistItem = ({ playlist }) => {
 
       <View style={styles.titleContainer}>
       <TouchableOpacity>
-        <Text style={styles.song} numberOfLines={1}>{playlist.filename}</Text>
+        <Text style={styles.song} numberOfLines={1}>{playlist.SongName}</Text>
         </TouchableOpacity>
         <TouchableOpacity>
-        {/* <Text style={styles.artist}>{playlist.Artist}</Text> */}
+        <Text style={styles.artist}>{playlist.Artist}</Text>
         </TouchableOpacity>
       </View>
 
       <View style={styles.lengthContainer}>
-        {/* <Text style={styles.length}>{playlist.duration}</Text> */}
+        <Text style={styles.length}>{playlist.duration}</Text>
       </View>
       <View style={styles.likeContainer}>
         <TouchableOpacity>

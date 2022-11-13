@@ -78,7 +78,18 @@ const ExploreScreen = () => {
     });
     const folders = await MediaLibrary.getAlbumsAsync();
     const foldersCount = (await MediaLibrary.getAlbumsAsync()).length;
-    //console.log(tempFile)
+    for (let i = 0; i < foldersCount; i++) {
+      if (folders[i].title === "SpotifyClone") {
+        var folderid = ('folder id',folders[i].id);
+      }
+    }
+
+    const songFolder = await MediaLibrary.getAssetsAsync({
+      album: '-1965883161',
+      mediaType: 'audio'
+    })
+    console.log(folderid)
+    //console.log(folders)
     //const folder = await MediaLibrary.getAssetInfoAsync('33 DADDY ! DADDY ! DO !.m4a')
     const tempFile = files.assets;
     setFiles(tempFile);

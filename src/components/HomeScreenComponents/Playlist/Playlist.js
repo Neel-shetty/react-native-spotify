@@ -16,20 +16,20 @@ const Playlist = ({data}) => {
   return (
     <View style={styles.root}>
       <View style={styles.playlistContainer}>
-        <Text style={styles.playlist}>Playlist</Text>
+        <Text style={styles.playlist}>Up Next</Text>
       </View>
       <View style={{ flex: 3 }}>
-        <FlatList 
+        {/* <FlatList 
         data={song} 
         renderItem={({item})=>(
           <PlaylistItem playlist={item} />
         )}  
-        />
-        {/* <ScrollView showsVerticalScrollIndicator={false}>
+        /> */}
+        <ScrollView showsVerticalScrollIndicator={false}>
           {PlaylistData.map((song) => (
-            <PlaylistItem playlist={song} key={song.id} />
+            <PlaylistItem playlist={song} key={song.key} />
           ))}
-        </ScrollView> */}
+        </ScrollView>
       </View>
       {/* 
       <PlaylistItem /> */}
