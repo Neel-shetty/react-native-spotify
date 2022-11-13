@@ -24,9 +24,22 @@ const ExploreScreen = () => {
   const [files, setFiles] = useState([]);
 
   const { isLoading, isSuccess, isError, data, error, refetch } = useQuery(
-    "search?q=Bad%20Guy",
-    fetchSongs,
-    { enabled: false, retry: 2, onSuccess, onError }
+    "search",
+    async () => {
+      return await apiClient.get("search?q=Bad%20Guy");
+    },
+    {
+      enabled: false,
+      retry: 2,
+      onSuccess: (res) => {
+        const result = res;
+        console.log(result);
+      },
+      onError: (err) => {
+        const error = err;
+        console.log(error)
+      },
+    }
   );
 
   songInfo();
