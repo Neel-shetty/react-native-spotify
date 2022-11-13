@@ -29,10 +29,10 @@ const HomeScreen = () => {
       mediaType: "audio",
       // album: 'music'
     });
-    // files = await MediaLibrary.getAssetsAsync({
-    //   mediaType: "audio",
-    //   first: files.totalCount,
-    // });
+    files = await MediaLibrary.getAssetsAsync({
+      mediaType: "audio",
+      first: files.totalCount,
+    });
     //const folder = await MediaLibrary.getAssetInfoAsync('33 DADDY ! DADDY ! DO !.m4a')
     const tempFile = files.assets;
     setFiles(tempFile);

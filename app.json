@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "SpotifyClone",
-    "slug": "SpotifyClone",
+    "name": "MusicPlayer",
+    "slug": "MusicPlayer",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -18,14 +18,26 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSPhotoLibraryUsageDescription": "Allow SpotifyClone to access your photos.",
+        "NSPhotoLibraryAddUsageDescription": "Allow SpotifyClone to save photos."
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF",
-        "permissons" : ["WRITE_EXTERNAL_STORAGE","READ_EXTERNAL_STORAGE"]
-      }
+        "permissons": [
+          "WRITE_EXTERNAL_STORAGE",
+          "READ_EXTERNAL_STORAGE"
+        ]
+      },
+      "permissions": [
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.ACCESS_MEDIA_LOCATION"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -39,6 +51,11 @@
           "isAccessMediaLocationEnabled": true
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "f3fe1388-8438-4525-bb35-9100e59ec1e8"
+      }
+    }
   }
 }

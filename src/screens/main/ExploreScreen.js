@@ -21,7 +21,7 @@ const db = SQLite.openDatabase("songDetails.db");
 
 const ExploreScreen = () => {
   const [files, setFiles] = useState([]);
-  songInfo()
+  songInfo();
   //console.log(files[0]);
 
   // db.transaction((tx) => {
@@ -81,7 +81,7 @@ const ExploreScreen = () => {
     //console.log(tempFile)
     //const folder = await MediaLibrary.getAssetInfoAsync('33 DADDY ! DADDY ! DO !.m4a')
     const tempFile = files.assets;
-    //setFiles(tempFile);
+    setFiles(tempFile);
     for (let i = 0; i < files.totalCount; i++) {
       const filename = files.assets[i].filename;
       const uri = files.assets[i].uri;
@@ -98,7 +98,7 @@ const ExploreScreen = () => {
         : null;
       //console.log(filename)
 
-      db.transaction((tx) => {
+      /* db.transaction((tx) => {
         tx.executeSql(
           "insert into songs_table(song_id , song_filename , song_uri , song_duration , song_modificationTime , song_albumId, song_cover ) values (?,?,?,?,?,?,?)",
           [id, filename, uri, duration, modificationTime, albumId, cover],
@@ -111,7 +111,7 @@ const ExploreScreen = () => {
         tx.executeSql("select * from songs_table ", [], (tx, res) => {
           console.log(res.rows);
         });
-      });
+      }); */
     }
 
     //console.log(folder)
@@ -120,7 +120,7 @@ const ExploreScreen = () => {
   }
 
   useEffect(() => {
-    //getFiles();
+    getFiles();
   }, []);
 
   useEffect(() => {
@@ -153,7 +153,7 @@ const ExploreScreen = () => {
       // );
       tx.executeSql("select * from songs_table", [], (tx, res) => {
         var songData = res.rows._array;
-        setFiles(songData);
+        //setFiles(songData);
       });
     });
   }
@@ -175,7 +175,9 @@ const ExploreScreen = () => {
         <FlashList
           data={files}
           //decelerationRate={0.9}
-          renderItem={({ item }) => <PlaylistScreenItem playlist={item} id={item.song_id} />}
+          renderItem={({ item }) => (
+            <PlaylistScreenItem playlist={item} id={item.id} />
+          )}
           // key={files.id}
           estimatedItemSize={150}
           fadingEdgeLength={0.5}
