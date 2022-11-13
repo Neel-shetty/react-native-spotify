@@ -20,7 +20,7 @@ const PlaylistScreenItem = ({ playlist, id }) => {
   // const [info, setInfo] = useState();
   //console.log(id)
   db.transaction((tx) => {
-    tx.executeSql("select * from songs_table", [], (tx, res) => {
+    tx.executeSql("select * from songs_table where id=?", [id], (tx, res) => {
       //console.log(res.rows._array[0]);
     });
   });
