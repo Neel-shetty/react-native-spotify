@@ -7,7 +7,12 @@ import {
   Dimensions,
   TouchableOpacity,
 } from "react-native";
-import React, { useCallback, useEffect, useLayoutEffect, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useState,
+} from "react";
 import Button from "../../components/ui/Button";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
@@ -19,7 +24,8 @@ import Playlist from "../../components/HomeScreenComponents/Playlist/Playlist";
 import Header from "../../components/HomeScreenComponents/Header/Header";
 import SearchIcon from "../../components/ui/SearchIcon";
 import MenuDots from "../../components/ui/MenuDots";
-import * as MediaLibrary from 'expo-media-library';
+import * as MediaLibrary from "expo-media-library";
+import { StatusBar } from "expo-status-bar";
 
 const HomeScreen = () => {
   const [files, setFiles] = useState([]);
@@ -55,14 +61,13 @@ const HomeScreen = () => {
     "satoshi-medium": require("../../../assets/fonts/satoshi/Satoshi-Medium.otf"),
   });
 
-  useEffect(()=>{
-    async function getPerms(){
-    const perms = await MediaLibrary.requestPermissionsAsync()
-    console.log(perms)
+  useEffect(() => {
+    async function getPerms() {
+      const perms = await MediaLibrary.requestPermissionsAsync();
+      console.log(perms);
     }
-    getPerms()
-  },[])
-
+    getPerms();
+  }, []);
 
   useEffect(() => {
     async function prepare() {
@@ -82,68 +87,71 @@ const HomeScreen = () => {
   }
 
   return (
-    <SafeAreaView onLayout={onLayoutRootView} style={styles.root}>
-      <ScrollView
-        contentContainerStyle={styles.root}
-        nestedScrollEnabled={true}
-        showsVerticalScrollIndicator={false}
-      >
-        {/* <Button>logout</Button> */}
-        <>
-          <View
-            style={{
-              width: width,
-              alignItems: "center",
-              justifyContent: "space-between",
-              paddingTop: 30,
-              paddingBottom: 24,
-              flexDirection: "row",
-              paddingHorizontal: 35,
-              //backgroundColor: "violet",
-              //flex:0.8
-            }}
-          >
-            <TouchableOpacity>
-              <SearchIcon />
-            </TouchableOpacity>
+    <>
+      <StatusBar style="dark" translucent={true} backgroundColor={"transparent"}/>
+      <SafeAreaView onLayout={onLayoutRootView} style={styles.root}>
+        <ScrollView
+          contentContainerStyle={styles.root}
+          nestedScrollEnabled={true}
+          showsVerticalScrollIndicator={false}
+        >
+          {/* <Button>logout</Button> */}
+          <>
+            <View
+              style={{
+                width: width,
+                alignItems: "center",
+                justifyContent: "space-between",
+                paddingTop: 30,
+                paddingBottom: 24,
+                flexDirection: "row",
+                paddingHorizontal: 35,
+                //backgroundColor: "violet",
+                //flex:0.8
+              }}
+            >
+              <TouchableOpacity>
+                <SearchIcon />
+              </TouchableOpacity>
 
-            <Header />
-            <MenuDots />
-          </View>
-          <View
-            style={{
-              alignItems: "center",
-              justifyContent: "flex-start",
-              //backgroundColor: "violet",
-              paddingBottom: 41,
-              //paddingHorizontal:60
-            }}
-          >
-            <NewAlbum />
-          </View>
-          <View style={{ flex: 5 }}>
-            <View style={{ height: 30, marginBottom: 30 }}>
-              <CategoryBar />
-            </View>
-            <View style={{ height: 242, marginBottom: 30 }}>
-              <SongPreviewList data={files}  />
+              <Header />
+              <MenuDots />
             </View>
             <View
               style={{
-                flex: 3,
                 alignItems: "center",
-                justifyContent: "center",
+                justifyContent: "flex-start",
+                //backgroundColor: "violet",
+                paddingBottom: 41,
+                //paddingHorizontal:60
               }}
             >
-              {/* <ScrollView horizontal={true} style={{ width: "100%" }}> */}
-                <Playlist data={files} />
-              {/* </ScrollView> */}
-              {/* <Text>test</Text> */}
+              <NewAlbum />
             </View>
-          </View>
-        </>
-      </ScrollView>
-    </SafeAreaView>
+            <View style={{ flex: 5 }}>
+              <View style={{ height: 30, marginBottom: 30 }}>
+                <CategoryBar />
+              </View>
+              <View style={{ height: 242, marginBottom: 30 }}>
+                <SongPreviewList data={files} />
+              </View>
+              <View
+                style={{
+                  flex: 3,
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                {/* <ScrollView horizontal={true} style={{ width: "100%" }}> */}
+                <Playlist data={files} />
+                {/* </ScrollView> */}
+                {/* <Text>test</Text> */}
+              </View>
+            </View>
+          </>
+        </ScrollView>
+      </SafeAreaView>
+    </>
   );
 };
 
