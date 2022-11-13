@@ -16,7 +16,7 @@ import React, {
 import Button from "../../components/ui/Button";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-import { Auth } from "aws-amplify";
+import { Auth, Analytics } from "aws-amplify";
 import SongPreviewList from "../../components/HomeScreenComponents/SongPreview";
 import CategoryBar from "../../components/HomeScreenComponents/CategoryBar";
 import NewAlbum from "../../components/HomeScreenComponents/NewAlbum/NewAlbum";
@@ -29,7 +29,7 @@ import { StatusBar } from "expo-status-bar";
 
 const HomeScreen = () => {
   const [files, setFiles] = useState([]);
-
+  Analytics.autoTrack()
   async function getFiles() {
     let files = await MediaLibrary.getAssetsAsync({
       mediaType: "audio",
