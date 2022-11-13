@@ -171,7 +171,7 @@ const ExploreScreen = () => {
 
   const width = Dimensions.get("window").width;
   return (
-    <View style={{ alignItems: "center", justifyContent: "center", flex: 1 }}>
+    <View style={{ alignItems: "center", justifyContent: "center", flex: 1,backgroundColor: "white", }}>
       {/* <Image
         style={{ height: 200, width: 200 }}
         source={{

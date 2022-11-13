@@ -9,7 +9,7 @@ import LyricsButton from "../../components/MusicPlayerComponents/LyricsButton";
 
 const MusicPlayer = () => {
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1,backgroundColor: "white", }}>
       <View style={{ flex: 1 }}>
         <DefaultHeader />
       </View>

@@ -165,6 +165,7 @@ const styles = StyleSheet.create({
   },
   rootContainer: {
     flex: 1,
+    backgroundColor: "white",
   },
   button: {
     width: 147,

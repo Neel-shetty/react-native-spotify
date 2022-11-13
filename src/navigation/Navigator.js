@@ -74,6 +74,9 @@ const Navigator = () => {
         screenOptions={{
           tabBarShowLabel: false,
           tabBarStyle: { height: 73 },
+          cardStyle: {
+            backgroundColor: 'white'
+          }
         }}
       >
         <Tab.Screen
