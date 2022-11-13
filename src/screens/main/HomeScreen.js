@@ -33,7 +33,7 @@ const HomeScreen = () => {
   async function getFiles() {
     let files = await MediaLibrary.getAssetsAsync({
       mediaType: "audio",
-      // album: 'music'
+      //album: 'music'
     });
     files = await MediaLibrary.getAssetsAsync({
       mediaType: "audio",

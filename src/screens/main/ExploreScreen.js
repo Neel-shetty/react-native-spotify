@@ -70,25 +70,26 @@ const ExploreScreen = () => {
   async function getFiles() {
     let files = await MediaLibrary.getAssetsAsync({
       mediaType: "audio",
-      // album: 'music'
+      album: 'music'
     });
     files = await MediaLibrary.getAssetsAsync({
       mediaType: "audio",
+      album: 'music',
       first: files.totalCount,
     });
     const folders = await MediaLibrary.getAlbumsAsync();
     const foldersCount = (await MediaLibrary.getAlbumsAsync()).length;
     for (let i = 0; i < foldersCount; i++) {
       if (folders[i].title === "SpotifyClone") {
-        var folderid = ('folder id',folders[i].id);
+        var folderid = ("folder id", folders[i].id);
       }
     }
 
     const songFolder = await MediaLibrary.getAssetsAsync({
-      album: '-1965883161',
-      mediaType: 'audio'
-    })
-    console.log(folderid)
+      album: "-1965883161",
+      mediaType: "audio",
+    });
+    console.log(folderid);
     //console.log(folders)
     //const folder = await MediaLibrary.getAssetInfoAsync('33 DADDY ! DADDY ! DO !.m4a')
     const tempFile = files.assets;
@@ -109,7 +110,7 @@ const ExploreScreen = () => {
         : null;
       //console.log(filename)
 
-      /* db.transaction((tx) => {
+      db.transaction((tx) => {
         tx.executeSql(
           "insert into songs_table(song_id , song_filename , song_uri , song_duration , song_modificationTime , song_albumId, song_cover ) values (?,?,?,?,?,?,?)",
           [id, filename, uri, duration, modificationTime, albumId, cover],
@@ -122,7 +123,7 @@ const ExploreScreen = () => {
         tx.executeSql("select * from songs_table ", [], (tx, res) => {
           console.log(res.rows);
         });
-      }); */
+      });
     }
 
     //console.log(folder)
@@ -171,7 +172,14 @@ const ExploreScreen = () => {
 
   const width = Dimensions.get("window").width;
   return (
-    <View style={{ alignItems: "center", justifyContent: "center", flex: 1,backgroundColor: "white", }}>
+    <View
+      style={{
+        alignItems: "center",
+        justifyContent: "center",
+        flex: 1,
+        backgroundColor: "white",
+      }}
+    >
       {/* <Image
         style={{ height: 200, width: 200 }}
         source={{
