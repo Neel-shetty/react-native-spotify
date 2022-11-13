@@ -64,7 +64,7 @@ const PlaylistScreenItem = ({ playlist, id }) => {
     // console.log("FOLDER INFO - ", folderInfo.assets[0].uri);
     // console.log("folder log", folders[0].id);
     // console.log(info.albumId);
-    const cover = folderInfo.assets[0].uri;
+    const cover = folderInfo?.assets[0]?.uri;
     // console.log(cover)
     navigation.navigate("MusicPlayer", {
       songId: playlist.id,
