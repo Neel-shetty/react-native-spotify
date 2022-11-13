@@ -16,11 +16,19 @@ import PlaylistItem from "../../components/HomeScreenComponents/Playlist/Playlis
 import PlaylistData from "../../../assets/dummydata/PlaylistData";
 import PlaylistScreenItem from "../../components/PlaylistScreenComponents/PlaylistScreenItem";
 import * as SQLite from "expo-sqlite";
+import apiClient from "../../service/http";
 
 const db = SQLite.openDatabase("songDetails.db");
 
 const ExploreScreen = () => {
   const [files, setFiles] = useState([]);
+
+  const { isLoading, isSuccess, isError, data, error, refetch } = useQuery(
+    "search?q=Bad%20Guy",
+    fetchSongs,
+    { enabled: false, retry: 2, onSuccess, onError }
+  );
+
   songInfo();
   //console.log(files[0]);
 
@@ -70,11 +78,11 @@ const ExploreScreen = () => {
   async function getFiles() {
     let files = await MediaLibrary.getAssetsAsync({
       mediaType: "audio",
-      album: 'music'
+      album: "music",
     });
     files = await MediaLibrary.getAssetsAsync({
       mediaType: "audio",
-      album: 'music',
+      album: "music",
       first: files.totalCount,
     });
     const folders = await MediaLibrary.getAlbumsAsync();

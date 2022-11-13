@@ -6,14 +6,19 @@ import { store } from "./src/redux/store/store";
 import { Provider } from "react-redux";
 //import { withAuthenticator } from '@aws-amplify/ui-react-native'
 
+import { QueryClient, QueryClientProvider } from "react-query";
+const queryClient = new QueryClient();
+
 Amplify.configure(awsconfig);
 
 export default function App() {
   return (
     <>
-      <Provider store={store}>
-        <Navigator />
-      </Provider>
+      <QueryClientProvider client={queryClient}>
+        <Provider store={store}>
+          <Navigator />
+        </Provider>
+      </QueryClientProvider>
     </>
   );
 }
