@@ -55,13 +55,16 @@ const ResetPassword = ({ navigation }) => {
         const response = await Auth.forgotPassword(username)
         setSubmitUsername(true)
         console.log(response)
-        navigation.navigate('SignInScreen')
+        setSubmitUsername(true)
       } catch (e) {
         Alert.alert('oops',e.message)
       }
     } else {
       try {
         const response =  await Auth.forgotPasswordSubmit(username, otp, newpassword)
+        console.log(response)
+        Alert.alert('Success!', 'Your password has been reset')
+        navigation.navigate('SignInScreen')
       } catch (e) {
         Alert.alert('oops',e.message)
       }
