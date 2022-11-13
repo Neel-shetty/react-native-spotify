@@ -1,10 +1,11 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import Button from '../../components/ui/Button'
 
 const ProfileScreen = () => {
   return (
-    <View>
-      <Text>ProfileScreen</Text>
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <Button>Log Out</Button>
     </View>
   )
 }
