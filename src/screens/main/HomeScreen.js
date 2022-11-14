@@ -26,6 +26,7 @@ import SearchIcon from "../../components/ui/SearchIcon";
 import MenuDots from "../../components/ui/MenuDots";
 import * as MediaLibrary from "expo-media-library";
 import { StatusBar } from "expo-status-bar";
+import {API_KEY} from '@env'
 
 const HomeScreen = () => {
   const [files, setFiles] = useState([]);
