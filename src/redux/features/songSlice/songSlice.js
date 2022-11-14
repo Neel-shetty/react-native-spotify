@@ -5,7 +5,10 @@ import { Audio } from "expo-av";
 import { Sound } from "expo-av/build/Audio";
 import { useState } from "react";
 
-const [songStatus, setSongStatus] = useState(null)
+const [sound, setSound] = useState(null);
+const [songStatus, setSongStatus] = useState("");
+const [position, setPosition] = useState();
+const [currentAudio, setCurrentAudio] = useState();
 
 const initialState = {
   songDetails: songStatus,
@@ -19,8 +22,8 @@ const songSlice = createSlice({
     //   state.isPlaying = true
     // }
     pause: (state) => {
-      Sound.createAsync({shouldPlay: false})
-      state.songDetails.isPlaying = false
+      Sound.createAsync({ shouldPlay: false });
+      state.songDetails.isPlaying = false;
     },
   },
 });
