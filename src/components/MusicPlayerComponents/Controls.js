@@ -108,6 +108,11 @@ const Controls = () => {
       const status = await sound.playAsync();
       return setSongStatus(status);
     }
+
+    //play next song 
+    if('x'){
+      
+    }
   }
   //console.log(songStatus.isPlaying);
   /* function pp() {

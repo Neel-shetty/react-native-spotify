@@ -3,9 +3,7 @@ import PlaylistData from "../../../../assets/dummydata/PlaylistData";
 import previewData from "../../../../assets/dummydata/previewData";
 
 const initialState = {
-  songDetails: previewData,
-  isPlaying: false,
-  isLoading: true,
+  songDetails: songStatus,
 };
 
 const songSlice = createSlice({
