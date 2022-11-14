@@ -26,11 +26,12 @@ import SearchIcon from "../../components/ui/SearchIcon";
 import MenuDots from "../../components/ui/MenuDots";
 import * as MediaLibrary from "expo-media-library";
 import { StatusBar } from "expo-status-bar";
-import {API_KEY} from '@env'
+// import {API_KEY} from '@env'
 
 const HomeScreen = () => {
   const [files, setFiles] = useState([]);
   Analytics.autoTrack()
+  // console.log(API_KEY)
   async function getFiles() {
     let files = await MediaLibrary.getAssetsAsync({
       mediaType: "audio",
