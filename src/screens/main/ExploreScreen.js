@@ -17,34 +17,39 @@ import PlaylistData from "../../../assets/dummydata/PlaylistData";
 import PlaylistScreenItem from "../../components/PlaylistScreenComponents/PlaylistScreenItem";
 import * as SQLite from "expo-sqlite";
 import apiClient from "../../service/http";
+import { useQuery } from "react-query";
 
 const db = SQLite.openDatabase("songDetails.db");
 
 const ExploreScreen = () => {
   const [files, setFiles] = useState([]);
-  const [songData, setSongData] = useState()
+  const [songData, setSongData] = useState(null);
+  //console.log(songData)
 
   const { isLoading, isSuccess, isError, data, error, refetch } = useQuery(
     "search",
     async () => {
+      console.log('test')
       return await apiClient.get("search?q=Bad%20Guy");
     },
     {
-      enabled: false,
+      enabled: true,
       retry: 2,
       onSuccess: (res) => {
         const result = res;
-        setSongData(result)
+        setSongData(result);
         console.log(result);
+        console.log('success');
       },
       onError: (err) => {
         const error = err;
-        console.log(error)
+        console.log(error);
+        console.log('error');
       },
     }
   );
-
-  console.log(songData)
+  
+  
 
   songInfo();
   //console.log(files[0]);
@@ -95,18 +100,18 @@ const ExploreScreen = () => {
   async function getFiles() {
     let files = await MediaLibrary.getAssetsAsync({
       mediaType: "audio",
-      album: "music",
+      //album: "music",
     });
     files = await MediaLibrary.getAssetsAsync({
       mediaType: "audio",
-      album: "music",
+      //album: "music",
       first: files.totalCount,
     });
     const folders = await MediaLibrary.getAlbumsAsync();
     const foldersCount = (await MediaLibrary.getAlbumsAsync()).length;
     for (let i = 0; i < foldersCount; i++) {
       if (folders[i].title === "SpotifyClone") {
-        var folderid = ("folder id", folders[i].id);
+        var folderid = folders[i].id;
       }
     }
 
@@ -114,7 +119,7 @@ const ExploreScreen = () => {
       album: "-1965883161",
       mediaType: "audio",
     });
-    console.log(folderid);
+    //console.log(folderid);
     //console.log(folders)
     //const folder = await MediaLibrary.getAssetInfoAsync('33 DADDY ! DADDY ! DO !.m4a')
     const tempFile = files.assets;
@@ -140,13 +145,13 @@ const ExploreScreen = () => {
           "insert into songs_table(song_id , song_filename , song_uri , song_duration , song_modificationTime , song_albumId, song_cover ) values (?,?,?,?,?,?,?)",
           [id, filename, uri, duration, modificationTime, albumId, cover],
           (tx, res) => {
-            console.log(res);
+            //console.log(res);
           }
         );
       });
       db.transaction((tx) => {
         tx.executeSql("select * from songs_table ", [], (tx, res) => {
-          console.log(res.rows);
+          //console.log(res.rows);
         });
       });
     }
