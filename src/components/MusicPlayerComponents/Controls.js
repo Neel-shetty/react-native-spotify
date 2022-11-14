@@ -111,8 +111,10 @@ const Controls = () => {
 
     //play next song 
     if('x'){
-      
+
     }
+
+    //previous song
   }
   //console.log(songStatus.isPlaying);
   /* function pp() {
