@@ -55,9 +55,6 @@ const Controls = () => {
   }
 
   async function playSound() {
-    if (sound){
-      await sound.unloadAsync()
-    }
 
     if (sound === null) {
       // initial audio playback
@@ -180,12 +177,12 @@ const Controls = () => {
   // },[position])
 
   useEffect(() => {
-    return sound
+    return sound 
       ? () => {
           console.log("Unloading Sound");
           sound.unloadAsync();
         }
-      : undefined;
+      : undefined
   }, [sound]);
 
   //console.log(status)
