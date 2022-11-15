@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import { useRoute } from "@react-navigation/native";
 import * as MediaLibrary from "expo-media-library";
 import { a } from "aws-amplify";
-// import { Sound } from "expo-av/build/Audio";
+import { Sound } from "expo-av/build/Audio";
 
 const Controls = () => {
   const route = useRoute();
@@ -50,16 +50,29 @@ const Controls = () => {
   //   getFiles()
   // },[])
 
+  function onPlaybackStatusUpdate(status){
+    console.log(status)
+  }
+
   async function playSound() {
+    if (sound){
+      await sound.unloadAsync()
+    }
+
     if (sound === null) {
       // initial audio playback
       const playbackObj = new Audio.Sound();
-
+      /* const {sound} = await Sound.createAsync(
+        {uri:filePath},
+        {shouldPlay:true},
+        onPlaybackStatusUpdate
+      ) */
       const status = await playbackObj.loadAsync(
         {
           uri: filePath,
         },
         { shouldPlay: true }
+
       );
       setCurrentAudio(route.params);
       //console.log(status)
